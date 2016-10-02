@@ -1,0 +1,24 @@
+{
+  "name": "vue-formular-2",
+  "version": "0.0.1",
+  "description": "VueJs 2 form component",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matfish2/vue-formular-2.git"
+  },
+  "keywords": [
+    "vuejs2",
+    "form",
+    "validation"
+  ],
+  "author": "Matanya Fisaimer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/matfish2/vue-formular-2/issues"
+  },
+  "homepage": "https://github.com/matfish2/vue-formular-2#readme"
+}
