@@ -28,7 +28,8 @@
   "homepage": "https://github.com/matfish2/vue-form-2#readme",
   "files": [
     "lib",
-    "index.js"
+    "index.js",
+    "bus.js"
   ],
   "dependencies": {
     "vue": ">=2.0.0",
