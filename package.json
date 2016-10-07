@@ -20,6 +20,11 @@
   "bugs": {
     "url": "https://github.com/matfish2/vue-form-2/issues"
   },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
   "homepage": "https://github.com/matfish2/vue-form-2#readme",
   "files": [
     "lib",
