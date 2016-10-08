@@ -1,13 +1,17 @@
-var merge = require('merge');
+import merge from 'merge'
 import formTemplate from './lib/templates/form.jsx'
 import opts from './lib/computed/opts'
 import statusBar from './lib/components/status-bar'
 import submit from './lib/components/submit'
 import text from './lib/components/fields/text'
 import password from './lib/components/fields/password'
+import fields from './lib/templates/fields'
 
-exports.install = function(Vue, globalOptions) {
+exports.install = function(Vue, globalOptions, customFields) {
 
+  customFields = customFields?customFields:{};
+
+  console.log(customFields);
   var vfForm = {
     render: formTemplate,
     props: {
@@ -71,6 +75,7 @@ exports.install = function(Vue, globalOptions) {
     data: function() {
       return {
         globalOptions: globalOptions?globalOptions:{},
+        templates: merge.recursive(fields, customFields),
         isForm: true,
         fields:[],
         additionalValues:[],

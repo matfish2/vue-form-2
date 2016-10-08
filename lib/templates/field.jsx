@@ -1,10 +1,11 @@
-import fields from './fields'
+import merge from 'merge'
 
 export default function(h) {
 
   let label = '';
   let feedback = '';
   let error = '';
+  let form = this.getForm();
 
   if (this.hasLabel) {
    label = <label
@@ -29,9 +30,9 @@ id={'Field--' + this.name}
 class={'VF VF-Field form-group row ' + this.fieldClasses}
 >
 {label}
-<div class={"VF-Field__wrapper" +  this.hasLabel?this.getForm().fieldClass:''}>
+<div class={"VF-Field__wrapper" +  this.hasLabel?form.fieldClass:''}>
 {this.$slots.before}
-{fields[this.fieldType].apply(this,[h])}
+{form.templates[this.fieldType].apply(this,[h])}
 {feedback}
 {error}
 {this.$slots.after}
