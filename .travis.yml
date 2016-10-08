@@ -1,0 +1,6 @@
+notifications:
+  webhooks:
+    urls:
+      - https://api.ghostinspector.com/v1/suites/57f8a754e327135e5e22bff2/execute/?apiKey=834f5ff3e9baf85017294a7ac97db8a10ea6bf34
+    on_success: always
+    on_failure: never
