@@ -11,7 +11,6 @@ exports.install = function(Vue, globalOptions, customFields) {
 
   customFields = customFields?customFields:{};
 
-  console.log(customFields);
   var vfForm = {
     render: formTemplate,
     props: {
