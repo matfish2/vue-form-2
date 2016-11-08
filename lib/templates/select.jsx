@@ -13,7 +13,7 @@
 
 
     items = items.map(function(item) {
-      return <option value={item.id}>{item.text}</option>
+      return <option value={item.id} selected={item.id === this.curValue}>{item.text}</option>
     })
   }
 
