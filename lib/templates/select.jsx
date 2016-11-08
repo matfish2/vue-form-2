@@ -12,8 +12,8 @@
     })
 
 
-    items = items.map(function(item) {
-      return <option value={item.id} selected={item.id === this.curValue}>{item.text}</option>
+    items = items.map((item) => {
+      return <option value={item.id} selected={item.id == this.curValue}>{item.text}</option>
     })
   }
 
