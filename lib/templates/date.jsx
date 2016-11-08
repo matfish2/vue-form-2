@@ -1,7 +1,8 @@
-import dates from './dates'
+import {input,span} from './dates'
 
 export default function(h) {
 
+  let dates = {input,span}
   let classes = '';
 
   if (this.isTimepicker) classes+=' VF-Field--Date__timepicker';
