@@ -21,7 +21,7 @@ if (this.validationError) {
 }
 
 if (this.hasFeedback) {
-  feedback = <span class={"glyphicon glyphicon-" +this.feedbackIcon + "form-control-feedback"}
+  feedback = <span class={"glyphicon glyphicon-" +this.feedbackIcon + " form-control-feedback"}
   aria-hidden="true"></span>
 }
 
