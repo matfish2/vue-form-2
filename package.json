@@ -4,7 +4,8 @@
   "description": "Vue.js 2 form component",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build-min": "browserify index.js --s vue-form-2 | uglifyjs -c > dist/vue-form-2.min.js",
+    "build": "browserify index.js --s vue-form-2 > dist/vue-form-2.js"
   },
   "repository": {
     "type": "git",
@@ -37,5 +38,17 @@
     "clone": "^1.0.2",
     "merge": "^1.2.0",
     "moment": "^2.10.6"
+  },
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.18.2",
+    "babel-helper-vue-jsx-merge-props": "^2.0.2",
+    "babel-loader": "^6.2.8",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-plugin-transform-vue-jsx": "^3.2.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.1",
+    "uglifyjs": "^2.4.10"
   }
 }
