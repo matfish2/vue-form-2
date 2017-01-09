@@ -7,5 +7,16 @@ The presentation is based on [Bootstrap's form component](http://v4-alpha.getboo
 
 Compilation requires [babel-plugin-transform-vue-jsx](https://github.com/vuejs/babel-plugin-transform-vue-jsx).
 
+Webpack users, use the following setup to compile the package's `jsx` files:
+```js
+loaders: [
+    {
+        test: /\.jsx?$/,
+        loader: 'babel',
+        exclude: /node_modules(?!\/(vue-form-2))/
+    }
+]
+```
+
 * [Documentation](https://matfish2.gitbooks.io/vue-form-2/content/)
 
