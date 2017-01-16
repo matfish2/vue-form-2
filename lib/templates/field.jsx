@@ -6,10 +6,11 @@ export default function(h) {
   let feedback = '';
   let error = '';
   let form = this.getForm();
+  let rowClass = form.opts.layout=='form-horizontal'?'row ':''; 
 
   if (this.hasLabel) {
    label = <label
-   class={'col-form-label VF-Field__label control-label ' + this.getForm().labelClass}
+   class={'col-form-label VF-Field__label control-label ' + form.labelClass}
    for={this.name}>
     {this.label}
   </label>
@@ -27,7 +28,7 @@ if (this.hasFeedback) {
 
 return  <div v-show={this.shouldShow}
 id={'Field--' + this.name}
-class={'VF VF-Field form-group row ' + this.fieldClasses}
+class={'VF VF-Field form-group ' + rowClass +  this.fieldClasses}
 >
 {label}
 <div class={"VF-Field__wrapper" +  this.hasLabel?form.fieldClass:''}>
