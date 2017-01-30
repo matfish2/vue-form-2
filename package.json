@@ -1,6 +1,6 @@
 {
   "name": "vue-form-2",
-  "version": "0.1.58",
+  "version": "0.1.59",
   "description": "Vue.js 2 form component",
   "main": "main.js",
   "scripts": {
@@ -30,6 +30,7 @@
   "files": [
     "lib",
     "index.js",
+    "main.js",
     "bus.js"
   ],
   "dependencies": {
