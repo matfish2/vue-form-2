@@ -1,3 +1,5 @@
-import Vue from 'vue'
+var Vue = require('vue');
 
-export default new Vue()
+let bus = new Vue();
+
+module.exports = bus;
