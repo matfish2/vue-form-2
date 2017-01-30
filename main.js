@@ -1,6 +1,7 @@
-import VueForm from './index';
-import Event from './bus';
+var VueForm = require('./index');
+var Event = require('./bus');
 
-export default {
-	VueForm, Event
+module.exports = {
+	VueForm, 
+	Event
 };
