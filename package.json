@@ -1,8 +1,8 @@
 {
   "name": "vue-form-2",
-  "version": "0.1.56",
+  "version": "0.1.57",
   "description": "Vue.js 2 form component",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "build-min": "browserify index.js --s VueForm | uglifyjs -c > dist/vue-form-2.min.js",
     "build": "browserify index.js --s VueForm > dist/vue-form-2.js"
