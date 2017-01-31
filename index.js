@@ -14,6 +14,10 @@ exports.install = function(Vue, globalOptions, customFields) {
   var vfForm = {
     render: formTemplate,
     props: {
+      name:{
+        type:String,
+        required:false
+      },
       client:{
         type:Boolean,
         required:false,
@@ -105,7 +109,9 @@ exports.install = function(Vue, globalOptions, customFields) {
       registerInterfieldsRules: require('./lib/methods/register-interfields-rules'),
       registerTriggers: require('./lib/methods/register-triggers'),
       childrenOf: require('./lib/methods/children-of'),
-      getStatusBar: require('./lib/methods/get-status-bar')
+      getStatusBar: require('./lib/methods/get-status-bar'),
+      dispatch: require('./lib/methods/dispatch'),
+      getOptions: opts
     }
 
   }
