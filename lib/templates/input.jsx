@@ -10,5 +10,6 @@ export default function(h) {
         disabled={this.disabled}
         minlength={this.minlength}
         maxlength={this.maxlength}
+        autocomplete={this.autocomplete}
         />
 }
