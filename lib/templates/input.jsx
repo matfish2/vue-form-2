@@ -8,5 +8,8 @@ export default function(h) {
         class="form-control"
         placeholder={this.placeholder}
         disabled={this.disabled}
+        minlength={this.minlength}
+        maxlength={this.maxlength}
+        autocomplete={this.autocomplete}
         />
 }
