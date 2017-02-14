@@ -30,8 +30,8 @@ return  <div v-show={this.shouldShow}
 id={'Field--' + this.name}
 class={'VF VF-Field form-group ' + rowClass +  this.fieldClasses}
 >
-{label}
 <div class={"VF-Field__wrapper" +  this.hasLabel?form.fieldClass:''}>
+{label}
 {this.$slots.before}
 {form.templates[this.fieldType].apply(this,[h])}
 {feedback}
