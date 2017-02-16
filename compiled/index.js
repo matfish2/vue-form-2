@@ -113,9 +113,9 @@ exports.install = function (Vue, globalOptions, customFields) {
       };
     },
     computed: {
-      labelClass: require('./lib/computed/label-class'),
-      fieldClass: require('./lib/computed/field-class'),
-      hasErrors: require('./lib/computed/has-errors'),
+      labelClass: require('./computed/label-class'),
+      fieldClass: require('./computed/field-class'),
+      hasErrors: require('./computed/has-errors'),
       server: function server() {
         return !_this.ajax && !_this.client;
       },
@@ -125,16 +125,16 @@ exports.install = function (Vue, globalOptions, customFields) {
       }
     },
     methods: {
-      submit: require('./lib/methods/submit'),
-      formData: require('./lib/methods/form-data'),
-      getField: require('./lib/methods/get-field'),
-      showAllErrors: require('./lib/methods/show-all-errors'),
-      reinitForm: require('./lib/methods/reinit-form'),
-      registerInterfieldsRules: require('./lib/methods/register-interfields-rules'),
-      registerTriggers: require('./lib/methods/register-triggers'),
-      childrenOf: require('./lib/methods/children-of'),
-      getStatusBar: require('./lib/methods/get-status-bar'),
-      dispatch: require('./lib/methods/dispatch'),
+      submit: require('./methods/submit'),
+      formData: require('./methods/form-data'),
+      getField: require('./methods/get-field'),
+      showAllErrors: require('./methods/show-all-errors'),
+      reinitForm: require('./methods/reinit-form'),
+      registerInterfieldsRules: require('./methods/register-interfields-rules'),
+      registerTriggers: require('./methods/register-triggers'),
+      childrenOf: require('./methods/children-of'),
+      getStatusBar: require('./methods/get-status-bar'),
+      dispatch: require('./methods/dispatch'),
       getOptions: _opts2.default
     }
 
@@ -143,15 +143,15 @@ exports.install = function (Vue, globalOptions, customFields) {
   Vue.component('vf-form', vfForm);
 
   Vue.component('vf-text', (0, _text2.default)());
-  Vue.component('vf-email', require('./lib/components/fields/email')());
-  Vue.component('vf-number', require('./lib/components/fields/number')());
+  Vue.component('vf-email', require('./components/fields/email')());
+  Vue.component('vf-number', require('./components/fields/number')());
   Vue.component('vf-password', (0, _password2.default)());
-  Vue.component('vf-file', require('./lib/components/fields/file')());
-  Vue.component('vf-textarea', require('./lib/components/fields/textarea')());
-  Vue.component('vf-select', require('./lib/components/fields/select')());
-  Vue.component('vf-buttons-list', require('./lib/components/fields/buttons-list')());
-  Vue.component('vf-date', require('./lib/components/fields/date')());
-  Vue.component('vf-checkbox', require('./lib/components/fields/checkbox')());
+  Vue.component('vf-file', require('./components/fields/file')());
+  Vue.component('vf-textarea', require('./components/fields/textarea')());
+  Vue.component('vf-select', require('./components/fields/select')());
+  Vue.component('vf-buttons-list', require('./components/fields/buttons-list')());
+  Vue.component('vf-date', require('./components/fields/date')());
+  Vue.component('vf-checkbox', require('./components/fields/checkbox')());
 
   Vue.component('vf-status-bar', _statusBar2.default);
   Vue.component('vf-submit', _submit2.default);
