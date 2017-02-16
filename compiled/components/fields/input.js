@@ -34,6 +34,12 @@ module.exports = function () {
       };
     },
     methods: {
+      setValue: function setValue(val) {
+        this.curValue = val;
+        this.dirty = true;
+        document.getElementsByName(this.name)[0].value = val;
+      },
+
       updateValue: _updateValue2.default
     }
   });
