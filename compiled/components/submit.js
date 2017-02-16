@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _submit = require('../templates/submit.jsx');
+var _submit = require('../templates/submit');
 
 var _submit2 = _interopRequireDefault(_submit);
 
