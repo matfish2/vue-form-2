@@ -38,6 +38,10 @@ module.exports = function () {
       valueKey: {
         type: String,
         default: 'value'
+      },
+      onSubmit: {
+        type: Function,
+        required: false
       }
     },
     mounted: function mounted() {
@@ -72,6 +76,10 @@ module.exports = function () {
         options.done = this.done ? this.done : function (e, data) {
           self.setValue(data.result[self.valueKey]);
         };
+      }
+
+      if (!options.hasOwnProperty('add')) {
+        options.add = this.onSubmit;
       }
 
       if (!options.hasOwnProperty('error')) {
