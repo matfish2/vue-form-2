@@ -71,6 +71,15 @@ module.exports = function () {
       arraySymbol: require('../computed/array-symbol')
     },
     methods: {
+      setValue: function setValue(value) {
+        var _this = this;
+
+        this.curValue = value;
+        document.getElementsByName(this.name).forEach(function (el) {
+          el.checked = _this.multiple ? value.indexOf(el.value) > -1 : el.value == value;
+        });
+      },
+
       updateValue: function updateValue(val, e) {
         var checked = e.target.checked;
 
