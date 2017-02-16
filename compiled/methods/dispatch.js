@@ -1,6 +1,6 @@
 "use strict";
 
-var _bus = require("../../bus");
+var _bus = require("../bus");
 
 var _bus2 = _interopRequireDefault(_bus);
 
