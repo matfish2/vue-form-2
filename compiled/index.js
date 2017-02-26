@@ -114,7 +114,6 @@ exports.install = function (Vue, globalOptions, customFields) {
     },
     computed: {
       labelClass: require('./computed/label-class'),
-      fieldClass: require('./computed/field-class'),
       hasErrors: require('./computed/has-errors'),
       server: function server() {
         return !_this.ajax && !_this.client;
@@ -125,6 +124,7 @@ exports.install = function (Vue, globalOptions, customFields) {
       }
     },
     methods: {
+      fieldClass: require('./methods/field-class'),
       submit: require('./methods/submit'),
       formData: require('./methods/form-data'),
       getField: require('./methods/get-field'),

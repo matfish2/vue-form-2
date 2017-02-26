@@ -55,7 +55,7 @@ exports.default = function (h) {
     },
     [label, h(
       'div',
-      { 'class': "VF-Field__wrapper" + this.hasLabel ? form.fieldClass : '' },
+      { 'class': "VF-Field__wrapper" + this.hasLabel ? form.fieldClass(!this.hideLabel) : '' },
       [this.$slots.before, form.templates[this.fieldType].apply(this, [h]), feedback, error, this.$slots.after]
     )]
   );
