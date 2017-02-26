@@ -1,5 +1,8 @@
 'use strict';
 
 module.exports = function () {
-  return this.opts.layout == 'form-horizontal' ? 'col-sm-' + (12 - this.opts.labelWidth) : '';
+
+  var width = this.hideLabel ? 12 : 12 - this.opts.labelWidth;
+
+  return this.opts.layout == 'form-horizontal' ? 'col-sm-' + width : '';
 };
