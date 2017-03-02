@@ -1,5 +1,14 @@
 "use strict";
 
 module.exports = function () {
-  return this.$parent.$refs.statusbar;
+  return getStatusbar(this.$parent);
 };
+
+function getStatusbar(instance) {
+
+  if (!instance) return false;
+
+  if (instance.$refs && instance.$refs.statusbar) return instance.$refs.statusbar;
+
+  return getStatusbar(instance.$parent);
+}
