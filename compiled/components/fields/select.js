@@ -179,12 +179,16 @@ module.exports = function () {
         this.curValue = value;
         this.dirty = true;
 
+        if (!this.select2) document.getElementsByName(this.name)[0].value = value;
+
         if (this.select2 && this.el) this.el.val(value).trigger("change");
       },
       reset: function reset() {
         var value = this.multiple ? [] : '';
         this.wasReset = true;
         this.curValue = value;
+
+        if (!this.select2) document.getElementsByName(this.name)[0].value = value;
 
         if (this.select2 && this.el) this.el.val(value).trigger("change");
       }
