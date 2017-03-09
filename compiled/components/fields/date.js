@@ -87,19 +87,13 @@ module.exports = function () {
       this.opts = merge.recursive(parentOptions, this.options);
 
       var options = merge.recursive(this.opts, {
+        autoUpdateInput: false,
         singleDatePicker: !this.range,
         format: this.format,
         locale: {
           cancelLabel: this.clearLabel
         }
       });
-
-      if (this.value) {
-        options = merge.recursive(options, {
-          startDate: this.range ? this.value.start : this.value,
-          endDate: this.range ? this.value.end : this.value
-        });
-      }
 
       this.datepicker.daterangepicker(options);
 
@@ -173,7 +167,7 @@ module.exports = function () {
         return val && this.isMoment(val) && val.isValid();
       },
       isMoment: function isMoment(val) {
-        return val && (typeof val === 'undefined' ? 'undefined' : _typeof(val)) == 'object' && val.hasOwnProperty('_isAMomentObject');
+        return val && (typeof val === 'undefined' ? 'undefined' : _typeof(val)) == 'object' && typeof val.isValid === 'function';
       },
       momentizeValue: function momentizeValue(val) {
 
@@ -191,15 +185,22 @@ module.exports = function () {
         return this.range ? { start: moment(val.start, this.format),
           end: moment(val.end, this.format) } : moment(val, this.format);
       },
+      addTime: function addTime(val) {
+
+        if (val.split(" ").length > 1) return val;
+
+        return val + " 00:00:00";
+      },
+
       setValue: function setValue(val) {
 
         try {
           if (this.range) {
 
-            if (typeof val.start == 'string') val.start = moment(val.start, DATE_FORMAT);
-            if (typeof val.end == 'string') val.end = moment(val.end, DATE_FORMAT);
+            if (typeof val.start == 'string') val.start = moment(this.addTime(val.start), DATE_FORMAT);
+            if (typeof val.end == 'string') val.end = moment(this.addTime(val.end), DATE_FORMAT);
           } else {
-            if (typeof val == 'string') val = moment(val, DATE_FORMAT);
+            if (typeof val == 'string') val = moment(this.addTime(val), DATE_FORMAT);
           }
 
           if (!this.isValidMoment(val)) throw 'invalid date';
