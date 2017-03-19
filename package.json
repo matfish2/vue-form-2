@@ -22,7 +22,6 @@
   },
   "homepage": "https://github.com/matfish2/vue-form-2#readme",
   "files": [
-    "lib",
     "compiled",
     "main.js"
   ],
