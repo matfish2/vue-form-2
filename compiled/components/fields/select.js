@@ -86,7 +86,7 @@ module.exports = function () {
           return;
         }
 
-        var options = this.inForm() ? clone(this.getForm().options.select2Options) : {};
+        var options = this.inForm() ? clone(this.getForm().opts.select2Options) : {};
         var self = this;
 
         options = merge.recursive(options, {
@@ -127,7 +127,7 @@ module.exports = function () {
           });
         }
 
-        options = merge.recursive(options, this.options);
+        options = merge.recursive(options, this.opts);
 
         this.el = $(this.$el).find("select");
 
