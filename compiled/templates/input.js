@@ -21,10 +21,16 @@ exports.default = function (h) {
                      },
                      on: {
                             "change": this.updateValue.bind(this),
-                            "keyup": this.updateValue.bind(this)
+                            "keyup": (0, _debounce2.default)(this.updateValue, this.debounce)
                      },
 
                      "class": "form-control" },
               []
        );
 };
+
+var _debounce = require("debounce");
+
+var _debounce2 = _interopRequireDefault(_debounce);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
