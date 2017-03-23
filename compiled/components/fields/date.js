@@ -109,9 +109,10 @@ module.exports = function () {
       this.datepicker.on('cancel.daterangepicker', function (ev, picker) {
 
         this.curValue = null;
-        this.datepicker.data('daterangepicker').setStartDate(moment().format(this.format));
-        this.datepicker.data('daterangepicker').setEndDate(moment().format(this.format));
-        this.datepicker.trigger("change");
+        this.datepicker.data('daterangepicker').setStartDate(moment());
+        this.datepicker.data('daterangepicker').setEndDate(moment());
+
+        if (!this.noInput) $(this.$el).find("input").val("");
       }.bind(this));
 
       if (!this.range && !this.isTimepicker) {
@@ -139,7 +140,7 @@ module.exports = function () {
           this.setDatepickerValue({ start: start, end: end });
         } else {
           var _formatted = val.format(this.format);
-          this.datepicker.find("input").val(_formatted);
+          $(this.$el).find("input").val(_formatted);
           var pickerDate = val.isValid() ? val : moment();
           this.setDatepickerValue(pickerDate);
         }
