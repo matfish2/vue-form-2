@@ -34,7 +34,8 @@ module.exports = function () {
       filterBy: {
         type: String,
         default: ''
-      }
+      },
+      horizontal: Boolean
     },
     ready: function ready() {
 
@@ -68,6 +69,10 @@ module.exports = function () {
       toggleText: function toggleText() {
         return this.allSelected ? this.toggleTexts.unselect : this.toggleTexts.select;
       },
+      itemClass: function itemClass() {
+        return this.horizontal ? 'form-check horizontal' : 'form-check';
+      },
+
       arraySymbol: require('../computed/array-symbol')
     },
     methods: {

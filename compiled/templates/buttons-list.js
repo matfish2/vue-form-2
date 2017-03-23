@@ -25,7 +25,7 @@ exports.default = function (h) {
   this.items.map(function (item) {
     if (_this.passesFilter(item)) items.push(h(
       "div",
-      { "class": "form-check" },
+      { "class": _this.itemClass },
       [h(
         "label",
         { "class": "form-check-label" },
