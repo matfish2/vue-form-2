@@ -141,7 +141,7 @@ module.exports = function () {
               that.curValue = value ? value : [];
             }, 0);
           } else {
-            that.value = '';
+            that.curValue = '';
           }
         });
 
