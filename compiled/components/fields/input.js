@@ -39,6 +39,11 @@ module.exports = function () {
         this.dirty = true;
         document.getElementsByName(this.name)[0].value = val;
       },
+      reset: function reset() {
+        this.curValue = '';
+        this.wasReset = true;
+        document.getElementsByName(this.name)[0].value = '';
+      },
 
       updateValue: _updateValue2.default
     }
