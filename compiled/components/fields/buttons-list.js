@@ -83,7 +83,7 @@ module.exports = function () {
 
         this.curValue = value;
 
-        $('[name={this.name}]').each(function () {
+        $('[name=' + this.name + ']').each(function () {
           el = $(_this);
           val = el.val();
           el.prop('checked', _this.multiple ? value.indexOf(val) > -1 : val == value);
