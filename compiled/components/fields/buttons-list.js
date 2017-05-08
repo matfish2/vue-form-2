@@ -79,9 +79,14 @@ module.exports = function () {
       setValue: function setValue(value) {
         var _this = this;
 
+        var el, val;
+
         this.curValue = value;
-        document.getElementsByName(this.name).forEach(function (el) {
-          el.checked = _this.multiple ? value.indexOf(el.value) > -1 : el.value == value;
+
+        $('[name={this.name}]').each(function () {
+          el = $(_this);
+          val = el.val();
+          el.prop('checked', _this.multiple ? value.indexOf(val) > -1 : val == value);
         });
       },
 
