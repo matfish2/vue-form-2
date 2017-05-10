@@ -23,6 +23,10 @@ module.exports = {
     required: {
       type: Boolean
     },
+    title: {
+      type: String,
+      default: ''
+    },
     rules: {
       type: Object,
       required: false,

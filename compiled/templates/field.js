@@ -17,7 +17,8 @@ exports.default = function (h) {
       'label',
       {
         'class': 'col-form-label VF-Field__label control-label ' + form.labelClass,
-        attrs: { 'for': this.name }
+        attrs: { 'for': this.name,
+          title: this.title }
       },
       [this.label]
     );
