@@ -7,12 +7,20 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = function (h) {
 
   var label = '';
+  var description = '';
   var feedback = '';
   var error = '';
   var form = this.getForm();
   var rowClass = form.opts.layout == 'form-horizontal' ? 'row ' : '';
 
   if (this.hasLabel) {
+
+    if (this.description) description = h(
+      'small',
+      { 'class': 'description' },
+      [this.description]
+    );
+
     label = h(
       'label',
       {
@@ -20,7 +28,11 @@ exports.default = function (h) {
         attrs: { 'for': this.name,
           title: this.title }
       },
-      [this.label]
+      [h(
+        'span',
+        null,
+        [this.label]
+      ), description]
     );
   }
 
