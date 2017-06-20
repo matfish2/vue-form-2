@@ -127,7 +127,7 @@ module.exports = function () {
           });
         }
 
-        options = merge.recursive(options, this.opts);
+        options = merge.recursive(options, this.options);
 
         this.el = $(this.$el).find("select");
 
