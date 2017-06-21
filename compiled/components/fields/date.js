@@ -240,7 +240,7 @@ module.exports = function () {
         return this.noInput ? 'span' : 'input';
       },
       isTimepicker: function isTimepicker() {
-        return this.options.hasOwnProperty('timePicker') && this.options.timePicker;
+        return this.options.hasOwnProperty('timePicker') && this.options.timePicker || this.timepicker;
       },
       formattedDate: function formattedDate() {
 
