@@ -7,6 +7,7 @@ module.exports = function () {
     layout: '',
     showErrorsInStatusBar: false,
     sendOnlyDirtyFields: false,
+    removePristineFields: true,
     successTimeout: 4000,
     additionalPayload: {},
     customRules: {},
