@@ -8,10 +8,14 @@ module.exports = function () {
   var data = {};
   var value;
 
-  this.fields.forEach(function (field) {
-    value = getValue(field.curValue);
-    data[field.name] = value;
-  });
+  if (this.vuex) {
+    data = this.$store.state[this.name].values;
+  } else {
+    this.fields.forEach(function (field) {
+      value = getValue(field.getValue());
+      data[field.name] = value;
+    });
+  }
 
   data = merge.recursive(data, this.getOptions().additionalPayload);
 

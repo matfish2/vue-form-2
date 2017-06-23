@@ -35,12 +35,12 @@ module.exports = function () {
     },
     methods: {
       setValue: function setValue(val) {
-        this.curValue = val;
+        this.saveValue(val);
         this.dirty = true;
         document.getElementsByName(this.name)[0].value = val;
       },
       reset: function reset() {
-        this.curValue = '';
+        this.saveValue('');
         this.wasReset = true;
         document.getElementsByName(this.name)[0].value = '';
       },

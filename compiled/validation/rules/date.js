@@ -2,7 +2,9 @@
 
 module.exports = function (field) {
 
-		if (!field.curValue) return true;
+		var val = field.getValue();
 
-		return field.curValue.isValid();
+		if (!val) return true;
+
+		return val.isValid();
 };

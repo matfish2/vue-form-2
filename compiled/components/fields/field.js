@@ -4,10 +4,6 @@ var _field = require('../../templates/field');
 
 var _field2 = _interopRequireDefault(_field);
 
-var _watch = require('../mixins/watch');
-
-var _watch2 = _interopRequireDefault(_watch);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var props = require('../mixins/props');
@@ -20,17 +16,21 @@ var mounted = require('../mixins/mounted');
 module.exports = function () {
 	return {
 		render: _field2.default,
-		mixins: [props, data, methods, computed, mounted, _watch2.default],
+		mixins: [props, data, methods, computed, mounted],
 		methods: {
 			setValue: function setValue(value) {
-				this.curValue = value;
+				this.saveValue(value);
 				this.dirty = true;
 			},
 			updateValue: function updateValue(e) {
-				this.curValue = e.target.value;
+				this.saveValue(e.target.value);
 			},
+			saveValue: function saveValue(value) {
+				this.curValue = value;
+			},
+
 			getValue: function getValue() {
-				return this.curValue;
+				return this.vuex ? this.state[this.name] : this.curValue;
 			},
 			reset: function reset() {
 				this.wasReset = true;

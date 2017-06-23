@@ -104,7 +104,7 @@ module.exports = function () {
               data: function data(params) {
                 var query = {
                   q: params.term,
-                  selected: that.curValue
+                  selected: that.getValue()
                 };
 
                 if (filterBy) {
@@ -132,16 +132,16 @@ module.exports = function () {
         this.el = $(this.$el).find("select");
 
         this.el.select2(options).on("select2:select", function (e) {
-          that.curValue = $(this).select2('val');
+          that.saveValue($(this).val());
         }).on("select2:unselecting", function (e) {
           if (that.multiple) {
             var $this = $(this);
             setTimeout(function () {
-              value = $this.select2('val');
-              that.curValue = value ? value : [];
+              value = $this.val();
+              that.saveValue(value ? value : []);
             }, 0);
           } else {
-            that.curValue = '';
+            that.saveValue('');
           }
         });
 
@@ -165,7 +165,7 @@ module.exports = function () {
 
         if (!this.filterBy) return '';
 
-        return this.getField(this.filterBy).curValue;
+        return this.getField(this.filterBy).getValue();
       }
     },
     data: function data() {
@@ -176,7 +176,7 @@ module.exports = function () {
     },
     methods: {
       setValue: function setValue(value) {
-        this.curValue = value;
+        this.saveValue(value);
         this.dirty = true;
 
         if (!this.select2) document.getElementsByName(this.name)[0].value = value;
@@ -186,7 +186,7 @@ module.exports = function () {
       reset: function reset() {
         var value = this.multiple ? [] : '';
         this.wasReset = true;
-        this.curValue = value;
+        this.saveValue(value);
 
         if (!this.select2) document.getElementsByName(this.name)[0].value = value;
 

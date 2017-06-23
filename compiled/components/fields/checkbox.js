@@ -13,7 +13,7 @@ module.exports = function () {
     },
     created: function created() {
       this.wasReset = true;
-      this.curValue = this.checked;
+      this.saveValue(this.checked);
     },
     mounted: function mounted() {
 
@@ -23,7 +23,7 @@ module.exports = function () {
     },
     methods: {
       updateValue: function updateValue(e) {
-        this.curValue = e.target.checked;
+        this.saveValue(e.target.checked);
       },
       reset: function reset() {
         this.wasReset = true;

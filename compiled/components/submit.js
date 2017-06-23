@@ -24,7 +24,7 @@ exports.default = {
   },
   computed: {
     disabled: function disabled() {
-      return this.getForm().sending || this.getForm().options.sendOnlyDirtyFields && this.getForm().pristine;
+      return this.getForm().sending || this.getForm().options.sendOnlyDirtyFields && this.getForm().pristine();
     }
   }
 };

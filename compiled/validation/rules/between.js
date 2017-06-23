@@ -4,8 +4,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 module.exports = function (that) {
 
+  var val = that.getValue();
+
   var value = that.Rules.number || that.Rules.integer || _typeof(that.Rules.between[0]) == 'object' ? // moment objects
-  that.curValue : that.curValue.length;
+  val : val.length;
 
   if (that.Rules.number || that.Rules.integer) value = parseFloat(value);
 

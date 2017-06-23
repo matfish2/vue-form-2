@@ -42,6 +42,7 @@ exports.install = function (Vue, globalOptions, customFields) {
   var vfForm = {
     render: _form2.default,
     props: {
+      vuex: Boolean,
       name: {
         type: String,
         required: false
@@ -89,6 +90,10 @@ exports.install = function (Vue, globalOptions, customFields) {
 
     created: function created() {
 
+      if (this.vuex && !this.name) {
+        throw new Error('You must declare the "name" prop when using vuex');
+      }
+
       if (!this.ajax && !this.client) {
         var payload = this.options.additionalPayload;
         for (var key in payload) {
@@ -98,6 +103,8 @@ exports.install = function (Vue, globalOptions, customFields) {
 
       this.registerInterfieldsRules();
       this.registerTriggers();
+
+      if (this.vuex) this.registerModule();
     },
     data: function data() {
       return {
@@ -118,10 +125,7 @@ exports.install = function (Vue, globalOptions, customFields) {
       server: function server() {
         return !_this.ajax && !_this.client;
       },
-      opts: _opts2.default,
-      pristine: function pristine() {
-        return this.fields.length == 0;
-      }
+      opts: _opts2.default
     },
     methods: {
       fieldClass: require('./methods/field-class'),
@@ -135,7 +139,11 @@ exports.install = function (Vue, globalOptions, customFields) {
       childrenOf: require('./methods/children-of'),
       getStatusBar: require('./methods/get-status-bar'),
       dispatch: require('./methods/dispatch'),
-      getOptions: _opts2.default
+      getOptions: _opts2.default,
+      registerModule: require('./methods/register-module'),
+      pristine: function pristine() {
+        return this.vuex ? this.$store.state[this.name].count === 0 : this.fields.length === 0;
+      }
     }
 
   };

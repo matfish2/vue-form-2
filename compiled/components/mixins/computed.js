@@ -8,6 +8,12 @@ module.exports = {
     validationError: require('../computed/validation-error'),
     success: require('../computed/success'),
     hasLabel: require('../computed/has-label'),
-    trigger: require('../computed/trigger')
+    trigger: require('../computed/trigger'),
+    state: function state() {
+      return this.$store.state[this.formName];
+    },
+    formName: function formName() {
+      return this.getForm().name;
+    }
   }
 };

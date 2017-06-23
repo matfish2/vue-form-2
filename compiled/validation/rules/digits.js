@@ -1,6 +1,6 @@
 "use strict";
 
 module.exports = function (that) {
-  return (/^[0-9]*$/.test(that.curValue.trim())
+  return (/^[0-9]*$/.test(that.getValue().trim())
   );
 };

@@ -4,11 +4,13 @@ var isNumeric = require('../../helpers/is-numeric');
 
 module.exports = function (that) {
 
-  return !!(that.curValue && (isString(that.curValue) || that.fieldType == 'checkbox' || that.fieldType == 'date' || isMultipleList(that) || isNumeric(that.curValue)));
+  var value = that.getValue();
+
+  return !!(value && (isString(value) || that.fieldType == 'checkbox' || that.fieldType == 'date' || isMultipleList(that, value) || isNumeric(value)));
 };
 
-function isMultipleList(that) {
-  return (that.fieldType == 'select' || that.fieldType == 'buttons') && that.multiple && that.curValue.length > 0;
+function isMultipleList(that, value) {
+  return (that.fieldType == 'select' || that.fieldType == 'buttons') && that.multiple && value.length > 0;
 }
 
 function isString(value) {

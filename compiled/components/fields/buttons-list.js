@@ -80,7 +80,7 @@ module.exports = function () {
 
         var el, val;
 
-        this.curValue = value;
+        this.saveValue(value);
 
         $('[name=' + this.name + ']').each(function () {
           el = $(this);
@@ -93,23 +93,29 @@ module.exports = function () {
         var checked = e.target.checked;
 
         if (this.multiple) {
+          var value = this.getValue();
+
           if (checked) {
-            this.curValue.push(val);
+            value.push(val);
+            this.saveValue(value);
           } else {
-            this.curValue = this.curValue.filter(function (value) {
+
+            value = value.filter(function (value) {
               return value != val;
             });
+            this.saveValue(value);
           }
         } else {
-          this.curValue = val;
+          this.saveValue(val);
         }
       },
       isChecked: function isChecked(value) {
-        return this.multiple ? this.curValue.indexOf(value) > -1 : value == this.curValue;
+        var val = this.getValue();
+        return this.multiple ? val.indexOf(value) > -1 : value == val;
       },
       reset: function reset() {
         this.wasReset = true;
-        this.curValue = this.multiple ? [] : '';
+        this.saveValue(this.multiple ? [] : '');
       },
       passesFilter: function passesFilter(item) {
         if (!this.filterBy || !this.filterValue) return true;

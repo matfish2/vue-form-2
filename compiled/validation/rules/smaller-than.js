@@ -4,14 +4,18 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 module.exports = function (that) {
 
-  if (!that.curValue) return true;
+  var val = that.getValue();
+
+  if (!val) return true;
 
   var otherField = that.getField(that.Rules.smallerThan);
 
   if (!otherField || !otherField.curValue) return true;
 
-  var value1 = !!isNaN(that.curValue) || _typeof(that.curValue) == 'object' ? that.curValue : parseFloat(that.curValue);
-  var value2 = !!isNaN(otherField.curValue) || _typeof(otherField.curValue) == 'object' ? otherField.curValue : parseFloat(otherField.curValue);
+  var otherFieldValue = otherField.getValue();
+
+  var value1 = !!isNaN(val) || (typeof val === 'undefined' ? 'undefined' : _typeof(val)) == 'object' ? val : parseFloat(val);
+  var value2 = !!isNaN(otherFieldValue) || (typeof otherFieldValue === 'undefined' ? 'undefined' : _typeof(otherFieldValue)) == 'object' ? otherFieldValue : parseFloat(otherFieldValue);
 
   return value1 < value2;
 };

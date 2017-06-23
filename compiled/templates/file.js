@@ -6,11 +6,12 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (h) {
         var value = '';
+        var val = this.getValue();
 
-        if (this.curValue) value = h(
+        if (val) value = h(
                 "span",
                 { "class": "VF-Field__file_uploaded glyphicon glyphicon-ok",
-                        attrs: { title: this.curValue }
+                        attrs: { title: val }
                 },
                 []
         );

@@ -4,13 +4,15 @@ var _merge = require('merge');
 
 var _merge2 = _interopRequireDefault(_merge);
 
+var _watch = require('./watch');
+
+var _watch2 = _interopRequireDefault(_watch);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = {
   mounted: function mounted() {
     var _this = this;
-
-    if (this.value) this.setValue(this.value);
 
     if (this.required) {
       this.Rules.required = true;
@@ -26,17 +28,19 @@ module.exports = {
 
       if (form.opts.sendOnlyDirtyFields) {
 
-        this.$watch('dirty', function (isDirty) {
-          if (isDirty) {
-            form.fields.push(_this);
-          } else if (form.opts.removePristineFields) {
-            form.fields = form.fields.filter(function (field) {
-              return field.name != _this.name;
-            });
-          }
-        });
+        if (!form.vuex) {
+          this.$watch('dirty', function (isDirty) {
+            if (isDirty) {
+              form.fields.push(_this);
+            } else if (form.opts.removePristineFields) {
+              form.fields = form.fields.filter(function (field) {
+                return field.name != _this.name;
+              });
+            }
+          });
+        }
       } else {
-        form.fields.push(this);
+        form.vuex ? this.commit('CHANGE', this.value) : form.fields.push(this);
       }
 
       var v = this.getForm().validation;
@@ -61,5 +65,11 @@ module.exports = {
 
       this.handleTriggeredFields();
     }
+
+    if (this.value) {
+      this.setValue(this.value);
+    }
+
+    this.$watch('curValue', _watch2.default);
   }
 };

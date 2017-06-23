@@ -71,7 +71,7 @@ module.exports = function () {
           _setup(ed);
 
           ed.on('change', function (e) {
-            that.curValue = ed.getContent();
+            that.saveValue(ed.getContent());
           }.bind(this));
         }
       });

@@ -104,7 +104,7 @@ module.exports = function () {
         this.setValue(value);
 
         if (!this.noInput) {
-          this.injectValueToField(this.curValue);
+          this.injectValueToField(this.getValue());
         }
       }.bind(this));
 
@@ -152,13 +152,13 @@ module.exports = function () {
         var value = e.target.value;
 
         if (!value.trim()) {
-          this.curValue = '';
+          this.saveValue('');
           return;
         }
 
         var val = this.momentizeValue(value);
 
-        this.curValue = val;
+        this.saveValue(val);
 
         this.injectValueToField(val);
       },
@@ -177,7 +177,7 @@ module.exports = function () {
 
         if (this.isValidMoment(val)) return val;
 
-        if (!val) val = this.curValue;
+        if (!val) val = this.getValue();
 
         if (this.range && typeof val == 'string') {
           var pieces = val.split('-');
@@ -215,16 +215,16 @@ module.exports = function () {
           return;
         }
 
-        this.curValue = val;
+        this.saveValue(val);
 
         setTimeout(function () {
-          this.setDatepickerValue(this.curValue);
+          this.setDatepickerValue(this.getValue());
         }.bind(this), 0);
         this.dirty = true;
       },
       reset: function reset() {
         this.wasReset = true;
-        this.curValue = null;
+        this.saveValue(null);
 
         this.setDatepickerValue(moment());
         this.datepicker.trigger("change");
@@ -247,24 +247,28 @@ module.exports = function () {
       },
       formattedDate: function formattedDate() {
 
-        if (!this.curValue || !this.range && (!this.curValue.format || this.curValue.format() == 'Invalid date') || this.range && (!this.curValue.start || !this.curValue.start.format || !this.curValue.end || !this.curValue.end.format)) {
+        var value = this.getValue();
+
+        if (!value || !this.range && (!value.format || value.format() == 'Invalid date') || this.range && (!value.start || !value.start.format || !value.end || !value.end.format)) {
 
           return this.noInput ? this.placeholder : '';
         }
 
-        if (!this.range) return this.curValue.format(this.format);
+        if (!this.range) return value.format(this.format);
 
-        return this.curValue.start.format(this.format) + " - " + this.curValue.end.format(this.format);
+        return value.start.format(this.format) + " - " + value.end.format(this.format);
       },
       serverFormat: function serverFormat() {
 
-        if (!this.curValue || isDateString(this.curValue)) return '';
+        var value = this.getValue();
 
-        if (!this.range) return this.curValue.format();
+        if (!value || isDateString(value)) return '';
+
+        if (!this.range) return value.format();
 
         return JSON.stringify({
-          start: this.curValue.start.format(),
-          end: this.curValue.end.format()
+          start: value.start.format(),
+          end: value.end.format()
         });
       }
     }

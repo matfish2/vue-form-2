@@ -1,5 +1,6 @@
 "use strict";
 
 module.exports = function (that) {
-  return !isNaN(that.curValue) && that.curValue % 1 === 0;
+	var value = that.getValue();
+	return !isNaN(value) && value % 1 === 0;
 };

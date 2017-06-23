@@ -11,6 +11,7 @@ module.exports = {
     triggerOn: require('../methods/trigger-on'),
     handleTriggeredFields: require('../methods/handle-triggered-fields'),
     getForm: require('../methods/get-form'),
-    getField: require('../methods/get-field')
+    getField: require('../methods/get-field'),
+    commit: require('../methods/commit')
   }
 };
