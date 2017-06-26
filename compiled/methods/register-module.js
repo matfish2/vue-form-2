@@ -17,7 +17,7 @@ module.exports = function () {
 			values: {}
 		},
 		mutations: (_mutations = {}, _defineProperty(_mutations, name + '/CHANGE', function undefined(state, payload) {
-			state.values[payload.name] = payload.value;
+			state.values[payload.name] = getValue(payload.value);
 			state.count++;
 		}), _defineProperty(_mutations, name + '/SENDING', function undefined(state, payload) {}), _defineProperty(_mutations, name + '/SENT', function undefined(state, payload) {
 			state.values = {};
@@ -25,3 +25,12 @@ module.exports = function () {
 		}), _defineProperty(_mutations, name + '/INVALID.SERVER', function undefined(state, payload) {}), _defineProperty(_mutations, name + '/INVALID.CLIENT', function undefined(state, payload) {}), _mutations)
 	});
 };
+
+function getValue(val) {
+
+	if (typeof val.format === 'function') {
+		return val.format('YYYY-MM-DD HH:mm:ss');
+	}
+
+	return val;
+}
