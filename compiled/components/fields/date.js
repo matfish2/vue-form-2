@@ -90,6 +90,7 @@ module.exports = function () {
         autoUpdateInput: false,
         singleDatePicker: !this.range,
         format: this.format,
+        startDate: moment(),
         locale: {
           cancelLabel: this.clearLabel
         }
@@ -190,6 +191,8 @@ module.exports = function () {
           end: moment(val.end, this.format) } : moment(val, this.format);
       },
       addTime: function addTime(val) {
+
+        val = val.replace("T", " ");
 
         if (val.split(" ").length > 1) return val;
 

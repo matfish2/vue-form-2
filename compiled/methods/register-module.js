@@ -28,7 +28,7 @@ module.exports = function () {
 
 function getValue(val) {
 
-	if (typeof val.format === 'function') {
+	if (val && typeof val.format === 'function') {
 		return val.format('YYYY-MM-DD HH:mm:ss');
 	}
 
