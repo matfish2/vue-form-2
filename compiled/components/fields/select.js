@@ -3,6 +3,7 @@
 var merge = require('merge');
 var clone = require('clone');
 var Field = require('./field');
+var fuzzyOptions = require('./fuzzy-search/options');
 
 module.exports = function () {
   return merge.recursive(Field(), {
@@ -19,9 +20,8 @@ module.exports = function () {
         required: false,
         default: false
       },
-      select2: {
-        type: Boolean
-      },
+      select2: Boolean,
+      fuzzy: Boolean,
       options: {
         type: Object,
         default: function _default() {
@@ -127,6 +127,10 @@ module.exports = function () {
           });
         }
 
+        if (this.fuzzy) {
+          options = merge.recursive(options, fuzzyOptions(this.fuzzySearch));
+        }
+
         options = merge.recursive(options, this.options);
 
         this.el = $(this.$el).find("select");
@@ -175,6 +179,7 @@ module.exports = function () {
       };
     },
     methods: {
+      fuzzySearch: require('./fuzzy-search/fuzzy-search'),
       setValue: function setValue(value) {
         this.saveValue(value);
         this.dirty = true;
