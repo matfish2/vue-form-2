@@ -1,7 +1,14 @@
 'use strict';
 
+var _clone = require('clone');
+
+var _clone2 = _interopRequireDefault(_clone);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var merge = require('merge');
 var Field = require('./field');
+
 
 module.exports = function () {
   return merge.recursive(Field(), {
@@ -93,7 +100,7 @@ module.exports = function () {
         var checked = e.target.checked;
 
         if (this.multiple) {
-          var value = this.getValue();
+          var value = (0, _clone2.default)(this.getValue());
 
           if (checked) {
             value.push(val);

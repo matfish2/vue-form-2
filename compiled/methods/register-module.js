@@ -18,7 +18,7 @@ module.exports = function () {
 		},
 		mutations: (_mutations = {}, _defineProperty(_mutations, name + '/CHANGE', function undefined(state, payload) {
 			state.values[payload.name] = getValue(payload.value);
-			state.count++;
+			state.count = getCount(state.values);
 		}), _defineProperty(_mutations, name + '/SENDING', function undefined(state, payload) {}), _defineProperty(_mutations, name + '/SENT', function undefined(state, payload) {
 			state.values = {};
 			state.count = 0;
@@ -33,4 +33,15 @@ function getValue(val) {
 	}
 
 	return val;
+}
+
+function getCount(values) {
+
+	var c = 0;
+
+	for (var v in values) {
+		c++;
+	}
+
+	return c;
 }
