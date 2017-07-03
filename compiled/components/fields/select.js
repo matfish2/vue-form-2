@@ -62,8 +62,6 @@ module.exports = function () {
       var callback = this.callback;
       var filterBy = this.filterBy;
 
-      if (this.multiple && !this.value) this.setValue([]);
-
       if (this.filterBy) {
 
         this.$watch('filterValue', function (val) {
@@ -181,6 +179,8 @@ module.exports = function () {
     methods: {
       fuzzySearch: require('./fuzzy-search/fuzzy-search'),
       setValue: function setValue(value) {
+        if (this.multiple && !value) value = [];
+
         this.saveValue(value);
         this.dirty = true;
 

@@ -54,7 +54,7 @@ module.exports = function () {
 
         this.$watch('filterValue', function (val) {
           if (val) {
-            this.value = this.multiple ? [] : '';
+            this.setValue(this.multiple ? [] : '');
           }
         }.bind(this));
       }
@@ -64,7 +64,7 @@ module.exports = function () {
         return this.multiple ? "checkbox" : "radio";
       },
       filterValue: function filterValue() {
-        return this.filteringField ? this.filteringField.value : null;
+        return this.filteringField ? this.filteringField.getValue() : null;
       },
       toggleText: function toggleText() {
         return this.allSelected ? this.toggleTexts.unselect : this.toggleTexts.select;
@@ -124,13 +124,15 @@ module.exports = function () {
       },
       toggle: function toggle() {
         this.allSelected = !this.allSelected;
+        var value = this.getValue();
 
         if (this.allSelected) {
           this.items.forEach(function (item) {
-            if (this.passesFilter(item)) this.value.push(item.id);
+            if (this.passesFilter(item)) value.push(item.id);
+            this.setValue(value);
           }.bind(this));
         } else {
-          this.value = [];
+          this.setValue([]);
         }
       }
     }

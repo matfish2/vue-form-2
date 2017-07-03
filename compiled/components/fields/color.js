@@ -14,7 +14,7 @@ module.exports = function () {
 			if (!browserSupportsColorpicker()) {
 				var that = this;
 				$(this.$el).find("input[type=color]").spectrum({
-					color: that.value ? that.value : "#000",
+					color: that.value ? that.value : "#000000",
 					change: function change(color) {
 						that.setValue(color.toHexString());
 					}
