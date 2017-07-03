@@ -16,10 +16,9 @@ module.exports = function () {
       this.saveValue(this.checked);
     },
     mounted: function mounted() {
-
-      // if (typeof this.checked=='undefined') {
-      //   this.dirty = true;
-      // }
+      if (typeof this.checked == 'undefined') {
+        this.setValue(false);
+      }
     },
     methods: {
       updateValue: function updateValue(e) {
