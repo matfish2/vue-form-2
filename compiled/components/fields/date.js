@@ -50,6 +50,11 @@ module.exports = function () {
       },
       timepicker: {
         type: Boolean
+      },
+      nowButton: Boolean,
+      nowText: {
+        type: String,
+        default: 'Now'
       }
     },
     created: function created() {
@@ -89,7 +94,7 @@ module.exports = function () {
       var options = merge.recursive(this.opts, {
         autoUpdateInput: false,
         singleDatePicker: !this.range,
-        format: this.format,
+        format: this.Format,
         startDate: moment(),
         locale: {
           cancelLabel: this.clearLabel
@@ -133,17 +138,21 @@ module.exports = function () {
       }
     },
     methods: {
+      setNow: function setNow() {
+        this.setValue(moment());
+      },
+
       injectValueToField: function injectValueToField(val) {
         if (this.range) {
 
-          var formatted = val.start.format(this.format) + " - " + val.end.format(this.format);
+          var formatted = val.start.format(this.Format) + " - " + val.end.format(this.Format);
           this.datepicker.find("input").val(formatted);
           var start = val.start.isValid() ? val.start : moment();
           var end = val.end.isValid() ? val.end : moment();
 
           this.setDatepickerValue({ start: start, end: end });
         } else {
-          var _formatted = val.format(this.format);
+          var _formatted = val.format(this.Format);
           $(this.$el).find("input").val(_formatted);
           var pickerDate = val.isValid() ? val : moment();
           this.setDatepickerValue(pickerDate);
@@ -187,8 +196,8 @@ module.exports = function () {
           val.end = pieces[1];
         }
 
-        return this.range ? { start: moment(val.start, this.format),
-          end: moment(val.end, this.format) } : moment(val, this.format);
+        return this.range ? { start: moment(val.start, this.Format),
+          end: moment(val.end, this.Format) } : moment(val, this.Format);
       },
       addTime: function addTime(val) {
 
@@ -242,6 +251,13 @@ module.exports = function () {
       }
     },
     computed: {
+      Format: function Format() {
+        var pieces = this.format.split(" ");
+        if (this.timepicker && pieces.length == 1) return this.format + ' HH:mm:ss';
+
+        return this.format;
+      },
+
       type: function type() {
         return this.noInput ? 'span' : 'input';
       },
@@ -257,9 +273,9 @@ module.exports = function () {
           return this.noInput ? this.placeholder : '';
         }
 
-        if (!this.range) return value.format(this.format);
+        if (!this.range) return value.format(this.Format);
 
-        return value.start.format(this.format) + " - " + value.end.format(this.format);
+        return value.start.format(this.Format) + " - " + value.end.format(this.Format);
       },
       serverFormat: function serverFormat() {
 
