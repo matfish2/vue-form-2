@@ -7,9 +7,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = function (h) {
   var _this = this;
 
-  if (!this.hasMessage) return '';
+  var message = this.hasMessage ? '<p>' + this.Message + '</p>' : '';
 
-  var message = '<p>' + this.Message + '</p>';
   var errors = [];
 
   this.showableErrors.map(function (error) {
@@ -19,10 +18,11 @@ exports.default = function (h) {
     return '<li>' + error + '</li>';
   });
   var content = this.hasErrors ? '<p>' + this.errorsCount + '</p><ul>' + errors.join('') + '</ul>' : message;
+  var style = content ? '' : 'display:none;';
 
   return h(
     'div',
-    { 'class': 'StatusBar alert alert-' + this.Status, domProps: {
+    { 'class': 'StatusBar alert alert-' + this.Status, style: style, domProps: {
         'innerHTML': content
       }
     },

@@ -33,17 +33,42 @@ module.exports = function () {
       debounce: {
         type: Number,
         default: 300
+      },
+      toggler: {
+        type: Boolean
+      },
+      togglerButton: {
+        type: Object,
+        default: function _default() {
+          return {
+            expand: 'Expand',
+            minimize: 'Minimize'
+          };
+        }
       }
     },
     data: function data() {
       return {
         editor: null,
         fieldType: 'textarea',
-        tagName: 'textarea'
+        tagName: 'textarea',
+        expanded: false
       };
     },
     methods: {
-      updateValue: _updateValue2.default
+      updateValue: _updateValue2.default,
+      toggle: function toggle() {
+        this.expanded = !this.expanded;
+        var textarea = $(this.$el).find("textarea");
+        height = this.expanded ? textarea.get(0).scrollHeight : "auto";
+        textarea.height(height);
+        this.dispatch('textarea-was-toggled', { expanded: this.expanded });
+      }
+    },
+    computed: {
+      togglerText: function togglerText() {
+        return this.expanded ? this.togglerButton.minimize : this.togglerButton.expand;
+      }
     },
     mounted: function mounted() {
 
