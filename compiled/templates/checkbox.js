@@ -26,7 +26,7 @@ exports.default = function (h) {
         attrs: { type: "checkbox",
           name: this.name,
           value: "1",
-          checked: this.checked,
+          checked: this.value,
 
           disabled: this.disabled },
         on: {

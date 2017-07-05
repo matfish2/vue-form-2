@@ -5,33 +5,29 @@ var Field = require('./field');
 
 module.exports = function () {
   return merge.recursive(Field(), {
-    props: {
-      checked: {
-        type: Boolean,
-        default: undefined
-      }
-    },
-    created: function created() {
-      this.wasReset = true;
-      this.saveValue(this.checked);
-    },
     mounted: function mounted() {
-      if (typeof this.checked == 'undefined') {
-        this.setValue(false);
+      if (typeof this.value == 'undefined') {
+        this.dirty = true;
       }
     },
     methods: {
       updateValue: function updateValue(e) {
         this.saveValue(e.target.checked);
       },
+      setValue: function setValue(val, isDirty) {
+        var value = val && val != '0';
+        this.saveValue(value);
+        $(this.$el).find("input[type=checkbox][value=1]").prop("checked", value);
+      },
+
       reset: function reset() {
         this.wasReset = true;
         this.checked = undefined;
+        $(this.$el).find("input[type=checkbox][value=1]").prop("checked", false);
       }
     },
     data: function data() {
       return {
-        initialValue: this.checked,
         fieldType: 'checkbox'
       };
     }

@@ -66,7 +66,7 @@ module.exports = {
       this.handleTriggeredFields();
     }
 
-    if (this.value) {
+    if (this.value || this.fieldType === 'checkbox') {
       this.setValue(this.value, false); // don't set as dirty on init
     }
 
