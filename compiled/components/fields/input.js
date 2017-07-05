@@ -35,8 +35,10 @@ module.exports = function () {
     },
     methods: {
       setValue: function setValue(val) {
+        var setDirty = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
         this.saveValue(val);
-        this.dirty = true;
+        if (setDirty) this.dirty = true;
         document.getElementsByName(this.name)[0].value = val;
       },
       reset: function reset() {

@@ -179,10 +179,12 @@ module.exports = function () {
     methods: {
       fuzzySearch: require('./fuzzy-search/fuzzy-search'),
       setValue: function setValue(value) {
+        var setDirty = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
         if (this.multiple && !value) value = [];
 
         this.saveValue(value);
-        this.dirty = true;
+        if (setDirty) this.dirty = true;
 
         if (!this.select2) document.getElementsByName(this.name)[0].value = value;
 

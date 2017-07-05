@@ -67,7 +67,7 @@ module.exports = {
     }
 
     if (this.value) {
-      this.setValue(this.value);
+      this.setValue(this.value, false); // don't set as dirty on init
     }
 
     this.$watch('curValue', _watch2.default);

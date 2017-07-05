@@ -19,8 +19,10 @@ module.exports = function () {
 		mixins: [props, data, methods, computed, mounted],
 		methods: {
 			setValue: function setValue(value) {
+				var setDirty = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
 				this.saveValue(value);
-				this.dirty = true;
+				if (setDirty) this.dirty = true;
 			},
 			updateValue: function updateValue(e) {
 				this.saveValue(e.target.value);

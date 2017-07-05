@@ -209,6 +209,8 @@ module.exports = function () {
       },
 
       setValue: function setValue(val) {
+        var setDirty = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
 
         try {
           if (this.range) {
@@ -232,7 +234,7 @@ module.exports = function () {
         setTimeout(function () {
           this.setDatepickerValue(this.getValue());
         }.bind(this), 0);
-        this.dirty = true;
+        if (setDirty) this.dirty = true;
       },
       reset: function reset() {
         this.wasReset = true;
