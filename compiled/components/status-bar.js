@@ -40,6 +40,8 @@ module.exports = {
 
       var field = this.getForm().getField(error.name);
 
+      if (!field) return false;
+
       if (error.hasOwnProperty('message')) return error.message.replace(":field", field.label);
 
       return field.getMessage(error.rule);
