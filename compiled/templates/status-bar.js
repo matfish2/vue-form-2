@@ -14,7 +14,7 @@ exports.default = function (h) {
   this.showableErrors.map(function (error) {
     return errors.push(_this.getErrorMessage(error));
   });
-  this.errors = this.errors.filter(function (error) {
+  errors = errors.filter(function (error) {
     return error;
   });
 
