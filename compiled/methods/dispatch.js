@@ -11,7 +11,7 @@ module.exports = function (event, payload) {
 	var eventName = pieces[0];
 
 	if (this.vuex && pieces.length === 1) {
-		var EventName = eventName.toUpperCase().replace('-', '_');
+		var EventName = eventName.toUpperCase().replace(/-/g, '_');
 		this.$store.commit(this.name + '/' + EventName, payload);
 	}
 
