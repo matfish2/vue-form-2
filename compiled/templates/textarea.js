@@ -11,7 +11,7 @@ exports.default = function (h) {
             {
                   attrs: { type: "button" },
                   "class": "btn btn-default btn-xs", on: {
-                        "click": "this.toggle.bind(this)"
+                        "click": this.toggle.bind(this)
                   }
             },
             [this.togglerText]

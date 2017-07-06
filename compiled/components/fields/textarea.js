@@ -36,15 +36,6 @@ module.exports = function () {
       },
       toggler: {
         type: Boolean
-      },
-      togglerButton: {
-        type: Object,
-        default: function _default() {
-          return {
-            expand: 'Expand',
-            minimize: 'Minimize'
-          };
-        }
       }
     },
     data: function data() {
@@ -60,12 +51,20 @@ module.exports = function () {
       toggle: function toggle() {
         this.expanded = !this.expanded;
         var textarea = $(this.$el).find("textarea");
-        height = this.expanded ? textarea.get(0).scrollHeight : "auto";
+        var height = this.expanded ? textarea.get(0).scrollHeight : "auto";
         textarea.height(height);
-        this.dispatch('textarea-was-toggled', { expanded: this.expanded });
+        this.getForm().dispatch('textarea-was-toggled', { expanded: this.expanded });
       }
     },
     computed: {
+      togglerButton: function togglerButton() {
+        var form = this.getForm();
+        return {
+          expand: form.opts.texts.expand,
+          minimize: form.opts.texts.minimize
+        };
+      },
+
       togglerText: function togglerText() {
         return this.expanded ? this.togglerButton.minimize : this.togglerButton.expand;
       }
