@@ -46,7 +46,7 @@ module.exports = {
       var v = this.getForm().validation;
 
       if (v.rules && v.rules.hasOwnProperty(this.name)) {
-        this.Rules = v.rules[this.name];
+        this.Rules = (0, _merge2.default)(this.Rules, v.rules[this.name]);
       }
 
       if (typeof v.messages != 'undefined' && v.messages.hasOwnProperty(this.name)) this.messages = v.messages[this.name];

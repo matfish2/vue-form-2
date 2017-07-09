@@ -57,15 +57,8 @@ module.exports = function () {
         default: 'Now'
       }
     },
-    created: function created() {
-
-      this.rules = convertDateRulesToMoment(this.rules);
-
-      this.$watch('rules', function () {
-        this.rules = convertDateRulesToMoment(this.rules);
-      }, { deep: true });
-    },
     mounted: function mounted() {
+      var _this = this;
 
       if (typeof $ == 'undefined') {
         console.error('vue-form-2: missing global dependency: vf-date depends on JQuery');
@@ -82,6 +75,10 @@ module.exports = function () {
       var dateRule = this.range ? 'daterange' : 'date';
 
       this.Rules[dateRule] = true;
+
+      setTimeout(function () {
+        _this.Rules = convertDateRulesToMoment(_this.Rules);
+      }, 1000);
 
       var parentOptions = this.inForm() ? clone(this.getForm().options.dateOptions) : {};
 
