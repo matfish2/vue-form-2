@@ -10,6 +10,8 @@ var _watch2 = _interopRequireDefault(_watch);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var convertDateRulesToMoment = require('../../helpers/convert-date-rules-to-moment');
+
 module.exports = {
   mounted: function mounted() {
     var _this = this;
@@ -46,14 +48,14 @@ module.exports = {
       var v = this.getForm().validation;
 
       if (v.rules && v.rules.hasOwnProperty(this.name)) {
-        this.Rules = (0, _merge2.default)(this.Rules, v.rules[this.name]);
+        this.Rules = convertDateRulesToMoment((0, _merge2.default)(this.Rules, v.rules[this.name]));
       }
 
       if (typeof v.messages != 'undefined' && v.messages.hasOwnProperty(this.name)) this.messages = v.messages[this.name];
 
-      setTimeout(function () {
-        this.validate();
-      }.bind(this), 0);
+      // setTimeout(function() {
+      //   this.validate();
+      // }.bind(this),0);
 
       if (form.relatedFields.hasOwnProperty(this.name)) this.foreignFields = form.relatedFields[this.name].map(function (name) {
         return form.getField(name);

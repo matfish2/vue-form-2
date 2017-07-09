@@ -5,7 +5,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 var merge = require('merge');
 var Field = require('./field');
 var clone = require('clone');
-var convertDateRulesToMoment = require('../../helpers/convert-date-rules-to-moment');
 var DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 
 module.exports = function () {
@@ -58,7 +57,6 @@ module.exports = function () {
       }
     },
     mounted: function mounted() {
-      var _this = this;
 
       if (typeof $ == 'undefined') {
         console.error('vue-form-2: missing global dependency: vf-date depends on JQuery');
@@ -75,10 +73,6 @@ module.exports = function () {
       var dateRule = this.range ? 'daterange' : 'date';
 
       this.Rules[dateRule] = true;
-
-      setTimeout(function () {
-        _this.Rules = convertDateRulesToMoment(_this.Rules);
-      }, 1000);
 
       var parentOptions = this.inForm() ? clone(this.getForm().options.dateOptions) : {};
 
