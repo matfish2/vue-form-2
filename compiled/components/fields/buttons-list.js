@@ -16,7 +16,11 @@ module.exports = function () {
       return {
         fieldType: 'buttons',
         filteringField: null,
-        allSelected: false
+        allSelected: false,
+        toggleTexts: {
+          select: 'Select All',
+          unselect: 'Unselect All'
+        }
       };
     },
     props: {
@@ -27,9 +31,6 @@ module.exports = function () {
       multiple: {
         type: Boolean,
         required: false,
-        default: false
-      },
-      toggleTexts: {
         default: false
       },
       value: {
@@ -44,16 +45,18 @@ module.exports = function () {
       },
       horizontal: Boolean
     },
-    ready: function ready() {
+    mounted: function mounted() {
 
-      if (!this.toggleTexts) {
-        var inForm = this.inForm();
-        var texts = this.getForm().options.texts;
+      if (this.inForm()) {
 
-        this.toggleTexts = {
-          select: inForm ? texts.selectAll : 'Select All',
-          unselect: inForm ? texts.unselectAll : 'Unselect All'
-        };
+        var texts = this.getForm().opts.texts;
+
+        if (texts.selectAll) {
+          this.toggleTexts = {
+            select: texts.selectAll,
+            unselect: texts.unselectAll
+          };
+        }
       }
 
       if (this.filterBy) {
@@ -130,14 +133,17 @@ module.exports = function () {
         return item[this.filterBy] == this.filterValue;
       },
       toggle: function toggle() {
+
         this.allSelected = !this.allSelected;
-        var value = this.getValue();
+
+        var value = [];
 
         if (this.allSelected) {
           this.items.forEach(function (item) {
             if (this.passesFilter(item)) value.push(item.id);
-            this.setValue(value);
           }.bind(this));
+
+          this.setValue(value);
         } else {
           this.setValue([]);
         }
