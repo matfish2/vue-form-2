@@ -141,8 +141,8 @@ module.exports = function () {
             var data = e.params.data;
 
             that.getForm().dispatch('new-ajax-item', {
-              name: this.name,
-              listId: this.listId,
+              name: that.name,
+              listId: that.listId,
               item: {
                 id: data.id,
                 text: data.text
