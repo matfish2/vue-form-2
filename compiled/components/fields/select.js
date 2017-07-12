@@ -137,6 +137,9 @@ module.exports = function () {
         this.el.select2(options).on("select2:select", function (e) {
 
           if (that.ajaxUrl && that.inForm()) {
+
+            var data = e.params.data;
+
             that.getForm().dispatch('new-ajax-item', {
               name: this.name,
               listId: this.listId,
