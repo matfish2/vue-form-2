@@ -53,7 +53,8 @@ module.exports = function () {
       },
       html: {
         type: Boolean
-      }
+      },
+      listId: {}
     },
     mounted: function mounted() {
 
@@ -134,6 +135,18 @@ module.exports = function () {
         this.el = $(this.$el).find("select");
 
         this.el.select2(options).on("select2:select", function (e) {
+
+          if (that.ajaxUrl && that.inForm()) {
+            that.getForm().dispatch('new-ajax-item', {
+              name: this.name,
+              listId: this.listId,
+              item: {
+                id: data.id,
+                text: data.text
+              }
+            });
+          }
+
           that.saveValue($(this).val());
         }).on("select2:unselecting", function (e) {
           if (that.multiple) {
