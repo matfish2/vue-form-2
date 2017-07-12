@@ -53,9 +53,9 @@ module.exports = {
 
       if (typeof v.messages != 'undefined' && v.messages.hasOwnProperty(this.name)) this.messages = v.messages[this.name];
 
-      // setTimeout(function() {
-      //   this.validate();
-      // }.bind(this),0);
+      setTimeout(function () {
+        this.validate();
+      }.bind(this), 0);
 
       if (form.relatedFields.hasOwnProperty(this.name)) this.foreignFields = form.relatedFields[this.name].map(function (name) {
         return form.getField(name);
