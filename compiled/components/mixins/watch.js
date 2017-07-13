@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
      value: true
 });
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 exports.default = function (newVal, oldVal) {
 
      if (oldVal === newVal) return;
@@ -13,9 +15,9 @@ exports.default = function (newVal, oldVal) {
      form.dispatch('change::' + this.name, { name: this.name, value: newVal, oldValue: oldVal });
      form.dispatch('change', { name: this.name, value: newVal, oldValue: oldVal });
 
-     if (typeof this.foreignFields != 'undefined') {
+     if (_typeof(this.foreignFields)) {
           this.foreignFields.forEach(function (field) {
-               field.validate();
+               if (field) field.validate();
           });
      }
 
