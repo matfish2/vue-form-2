@@ -6,7 +6,7 @@ var Field = require('./field');
 module.exports = function () {
   return merge.recursive(Field(), {
     mounted: function mounted() {
-      if (typeof this.value == 'undefined' || this.value === '') {
+      if (!this.disabled && (typeof this.value == 'undefined' || this.value === '')) {
         this.setValue(false);
       }
     },
