@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -8,7 +8,7 @@ module.exports = function (rule) {
 
   var message = this.messages[rule] ? this.messages[rule] : messages[rule];
 
-  if ((typeof message === "undefined" ? "undefined" : _typeof(message)) == 'object') {
+  if ((typeof message === 'undefined' ? 'undefined' : _typeof(message)) == 'object') {
     message = extractMessage(rule, message, this);
   }
 
@@ -18,6 +18,9 @@ module.exports = function (rule) {
     message = message.replace("{0}", params.format(this.format));
   } else if (Array.isArray(params)) {
     params.forEach(function (param, index) {
+      if (this.fieldType === 'date') {
+        param = typeof param === 'string' ? moment(param) : param;
+      }
       message = message.replace("{" + index + "}", !isMomentObject(param) ? param : param.format(this.format));
     }.bind(this));
   } else if (typeof params == 'number' || typeof params == 'string') {
@@ -39,7 +42,7 @@ function extractMessage(rule, message, field) {
 
   if (field.Rules.number || field.Rules.integer) return message.number;
 
-  if (rule == 'between' && _typeof(field.Rules[rule][0]) == 'object' || ['min', 'max'].indexOf(rule) > -1 && _typeof(field.Rules[rule]) == 'object') return message.date;
+  if (['date', 'partialdate'].indexOf(field.fieldType) > -1) return message.date;
 
   return message.string;
 }
