@@ -53,7 +53,7 @@ exports.default = function (h) {
     ));
   });
 
-  var content = items.length ? [toggler, items] : [this.opts.texts.noItems];
+  var content = items.length ? [toggler, items] : [this.getForm().opts.texts.noItems];
 
   return h(
     'div',
