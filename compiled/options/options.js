@@ -26,7 +26,8 @@ module.exports = function () {
       selectAll: 'Select All',
       unselectAll: 'Unselect All',
       expand: 'Expand',
-      minimize: 'Minimize'
+      minimize: 'Minimize',
+      noItems: 'No items were found'
     }
   };
 

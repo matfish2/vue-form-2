@@ -53,9 +53,11 @@ exports.default = function (h) {
     ));
   });
 
+  var content = items.length ? [toggler, items] : [this.opts.texts.noItems];
+
   return h(
     'div',
     { 'class': 'VF-Buttons__wrapper' },
-    [toggler, items]
+    [content]
   );
 };
