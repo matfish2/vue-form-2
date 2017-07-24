@@ -40,6 +40,7 @@ exports.default = function (h) {
 				attrs: { name: this.name,
 					placeholder: this.placeholder,
 					value: this.formattedDate,
+					disabled: this.disabled,
 
 					type: 'text' },
 				on: {

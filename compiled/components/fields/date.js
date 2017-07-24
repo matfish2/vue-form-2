@@ -236,6 +236,8 @@ module.exports = function () {
       },
       setDatepickerValue: function setDatepickerValue(value) {
 
+        if (this.disabled) return;
+
         var start = this.range ? value.start : value;
         var end = this.range ? value.end : value;
 
