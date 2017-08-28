@@ -12,14 +12,14 @@ exports.default = function (h) {
   var errors = [];
 
   this.showableErrors.map(function (error) {
-    return errors.push(_this.getErrorMessage(error));
+    return errors.push({ name: error.name, text: _this.getErrorMessage(error) });
   });
   errors = errors.filter(function (error) {
     return error;
   });
 
   errors = errors.map(function (error) {
-    return '<li>' + error + '</li>';
+    return '<li><a href="#Field--' + error.name + '">' + error.text + '</a></li>';
   });
   var content = this.hasErrors ? '<p>' + this.errorsCount + '</p><ul>' + errors.join('') + '</ul>' : message;
   var style = content ? '' : 'display:none;';
