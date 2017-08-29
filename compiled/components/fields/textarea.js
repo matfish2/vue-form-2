@@ -90,6 +90,10 @@ module.exports = function () {
         selector: 'textarea[name=' + this.name + ']',
         setup: function setup(ed) {
 
+          ed.on("init", function (ed) {
+            tinymce.get("textarea_" + that.name).setContent(that.value);
+          });
+
           that.editor = ed;
           parentSetup(ed);
           _setup(ed);
@@ -106,6 +110,9 @@ module.exports = function () {
           tinymce.get("textarea_" + this.name).setContent(val);
         }
       });
+    },
+    destroyed: function destroyed() {
+      tinymce.get("textarea_" + this.name).remove();
     }
   });
 };
