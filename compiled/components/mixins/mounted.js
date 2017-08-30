@@ -65,7 +65,9 @@ module.exports = {
         return form.getField(name);
       });
 
-      this.handleTriggeredFields();
+      setTimeout(function () {
+        _this.handleTriggeredFields();
+      }, 0);
     }
 
     if (this.value || this.fieldType === 'checkbox') {
