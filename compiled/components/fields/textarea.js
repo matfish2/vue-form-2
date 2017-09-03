@@ -112,7 +112,7 @@ module.exports = function () {
       });
     },
     destroyed: function destroyed() {
-      tinymce.get("textarea_" + this.name).remove();
+      if (this.tinymce) tinymce.get("textarea_" + this.name).remove();
     }
   });
 };
