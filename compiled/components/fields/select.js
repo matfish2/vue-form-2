@@ -60,7 +60,6 @@ module.exports = function () {
     mounted: function mounted() {
       var _this = this;
 
-      var that = this;
       var value;
       var callback = this.callback;
       var filterBy = this.filterBy;
@@ -138,7 +137,7 @@ module.exports = function () {
               data: function data(params) {
                 var query = {
                   q: params.term,
-                  selected: that.getValue()
+                  selected: self.getValue()
                 };
 
                 if (filterBy) {
@@ -171,13 +170,13 @@ module.exports = function () {
 
         this.el.select2(options).on("select2:select", function (e) {
 
-          if (that.ajaxUrl && that.inForm()) {
+          if (self.ajaxUrl && self.inForm()) {
 
             var data = e.params.data;
 
-            that.getForm().dispatch('new-ajax-item', {
-              name: that.name,
-              listId: that.listId,
+            self.getForm().dispatch('new-ajax-item', {
+              name: self.name,
+              listId: self.listId,
               item: {
                 id: data.id,
                 text: data.text
@@ -185,16 +184,16 @@ module.exports = function () {
             });
           }
 
-          that.saveValue($(this).val());
+          self.saveValue($(this).val());
         }).on("select2:unselecting", function (e) {
-          if (that.multiple) {
+          if (self.multiple) {
             var $this = $(this);
             setTimeout(function () {
               value = $this.val();
-              that.saveValue(value ? value : []);
+              self.saveValue(value ? value : []);
             }, 0);
           } else {
-            that.saveValue('');
+            self.saveValue('');
           }
         });
 
