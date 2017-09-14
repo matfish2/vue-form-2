@@ -36,7 +36,7 @@ exports.default = function (h) {
     });
   }
 
-  return h(
+  return this.render ? h(
     "select",
     {
       attrs: { name: this.name + this.arraySymbol,
@@ -49,5 +49,5 @@ exports.default = function (h) {
 
       "class": "form-control" },
     [placeholder, items]
-  );
+  ) : '';
 };

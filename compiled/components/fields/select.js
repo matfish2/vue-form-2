@@ -58,6 +58,7 @@ module.exports = function () {
       listId: {}
     },
     mounted: function mounted() {
+      var _this = this;
 
       var that = this;
       var value;
@@ -67,6 +68,15 @@ module.exports = function () {
       if (!this.disabled && !this.value && this.default) {
         this.setValue(this.default);
       }
+
+      this.$watch('select2', function (val) {
+        if (val) {
+          _this.initSelect2();
+        } else {
+          _this.el.select2("destroy");
+          _this.rerender();
+        }
+      });
 
       if (this.filterBy) {
 
@@ -79,7 +89,27 @@ module.exports = function () {
       }
 
       if (this.select2 || this.ajaxUrl) {
+        this.initSelect2();
+      }
+    },
+    computed: {
+      arraySymbol: require('../computed/array-symbol'),
+      filterValue: function filterValue() {
 
+        if (!this.filterBy) return '';
+
+        return this.getField(this.filterBy).getValue();
+      }
+    },
+    data: function data() {
+      return {
+        fieldType: 'select',
+        tagName: 'select',
+        render: true
+      };
+    },
+    methods: {
+      initSelect2: function initSelect2() {
         if (typeof $ == 'undefined') {
           console.error('vue-form-2: missing global dependency: vf-select with select2 depends on JQuery');
           return;
@@ -180,24 +210,16 @@ module.exports = function () {
           this.el.data('select2').$container.addClass("container-" + this.containerClass);
           this.el.data('select2').$dropdown.addClass("dropdown-" + this.containerClass);
         }
-      }
-    },
-    computed: {
-      arraySymbol: require('../computed/array-symbol'),
-      filterValue: function filterValue() {
+      },
+      rerender: function rerender() {
+        var _this2 = this;
 
-        if (!this.filterBy) return '';
+        this.render = false;
+        setTimeout(function () {
+          _this2.render = true;
+        });
+      },
 
-        return this.getField(this.filterBy).getValue();
-      }
-    },
-    data: function data() {
-      return {
-        fieldType: 'select',
-        tagName: 'select'
-      };
-    },
-    methods: {
       fuzzySearch: require('./fuzzy-search/fuzzy-search'),
       setValue: function setValue(value) {
         var setDirty = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
