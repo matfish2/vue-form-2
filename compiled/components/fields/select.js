@@ -61,8 +61,6 @@ module.exports = function () {
       var _this = this;
 
       var value;
-      var callback = this.callback;
-      var filterBy = this.filterBy;
 
       if (!this.disabled && !this.value && this.default) {
         this.setValue(this.default);
@@ -140,10 +138,10 @@ module.exports = function () {
                   selected: self.getValue()
                 };
 
-                if (filterBy) {
-                  var filterValue = self.getForm().getField(filterBy).getValue();
+                if (this.filterBy) {
+                  var filterValue = self.getForm().getField(this.filterBy).getValue();
 
-                  if (filterValue) query[filterBy] = filterValue;
+                  if (filterValue) query[this.filterBy] = filterValue;
                 }
 
                 return query;
@@ -151,7 +149,7 @@ module.exports = function () {
               processResults: function processResults(data) {
 
                 return {
-                  results: callback ? $.map(data, callback) : data
+                  results: this.callback ? $.map(data, this.callback) : data
                 };
               },
               cache: true
