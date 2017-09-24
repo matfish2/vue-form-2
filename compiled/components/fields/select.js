@@ -187,7 +187,7 @@ module.exports = function () {
           if (self.multiple) {
             var $this = $(this);
             setTimeout(function () {
-              value = $this.val();
+              var value = $this.val();
               self.saveValue(value ? value : []);
             }, 0);
           } else {
