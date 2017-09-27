@@ -12,7 +12,8 @@ module.exports = function () {
     data: function data() {
       return {
         fieldType: 'date',
-        datepicker: null
+        datepicker: null,
+        opts: this.options
       };
     },
     props: {
@@ -74,13 +75,13 @@ module.exports = function () {
 
       this.Rules[dateRule] = true;
 
-      var parentOptions = this.inForm() ? clone(this.getForm().options.dateOptions) : {};
+      var parentOptions = this.inForm() ? clone(this.getForm().opts.dateOptions) : {};
 
       if (this.disabled) return;
 
-      if (this.timepicker) this.options.timePicker = true;
+      if (this.timepicker) this.opts.timePicker = true;
 
-      this.opts = merge.recursive(parentOptions, this.options);
+      this.opts = merge.recursive(parentOptions, this.opts);
 
       var options = merge.recursive(this.opts, {
         autoUpdateInput: false,
@@ -258,7 +259,7 @@ module.exports = function () {
         return this.noInput ? 'span' : 'input';
       },
       isTimepicker: function isTimepicker() {
-        return this.options.hasOwnProperty('timePicker') && this.options.timePicker || this.timepicker;
+        return this.opts.hasOwnProperty('timePicker') && this.opts.timePicker || this.timepicker;
       },
       formattedDate: function formattedDate() {
 
