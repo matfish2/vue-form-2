@@ -83,7 +83,7 @@ module.exports = function () {
 
       this.opts = merge.recursive(parentOptions, this.opts);
 
-      var options = merge.recursive(this.opts, {
+      var options = merge.recursive({
         autoUpdateInput: false,
         singleDatePicker: !this.range,
         timePicker24Hour: true,
@@ -92,7 +92,7 @@ module.exports = function () {
         locale: {
           cancelLabel: this.clearLabel
         }
-      });
+      }, this.opts);
 
       this.datepicker.daterangepicker(options);
 
