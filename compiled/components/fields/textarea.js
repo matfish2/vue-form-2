@@ -30,6 +30,7 @@ module.exports = function () {
           return {};
         }
       },
+      lazy: Boolean,
       debounce: {
         type: Number,
         default: 300

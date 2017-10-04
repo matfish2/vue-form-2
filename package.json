@@ -1,6 +1,6 @@
 {
   "name": "vue-form-2",
-  "version": "0.2.75",
+  "version": "0.2.76",
   "description": "Vue.js 2 form component",
   "main": "main.js",
   "scripts": {
@@ -23,7 +23,7 @@
   "homepage": "https://github.com/matfish2/vue-form-2#readme",
   "files": [
     "compiled",
-    "main.js"
+    "main.js" 
   ],
   "dependencies": {
     "clone": "^1.0.2",
