@@ -8,6 +8,7 @@ module.exports = function () {
     showErrorsInStatusBar: false,
     sendOnlyDirtyFields: false,
     removePristineFields: true,
+    fireChangeOnInit: false,
     successTimeout: 4000,
     additionalPayload: {},
     customRules: {},
