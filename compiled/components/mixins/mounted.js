@@ -23,26 +23,27 @@ module.exports = {
     this.Rules = (0, _merge2.default)(this.Rules, this.rules);
 
     var inForm = this.inForm();
+    var form = null;
 
     if (inForm) {
 
-      var _form = this.getForm();
+      form = this.getForm();
 
-      if (_form.opts.sendOnlyDirtyFields) {
+      if (form.opts.sendOnlyDirtyFields) {
 
-        if (!_form.vuex) {
+        if (!form.vuex) {
           this.$watch('dirty', function (isDirty) {
             if (isDirty) {
-              _form.fields.push(_this);
-            } else if (_form.opts.removePristineFields) {
-              _form.fields = _form.fields.filter(function (field) {
+              form.fields.push(_this);
+            } else if (form.opts.removePristineFields) {
+              form.fields = form.fields.filter(function (field) {
                 return field.name != _this.name;
               });
             }
           });
         }
       } else {
-        _form.vuex ? this.commit('CHANGE', this.value) : _form.fields.push(this);
+        form.vuex ? this.commit('CHANGE', this.value) : form.fields.push(this);
       }
 
       var v = this.getForm().validation;
@@ -57,12 +58,12 @@ module.exports = {
         this.validate();
       }.bind(this), 0);
 
-      if (_form.relatedFields.hasOwnProperty(this.name)) this.foreignFields = _form.relatedFields[this.name].map(function (name) {
-        return _form.getField(name);
+      if (form.relatedFields.hasOwnProperty(this.name)) this.foreignFields = form.relatedFields[this.name].map(function (name) {
+        return form.getField(name);
       });
 
-      if (_form.triggeredFields.hasOwnProperty(this.name)) this.triggeredFields = _form.triggeredFields[this.name].map(function (name) {
-        return _form.getField(name);
+      if (form.triggeredFields.hasOwnProperty(this.name)) this.triggeredFields = form.triggeredFields[this.name].map(function (name) {
+        return form.getField(name);
       });
 
       setTimeout(function () {
@@ -70,12 +71,12 @@ module.exports = {
       }, 0);
     }
 
-    if (form.opts.fireChangeOnInit) this.$watch('curValue', _watch2.default);
+    if (form && form.opts.fireChangeOnInit) this.$watch('curValue', _watch2.default);
 
     if (this.value || this.fieldType === 'checkbox') {
       this.setValue(this.value, false); // don't set as dirty on init
     }
 
-    if (!form.opts.fireChangeOnInit) this.$watch('curValue', _watch2.default);
+    if (!form || !form.opts.fireChangeOnInit) this.$watch('curValue', _watch2.default);
   }
 };
