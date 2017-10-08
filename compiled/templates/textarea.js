@@ -27,13 +27,15 @@ exports.default = function (h) {
                                         name: this.name,
                                         id: "textarea_" + this.name,
 
-                                        value: this.curValue,
                                         disabled: this.disabled,
                                         placeholder: this.placeholder },
                                 "class": "form-control",
                                 on: {
                                         "change": this.updateValue.bind(this),
                                         "keyup": this.updateValue.bind(this)
+                                },
+                                domProps: {
+                                        "value": this.curValue
                                 }
                         },
                         [this.value]
