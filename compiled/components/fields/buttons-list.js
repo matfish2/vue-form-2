@@ -6,6 +6,8 @@ var _clone2 = _interopRequireDefault(_clone);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var merge = require('merge');
 var Field = require('./field');
 
@@ -13,15 +15,16 @@ var Field = require('./field');
 module.exports = function () {
   return merge.recursive(Field(), {
     data: function data() {
-      return {
+      var _ref;
+
+      return _ref = {
         fieldType: 'buttons',
-        filteringField: null,
         allSelected: false,
-        toggleTexts: {
-          select: 'Select All',
-          unselect: 'Unselect All'
-        }
-      };
+        filteringField: null
+      }, _defineProperty(_ref, 'allSelected', false), _defineProperty(_ref, 'toggleTexts', {
+        select: 'Select All',
+        unselect: 'Unselect All'
+      }), _ref;
     },
     props: {
       items: {
@@ -46,6 +49,17 @@ module.exports = function () {
       horizontal: Boolean
     },
     mounted: function mounted() {
+      var _this = this;
+
+      this.allSelected = this.selectedCount === this.filteredItems.length;
+
+      this.$watch('selectedCount', function (val) {
+        if (_this.selectedCount === 0) {
+          _this.allSelected = false;
+        } else if (_this.selectedCount === _this.filteredItems.length) {
+          _this.allSelected = true;
+        }
+      });
 
       if (this.inForm()) {
 
@@ -73,6 +87,19 @@ module.exports = function () {
       type: function type() {
         return this.multiple ? "checkbox" : "radio";
       },
+      selectedCount: function selectedCount() {
+        if (!this.multiple) return false;
+
+        return this.curValue.length;
+      },
+
+      filteredItems: function filteredItems() {
+        var _this2 = this;
+
+        return this.items.filter(function (item) {
+          return _this2.passesFilter(item);
+        });
+      },
       filterValue: function filterValue() {
         return this.filteringField ? this.filteringField.getValue() : null;
       },
@@ -92,10 +119,13 @@ module.exports = function () {
 
         this.saveValue(value);
 
-        $('[name=' + this.name + ']').each(function () {
+        var name = this.multiple ? this.name + "[]" : this.name;
+        var multiple = this.multiple;
+
+        $('[name="' + name + '"]').each(function () {
           el = $(this);
           val = el.val();
-          el.prop('checked', this.multiple ? value.indexOf(val) > -1 : val == value);
+          el.prop('checked', multiple ? value.indexOf(val) > -1 : val == value);
         });
       },
 
@@ -136,14 +166,10 @@ module.exports = function () {
 
         this.allSelected = !this.allSelected;
 
-        var value = [];
-
         if (this.allSelected) {
-          this.items.forEach(function (item) {
-            if (this.passesFilter(item)) value.push(item.id);
-          }.bind(this));
-
-          this.setValue(value);
+          this.setValue(this.filteredItems.map(function (item) {
+            return item.id;
+          }));
         } else {
           this.setValue([]);
         }

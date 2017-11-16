@@ -15,8 +15,11 @@ exports.default = function (h) {
         {
           attrs: {
             type: "hidden",
-            name: value.name,
-            value: value.value }
+            name: value.name
+          },
+          domProps: {
+            "value": value.value
+          }
         },
         []
       ));

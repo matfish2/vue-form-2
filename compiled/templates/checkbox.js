@@ -26,9 +26,11 @@ exports.default = function (h) {
         attrs: { type: "checkbox",
           name: this.name,
           value: "1",
-          checked: this.value,
 
           disabled: this.disabled },
+        domProps: {
+          "checked": this.value
+        },
         on: {
           "change": this.updateValue.bind(this)
         }
