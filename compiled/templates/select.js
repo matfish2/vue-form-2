@@ -29,10 +29,7 @@ exports.default = function (h) {
       return h(
         "option",
         {
-          domProps: {
-            "value": item.id,
-            "selected": item.id == _this.curValue
-          }
+          attrs: { value: item.id, selected: item.id == _this.curValue }
         },
         [item.text]
       );

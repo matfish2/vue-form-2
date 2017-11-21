@@ -11,15 +11,13 @@ exports.default = function (h) {
               {
                      attrs: { type: this.fieldType,
                             name: this.name,
+                            value: this.curValue,
 
                             placeholder: this.placeholder,
                             disabled: this.disabled,
                             minlength: this.minlength,
                             maxlength: this.maxlength,
                             autocomplete: this.autocomplete
-                     },
-                     domProps: {
-                            "value": this.curValue
                      },
                      on: {
                             "change": this.updateValue.bind(this),
