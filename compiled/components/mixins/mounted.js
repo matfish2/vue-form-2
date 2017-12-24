@@ -43,7 +43,7 @@ module.exports = {
           });
         }
       } else {
-        form.vuex ? this.commit('CHANGE', this.value) : form.fields.push(this);
+        form.vuex ? this.commit('CHANGE', { name: this.name, value: this.value, oldValue: this.value }) : form.fields.push(this);
       }
 
       var v = this.getForm().validation;
