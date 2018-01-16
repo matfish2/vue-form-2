@@ -12,6 +12,7 @@ exports.default = function (newVal, oldVal) {
 
      form.dispatch('change::' + this.name, { name: this.name, value: newVal, oldValue: oldVal });
      form.dispatch('change', { name: this.name, value: newVal, oldValue: oldVal });
+     this.$emit('changed', { value: newVal, oldValue: oldVal });
 
      if (typeof this.foreignFields != 'undefined') {
           this.foreignFields.forEach(function (field) {
