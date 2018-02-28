@@ -28,7 +28,8 @@ module.exports = function () {
       unselectAll: 'Unselect All',
       expand: 'Expand',
       minimize: 'Minimize',
-      noItems: 'No items were found'
+      noItems: 'No items were found',
+      clear: 'Clear'
     }
   };
 

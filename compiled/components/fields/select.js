@@ -180,6 +180,8 @@ module.exports = function () {
                 text: data.text
               }
             });
+
+            self.removeDuplicateValues();
           }
 
           self.saveValue($(this).val());
@@ -192,6 +194,10 @@ module.exports = function () {
             }, 0);
           } else {
             self.saveValue('');
+          }
+
+          if (self.ajaxUrl) {
+            self.removeDuplicateValues();
           }
         });
 
@@ -208,12 +214,27 @@ module.exports = function () {
           this.el.data('select2').$dropdown.addClass("dropdown-" + this.containerClass);
         }
       },
-      rerender: function rerender() {
+      removeDuplicateValues: function removeDuplicateValues() {
         var _this2 = this;
+
+        // fix select2 duplicate values bug when performing an ajax request 
+        // https://github.com/select2/select2/issues/4298
+
+        var title;
+
+        this.$nextTick(function () {
+          $(_this2.$el).find(".select2-selection__rendered li").each(function () {
+            title = $(this).prop('title');
+            $(this).siblings('[title=\'' + title + '\']').remove();
+          });
+        });
+      },
+      rerender: function rerender() {
+        var _this3 = this;
 
         this.render = false;
         setTimeout(function () {
-          _this2.render = true;
+          _this3.render = true;
         });
       },
 

@@ -21,7 +21,7 @@ module.exports = function () {
         fieldType: 'buttons',
         allSelected: false,
         filteringField: null
-      }, _defineProperty(_ref, 'allSelected', false), _defineProperty(_ref, 'toggleTexts', {
+      }, _defineProperty(_ref, 'allSelected', false), _defineProperty(_ref, 'clearText', 'Clear'), _defineProperty(_ref, 'toggleTexts', {
         select: 'Select All',
         unselect: 'Unselect All'
       }), _ref;
@@ -72,6 +72,8 @@ module.exports = function () {
           };
         }
       }
+
+      this.clearText = texts.clear;
 
       if (this.filterBy) {
         this.filteringField = this.getField(this.filterBy);
@@ -127,6 +129,9 @@ module.exports = function () {
           val = el.val();
           el.prop('checked', multiple ? value.indexOf(val) > -1 : val == value);
         });
+      },
+      clear: function clear() {
+        this.setValue(null);
       },
 
       updateValue: function updateValue(val, e) {
