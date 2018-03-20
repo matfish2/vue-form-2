@@ -12,6 +12,7 @@ module.exports = {
     handleTriggeredFields: require('../methods/handle-triggered-fields'),
     getForm: require('../methods/get-form'),
     getField: require('../methods/get-field'),
-    commit: require('../methods/commit')
+    commit: require('../methods/commit'),
+    isHidden: require('../helpers/is-hidden')
   }
 };

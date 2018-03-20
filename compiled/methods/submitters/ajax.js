@@ -18,6 +18,7 @@ exports.default = function (vm) {
       vm.$http[method](vm.action, getData(method, data)).then(function (data) {
 
         vm.reinitForm();
+
         vm.dispatch('sent', data);
 
         vm.sending = false;
