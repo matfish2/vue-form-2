@@ -13,6 +13,6 @@ module.exports = {
     getForm: require('../methods/get-form'),
     getField: require('../methods/get-field'),
     commit: require('../methods/commit'),
-    isHidden: require('../helpers/is-hidden')
+    isHidden: require('../../helpers/is-hidden')
   }
 };
