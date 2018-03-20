@@ -4,7 +4,7 @@ var hasValue = require('./has-value');
 
 module.exports = function (that) {
 
-  if (!that.Rules.required) {
+  if (!that.Rules.required || !that.shouldShow) {
     return true;
   }
 
