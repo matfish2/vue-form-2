@@ -113,8 +113,6 @@ module.exports = function () {
         this.dirty = true;
         this.datepicker.data('daterangepicker').setStartDate(moment());
         this.datepicker.data('daterangepicker').setEndDate(moment());
-
-        if (!this.noInput) $(this.$el).find("input").val("");
       }.bind(this));
 
       if (!this.range && !this.isTimepicker) {

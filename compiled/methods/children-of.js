@@ -3,7 +3,7 @@
 module.exports = function (ref) {
   if (!this.$parent.$refs.hasOwnProperty(ref)) throw 'vue-form: error in childrenOf method: ref "' + ref + '" was not found.';
 
-  return getFields(this.$parent.$refs[ref].$children, []);
+  return getFields(this.$parent.$refs[ref][0].$children, []);
 };
 
 function getFields(children, result) {
