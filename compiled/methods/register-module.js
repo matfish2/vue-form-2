@@ -22,7 +22,7 @@ module.exports = function () {
 		}), _defineProperty(_mutations, name + '/SENDING', function undefined(state, payload) {}), _defineProperty(_mutations, name + '/SENT', function undefined(state, payload) {
 			state.values = {};
 			state.count = 0;
-		}), _defineProperty(_mutations, name + '/INVALID.SERVER', function undefined(state, payload) {}), _defineProperty(_mutations, name + '/INVALID.CLIENT', function undefined(state, payload) {}), _mutations)
+		}), _defineProperty(_mutations, name + '/INVALID.SERVER', function undefined(state, payload) {}), _defineProperty(_mutations, name + '/INVALID.CLIENT', function undefined(state, payload) {}), _defineProperty(_mutations, name + '/ERROR_CLICKED', function undefined(state, payload) {}), _mutations)
 	});
 };
 

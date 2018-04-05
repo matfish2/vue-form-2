@@ -7,7 +7,11 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = function (h) {
   var _this = this;
 
-  var message = this.hasMessage ? '<p>' + this.Message + '</p>' : '';
+  var message = this.hasMessage ? h(
+    'p',
+    null,
+    [this.Message]
+  ) : '';
 
   var errors = [];
 
@@ -19,17 +23,41 @@ exports.default = function (h) {
   });
 
   errors = errors.map(function (error) {
-    return '<li><a href="#Field--' + error.name + '">' + error.text + '</a></li>';
+    return h(
+      'li',
+      null,
+      [h(
+        'a',
+        {
+          on: {
+            'click': function click() {
+              _this.getForm().dispatch('error-clicked', error.name);
+            }
+          },
+          attrs: { href: '#Field--' + error.name }
+        },
+        [error.text]
+      )]
+    );
   });
-  var content = this.hasErrors ? '<p>' + this.errorsCount + '</p><ul>' + errors.join('') + '</ul>' : message;
+  var content = this.hasErrors ? h(
+    'div',
+    null,
+    [h(
+      'p',
+      null,
+      [typeof this.errorsCount === 'function' ? this.errorsCount.call(this, h) : this.errorsCount]
+    ), h(
+      'ul',
+      null,
+      [errors]
+    )]
+  ) : message;
   var style = content ? '' : 'display:none;';
 
   return h(
     'div',
-    { 'class': 'StatusBar alert alert-' + this.Status, style: style, domProps: {
-        'innerHTML': content
-      }
-    },
-    []
+    { 'class': 'StatusBar alert alert-' + this.Status, style: style },
+    [content]
   );
 };

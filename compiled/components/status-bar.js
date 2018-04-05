@@ -58,7 +58,14 @@ module.exports = {
     },
     errorsCount: function errorsCount() {
       var texts = this.getForm().opts.texts;
-      return this.showableErrors.length == 1 ? texts.singleError : texts.errors.replace('{0}', this.showableErrors.length);
+
+      var multipleErrors = this.showableErrors.length > 1;
+      var text = multipleErrors ? texts.errors : texts.singleError;
+      if (multipleErrors && typeof text === 'string') {
+        text = text.replace('{0}', this.showableErrors.length);
+      }
+
+      return text;
     },
     hasErrors: function hasErrors() {
       return !this.message && this.getForm().opts.showClientErrorsInStatusBar && this.showableErrors.length;
