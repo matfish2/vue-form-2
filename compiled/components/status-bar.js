@@ -68,7 +68,7 @@ module.exports = {
       return text;
     },
     hasErrors: function hasErrors() {
-      return !this.message && this.getForm().opts.showClientErrorsInStatusBar && this.showableErrors.length;
+      return (!this.message || typeof this.message !== 'string') && this.getForm().opts.showClientErrorsInStatusBar && this.showableErrors.length;
     },
     hasMessage: function hasMessage() {
       return !!this.Message || this.hasErrors;
