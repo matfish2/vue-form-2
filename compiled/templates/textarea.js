@@ -29,8 +29,8 @@ exports.default = function (h) {
                   "textarea",
                   (0, _babelHelperVueJsxMergeProps2.default)([{
                         attrs: {
-                              name: this.name,
-                              id: "textarea_" + this.name
+                              name: this.Name,
+                              id: "textarea_" + this.Name
                         },
                         "class": "form-control",
                         on: {

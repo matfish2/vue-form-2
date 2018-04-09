@@ -9,6 +9,10 @@ module.exports = {
     success: require('../computed/success'),
     hasLabel: require('../computed/has-label'),
     trigger: require('../computed/trigger'),
+    Name: function Name() {
+      return this.name ? this.name : 'noname_' + this.randomId;
+    },
+
     state: function state() {
       return this.$store.state[this.formName];
     },

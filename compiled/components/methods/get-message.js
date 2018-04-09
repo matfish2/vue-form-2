@@ -31,7 +31,7 @@ module.exports = function (rule) {
     }
   }
 
-  message = message.replace(":field", this.label ? stripLabel(this.label) : this.name);
+  message = message.replace(":field", this.label ? stripLabel(this.label) : this.Name);
 
   if (this.fieldType == 'date') message = message.replace(":format", this.format);
 

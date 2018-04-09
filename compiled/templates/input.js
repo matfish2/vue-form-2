@@ -10,7 +10,7 @@ exports.default = function (h) {
               "input",
               {
                      attrs: { type: this.fieldType,
-                            name: this.name,
+                            name: this.Name,
                             value: this.curValue,
 
                             placeholder: this.placeholder,

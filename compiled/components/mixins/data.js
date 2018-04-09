@@ -6,6 +6,7 @@ module.exports = {
   data: function data() {
     return {
       isField: true,
+      randomId: Math.floor(Math.random() * 100000),
       curValue: '',
       tagName: 'input',
       messages: {},

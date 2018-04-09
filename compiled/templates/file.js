@@ -28,7 +28,7 @@ exports.default = function (h) {
                         {
                                 attrs: { disabled: this.disabled,
                                         type: "file",
-                                        name: this.name
+                                        name: this.Name
                                 },
                                 "class": "form-control-file" },
                         []

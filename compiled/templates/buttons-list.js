@@ -44,7 +44,7 @@ exports.default = function (h) {
           {
             "class": "form-check-input",
             attrs: { disabled: _this.disabled,
-              name: _this.name + _this.arraySymbol,
+              name: _this.Name + _this.arraySymbol,
               type: _this.type,
               value: item.id,
 

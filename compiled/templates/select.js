@@ -39,7 +39,7 @@ exports.default = function (h) {
   return this.render ? h(
     "select",
     {
-      attrs: { name: this.name + this.arraySymbol,
+      attrs: { name: this.Name + this.arraySymbol,
         disabled: this.disabled,
         multiple: this.multiple
       },

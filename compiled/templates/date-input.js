@@ -13,7 +13,7 @@ exports.default = function (h) {
 		hiddenInput = h(
 			'input',
 			{
-				attrs: { type: 'hidden', name: this.name, value: this.serverFormat }
+				attrs: { type: 'hidden', name: this.Name, value: this.serverFormat }
 			},
 			[]
 		);
@@ -37,7 +37,7 @@ exports.default = function (h) {
 		[h(
 			'input',
 			{ 'class': 'VF-Field--Date__datepicker form-control',
-				attrs: { name: this.name,
+				attrs: { name: this.Name,
 					placeholder: this.placeholder,
 					value: this.formattedDate,
 					disabled: this.disabled,

@@ -247,7 +247,7 @@ module.exports = function () {
         this.saveValue(value);
         if (setDirty) this.dirty = true;
 
-        if (!this.select2) document.getElementsByName(this.name)[0].value = value;
+        if (!this.select2) document.getElementsByName(this.Name)[0].value = value;
 
         if (this.select2 && this.el) this.el.val(value).trigger("change");
       },
@@ -256,7 +256,7 @@ module.exports = function () {
         this.wasReset = true;
         this.saveValue(value);
 
-        if (!this.select2) document.getElementsByName(this.name)[0].value = value;
+        if (!this.select2) document.getElementsByName(this.Name)[0].value = value;
 
         if (this.select2 && this.el) this.el.val(value).trigger("change");
       }

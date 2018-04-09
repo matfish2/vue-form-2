@@ -11,7 +11,7 @@ exports.default = function (h) {
     hiddenInput = h(
       "input",
       {
-        attrs: { name: this.name, type: "hidden", value: "0" }
+        attrs: { name: this.Name, type: "hidden", value: "0" }
       },
       []
     );
@@ -24,7 +24,7 @@ exports.default = function (h) {
       "input",
       {
         attrs: { type: "checkbox",
-          name: this.name,
+          name: this.Name,
           value: "1",
           checked: this.value,
 

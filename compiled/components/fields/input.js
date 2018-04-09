@@ -39,12 +39,12 @@ module.exports = function () {
 
         this.saveValue(val);
         if (setDirty) this.dirty = true;
-        document.getElementsByName(this.name)[0].value = val;
+        document.getElementsByName(this.Name)[0].value = val;
       },
       reset: function reset() {
         this.saveValue('');
         this.wasReset = true;
-        document.getElementsByName(this.name)[0].value = '';
+        document.getElementsByName(this.Name)[0].value = '';
       },
 
       updateValue: _updateValue2.default

@@ -219,7 +219,7 @@ module.exports = function () {
 
           if (!this.isValidMoment(val)) throw 'invalid date';
         } catch (e) {
-          var error = 'vue-form-2: invalid date passed to field "' + this.name + '".';
+          var error = 'vue-form-2: invalid date passed to field "' + this.Name + '".';
           error += this.range ? 'Date range must be passed as an object with \'start\' and \'end\' properties, each being a moment object or conforming to the ' + DATE_FORMAT + ' format.' : 'Date must be either a valid moment object or a string conforming to the ' + DATE_FORMAT + ' format.';
           console.error(error);
           return;

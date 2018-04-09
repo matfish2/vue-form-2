@@ -25,7 +25,7 @@ module.exports = {
     var inForm = this.inForm();
     var form = null;
 
-    if (inForm) {
+    if (inForm && this.name) {
 
       form = this.getForm();
 

@@ -4,25 +4,15 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 exports.default = function (h) {
     var _this = this;
 
     var message = '';
 
     if (this.hasMessage) {
-        message = typeof this.Message === 'string' ? this.Message : this.Message.map(function (m) {
-            return h(
-                'li',
-                null,
-                [h(
-                    'a',
-                    {
-                        attrs: { href: '#Field--' + m.name }
-                    },
-                    [m.message]
-                )]
-            );
-        });
+        message = getMessage(this.Message, h);
     }
 
     var errors = [];
@@ -73,3 +63,22 @@ exports.default = function (h) {
         [content]
     );
 };
+
+function getMessage(message, h) {
+    if (typeof message === 'string') return message;
+    if ((typeof message === 'undefined' ? 'undefined' : _typeof(message)) === 'object') return this.Message.map(function (m) {
+        return h(
+            'li',
+            null,
+            [h(
+                'a',
+                {
+                    attrs: { href: '#Field--' + m.name }
+                },
+                [m.message]
+            )]
+        );
+    });
+
+    if (typeof message === 'function') return message(h);
+}

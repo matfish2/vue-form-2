@@ -12,7 +12,7 @@ exports.default = function (h) {
         hiddenInput = h(
             'input',
             {
-                attrs: { type: 'hidden', name: this.name, value: this.serverFormat }
+                attrs: { type: 'hidden', name: this.Name, value: this.serverFormat }
             },
             []
         );
