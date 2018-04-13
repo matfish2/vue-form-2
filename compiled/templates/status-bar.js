@@ -66,7 +66,7 @@ exports.default = function (h) {
 
 function getMessage(message, h) {
     if (typeof message === 'string') return message;
-    if ((typeof message === 'undefined' ? 'undefined' : _typeof(message)) === 'object') return this.Message.map(function (m) {
+    if ((typeof message === 'undefined' ? 'undefined' : _typeof(message)) === 'object') return message.map(function (m) {
         return h(
             'li',
             null,

@@ -14,7 +14,7 @@ module.exports = {
     },
 
     state: function state() {
-      return this.$store.state[this.formName];
+      return this.$store ? this.$store.state[this.formName] : false;
     },
     formName: function formName() {
       return this.getForm().name;
