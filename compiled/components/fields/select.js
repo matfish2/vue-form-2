@@ -79,7 +79,11 @@ module.exports = function () {
 
         this.$watch('filterValue', function (val) {
           if (val) {
-            if (this.select2 && !this.ajaxUrl) this.el.select2(options);
+
+            if (this.select2 && !this.ajaxUrl) {
+              this.el.select2(options);
+            }
+
             this.reset();
           }
         }.bind(this));
@@ -90,6 +94,14 @@ module.exports = function () {
       }
     },
     computed: {
+      filteredItems: function filteredItems() {
+        var _this2 = this;
+
+        return this.items.filter(function (item) {
+          return !_this2.filterValue || !item[_this2.filterBy] || item[_this2.filterBy] == _this2.filterValue;
+        });
+      },
+
       arraySymbol: require('../computed/array-symbol'),
       filterValue: function filterValue() {
 
@@ -215,7 +227,7 @@ module.exports = function () {
         }
       },
       removeDuplicateValues: function removeDuplicateValues() {
-        var _this2 = this;
+        var _this3 = this;
 
         // fix select2 duplicate values bug when performing an ajax request 
         // https://github.com/select2/select2/issues/4298
@@ -223,18 +235,18 @@ module.exports = function () {
         var title;
 
         this.$nextTick(function () {
-          $(_this2.$el).find(".select2-selection__rendered li").each(function () {
+          $(_this3.$el).find(".select2-selection__rendered li").each(function () {
             title = $(this).prop('title');
             $(this).siblings('[title=\'' + title + '\']').remove();
           });
         });
       },
       rerender: function rerender() {
-        var _this3 = this;
+        var _this4 = this;
 
         this.render = false;
         setTimeout(function () {
-          _this3.render = true;
+          _this4.render = true;
         });
       },
 
@@ -253,6 +265,11 @@ module.exports = function () {
       },
       reset: function reset() {
         var value = this.multiple ? [] : '';
+
+        if (this.noDefault && this.filteredItems.length) {
+          value = this.filteredItems[0].id;
+        }
+
         this.wasReset = true;
         this.saveValue(value);
 
