@@ -21,8 +21,9 @@ exports.default = function (h) {
   }
 
   if (!this.select2 || this.ajaxUrl || this.html || this.filterBy) {
+
     items = this.items.filter(function (item) {
-      return !_this.filterValue || item[_this.filterBy] == _this.filterValue;
+      return !_this.filterValue || !item[_this.filterBy] || item[_this.filterBy] == _this.filterValue;
     });
 
     items = items.map(function (item) {
