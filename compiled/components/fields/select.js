@@ -64,6 +64,8 @@ module.exports = function () {
 
       if (!this.disabled && !this.value && this.default) {
         this.setValue(this.default);
+      } else if (this.noDefault && !this.value) {
+        this.setValue(this.filteredItems[0].id);
       }
 
       this.$watch('select2', function (val) {

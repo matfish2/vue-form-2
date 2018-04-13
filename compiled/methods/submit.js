@@ -3,10 +3,18 @@
 var getSubmitter = require('./get-submitter');
 
 module.exports = function (e) {
+  var _this = this;
 
   if (e) e.preventDefault();
 
-  if (this.errors.length > 0) return handleErrors(this);
+  this.errors = this.errors.filter(function (error) {
+    var field = _this.getField(error.name);
+    return field && !field.isHidden();
+  });
+
+  if (this.errors.length > 0) {
+    return handleErrors(this);
+  }
 
   if (this.sending || this.opts.sendOnlyDirtyFields && this.pristine()) {
     return false;
@@ -14,7 +22,7 @@ module.exports = function (e) {
 
   var beforeSubmit = this.opts.beforeSubmit(this);
 
-  if (typeof beforeSubmit == 'boolean' && beforeSubmit) return getSubmitter(this).submit(e);
+  if (typeof beforeSubmit === 'boolean' && beforeSubmit) return getSubmitter(this).submit(e);
 
   var resolveMethod = beforeSubmit.done ? 'done' : 'then';
   var rejectMethod = beforeSubmit.catch ? 'catch' : 'fail';

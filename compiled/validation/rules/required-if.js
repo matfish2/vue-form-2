@@ -7,5 +7,5 @@ module.exports = function (that) {
 
   var required = requiredIfBase(that, 'requiredIf');
 
-  return !required || hasValue(that) || that.fieldType == 'checkbox' || that.isHidden();
+  return !required || hasValue(that);
 };
