@@ -150,6 +150,7 @@ module.exports = function () {
         }
       },
       updateValue: function updateValue(e) {
+
         var value = e.target.value;
 
         if (!value.trim()) {
@@ -228,7 +229,10 @@ module.exports = function () {
         this.saveValue(val);
 
         setTimeout(function () {
-          this.setDatepickerValue(this.getValue());
+          this.setDatepickerValue(val);
+          if (!this.noInput && val) {
+            this.injectValueToField(val);
+          }
         }.bind(this), 0);
         if (setDirty) this.dirty = true;
       },
@@ -243,6 +247,11 @@ module.exports = function () {
         this.saveValue(null);
 
         this.setDatepickerValue(moment());
+
+        if (!this.noInput) {
+          $(this.$el).find("input").val("");
+        }
+
         this.datepicker.trigger("change");
       },
       setDatepickerValue: function setDatepickerValue(value) {
