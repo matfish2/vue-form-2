@@ -66,19 +66,30 @@ exports.default = function (h) {
 
 function getMessage(message, h) {
     if (typeof message === 'string') return message;
-    if ((typeof message === 'undefined' ? 'undefined' : _typeof(message)) === 'object') return message.map(function (m) {
-        return h(
-            'li',
-            null,
-            [h(
-                'a',
-                {
-                    attrs: { href: '#Field--' + m.name }
-                },
-                [m.message]
-            )]
-        );
-    });
+    if ((typeof message === 'undefined' ? 'undefined' : _typeof(message)) === 'object') {
+
+        return message.map(function (m) {
+            if (m.name) {
+                return h(
+                    'li',
+                    null,
+                    [h(
+                        'a',
+                        {
+                            attrs: { href: '#Field--' + m.name }
+                        },
+                        [m.message]
+                    )]
+                );
+            }
+
+            return h(
+                'li',
+                null,
+                [m]
+            );
+        });
+    }
 
     if (typeof message === 'function') return message(h);
 }
