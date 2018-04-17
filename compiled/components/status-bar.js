@@ -38,7 +38,7 @@ module.exports = {
     },
     getErrorMessage: function getErrorMessage(error) {
 
-      var field = this.getForm().getField(error.name);
+      var field = this.form.getField(error.name);
 
       if (!field) return false;
 
@@ -47,6 +47,10 @@ module.exports = {
       return field.getMessage(error.rule);
     }
   },
+  created: function created() {
+    this.form = this.getForm();
+  },
+
   computed: {
     Message: function Message() {
       return this.message;
@@ -57,7 +61,7 @@ module.exports = {
       return this.status;
     },
     errorsCount: function errorsCount() {
-      var texts = this.getForm().opts.texts;
+      var texts = this.form.opts.texts;
 
       var multipleErrors = this.showableErrors.length > 1;
       var text = multipleErrors ? texts.errors : texts.singleError;
@@ -68,21 +72,16 @@ module.exports = {
       return text;
     },
     hasErrors: function hasErrors() {
-      return (!this.message || typeof this.message !== 'string') && this.getForm().opts.showClientErrorsInStatusBar && this.showableErrors.length;
+      return (!this.message || typeof this.message !== 'string') && this.form.opts.showClientErrorsInStatusBar && this.showableErrors.length;
     },
     hasMessage: function hasMessage() {
       return !!this.Message || this.hasErrors;
     },
 
     showableErrors: function showableErrors() {
-
-      var errors = [];
-
-      this.getForm().errors.forEach(function (error) {
-        if (error.show) errors.push(error);
+      return this.form.errors.filter(function (error) {
+        return error.show;
       });
-
-      return errors;
     }
   }
 };
