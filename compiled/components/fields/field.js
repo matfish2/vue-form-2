@@ -41,6 +41,14 @@ module.exports = function () {
 			focus: function focus() {
 				this.$el.getElementsByTagName(this.tagName)[0].focus();
 			}
+		},
+		destroyed: function destroyed() {
+			var _this = this;
+
+			var form = this.getForm();
+			form.errors = form.errors.filter(function (error) {
+				return error.name != _this.name;
+			});
 		}
 	};
 };
