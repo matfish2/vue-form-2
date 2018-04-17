@@ -155,7 +155,7 @@ exports.install = function (Vue, globalOptions, customFields) {
   Vue.component('vf-color', require('./components/fields/color')());
   Vue.component('vf-number', require('./components/fields/number')());
   Vue.component('vf-password', (0, _password2.default)());
-  Vue.component('vf-file', require('./components/fields/file')());
+  Vue.component('vf-file', require('./components/fields/file')(globalOptions.fileOptions));
   Vue.component('vf-textarea', require('./components/fields/textarea')());
   Vue.component('vf-select', require('./components/fields/select')());
   Vue.component('vf-buttons-list', require('./components/fields/buttons-list')());

@@ -4,7 +4,7 @@ var merge = require('merge');
 var clone = require('clone');
 var Field = require('./field');
 
-module.exports = function () {
+module.exports = function (globalOptions) {
   return merge.recursive(Field(), {
     data: function data() {
       return {
@@ -61,7 +61,7 @@ module.exports = function () {
       var self = this;
       var parentOptions = this.inForm() ? clone(this.getForm().options.fileOptions) : {};
 
-      var options = merge.recursive(parentOptions, this.options);
+      var options = merge.recursive(globalOptions, parentOptions, this.options);
 
       if (this.url) options.url = this.url;
       if (!options.hasOwnProperty("formData")) options.formData = {};
