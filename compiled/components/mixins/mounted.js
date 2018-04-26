@@ -79,12 +79,12 @@ module.exports = {
 
     if (!form || !form.opts.fireChangeOnInit) this.$watch('curValue', _watch2.default);
 
-    this.$watch('value', function (value) {
-      if (value === '') {
-        _this.reset();
-      } else {
-        _this.setValue(value);
-      }
-    });
+    // this.$watch('value', (value)=>{
+    //   if (value==='') {
+    //     this.reset();
+    //   } else {
+    //     this.setValue(value);
+    //   }
+    // });
   }
 };
