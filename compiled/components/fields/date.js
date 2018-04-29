@@ -101,10 +101,6 @@ module.exports = function () {
         var value = this.range ? { start: picker.startDate, end: picker.endDate } : picker.startDate;
 
         this.setValue(value);
-
-        if (!this.noInput) {
-          this.injectValueToField(this.getValue());
-        }
       }.bind(this));
 
       this.datepicker.on('cancel.daterangepicker', function (ev, picker) {
@@ -134,20 +130,23 @@ module.exports = function () {
       },
 
       injectValueToField: function injectValueToField(val) {
+        var formatted = void 0;
+
         if (this.range) {
 
-          var formatted = val.start.format(this.Format) + " - " + val.end.format(this.Format);
+          formatted = val.start.format(this.Format) + " - " + val.end.format(this.Format);
           this.datepicker.find("input").val(formatted);
           var start = val.start.isValid() ? val.start : moment();
           var end = val.end.isValid() ? val.end : moment();
 
           this.setDatepickerValue({ start: start, end: end });
         } else {
-          var _formatted = val.format(this.Format);
-          $(this.$el).find("input").val(_formatted);
+          formatted = val.format(this.Format);
           var pickerDate = val.isValid() ? val : moment();
           this.setDatepickerValue(pickerDate);
         }
+
+        $(this.$el).find("input").val(formatted);
       },
       updateValue: function updateValue(e) {
 
