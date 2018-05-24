@@ -2,7 +2,7 @@
 
 module.exports = function (name) {
 
-     if (this.$parent.$refs.hasOwnProperty(name)) return this.$parent.$refs[name];
+     if (this.$parent && this.$parent.$refs.hasOwnProperty(name)) return this.$parent.$refs[name];
 
      return getField(this, name);
 };

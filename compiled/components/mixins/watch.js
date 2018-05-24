@@ -12,7 +12,7 @@ exports.default = function (newVal, oldVal) {
 
      var form = this.getForm();
 
-     var data = { value: newVal, oldValue: oldVal };
+     var data = { name: this.Name, value: newVal, oldValue: oldVal };
 
      if (_typeof(this.items) === 'object') {
           var selected = this.items.find(function (item) {
@@ -21,10 +21,8 @@ exports.default = function (newVal, oldVal) {
           data = (0, _merge2.default)(data, { selected: selected });
      }
 
-     var formData = (0, _merge2.default)({ name: this.Name }, data);
-
-     form.dispatch('change::' + this.Name, formData);
-     form.dispatch('change', formData);
+     form.dispatch('change::' + this.Name, data);
+     form.dispatch('change', data);
      this.$emit('changed', data);
 
      if (typeof this.foreignFields != 'undefined') {
