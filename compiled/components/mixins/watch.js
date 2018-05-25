@@ -39,7 +39,9 @@ exports.default = function (newVal, oldVal) {
 
      this.wasReset = false;
 
-     if (this.inForm()) this.validate();
+     if (this.inForm() && !form.opts.disableValidation) {
+          this.validate();
+     }
 };
 
 var _isEqual = require('../../helpers/is-equal');

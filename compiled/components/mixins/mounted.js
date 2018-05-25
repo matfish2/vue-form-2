@@ -46,7 +46,7 @@ module.exports = {
         form.vuex ? this.commit('CHANGE', { name: this.name, value: this.value, oldValue: this.value }) : form.fields.push(this);
       }
 
-      var v = this.getForm().validation;
+      var v = form.validation;
 
       if (v.rules && v.rules.hasOwnProperty(this.name)) {
         this.Rules = convertDateRulesToMoment((0, _merge2.default)(this.Rules, v.rules[this.name]));
@@ -54,9 +54,11 @@ module.exports = {
 
       if (typeof v.messages != 'undefined' && v.messages.hasOwnProperty(this.name)) this.messages = v.messages[this.name];
 
-      setTimeout(function () {
-        this.validate();
-      }.bind(this), 0);
+      if (!form.opts.disableValidation) {
+        setTimeout(function () {
+          this.validate();
+        }.bind(this), 0);
+      }
 
       if (form.relatedFields.hasOwnProperty(this.name)) this.foreignFields = form.relatedFields[this.name].map(function (name) {
         return form.getField(name);

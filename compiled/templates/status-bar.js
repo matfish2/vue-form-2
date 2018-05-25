@@ -12,7 +12,7 @@ exports.default = function (h) {
     var message = '';
 
     if (this.hasMessage) {
-        message = getMessage(this.Message, h);
+        message = getMessage.call(this, h);
     }
 
     var errors = [];
@@ -64,9 +64,15 @@ exports.default = function (h) {
     );
 };
 
-function getMessage(message, h) {
+function getMessage(h) {
+
+    var message = this.Message;
     if (typeof message === 'string') return message;
     if ((typeof message === 'undefined' ? 'undefined' : _typeof(message)) === 'object') {
+
+        if (message.formatter) {
+            return this.getForm().opts.messageFormatters[message.formatter](h, message.message);
+        }
 
         return message.map(function (m) {
             if (m.name) {
