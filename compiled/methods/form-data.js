@@ -7,12 +7,13 @@ var merge = require('merge');
 module.exports = function () {
   var data = {};
   var value;
+  var nullifyEmptyStrings = this.opts.nullifyEmptyStrings;
 
   if (this.vuex) {
     data = this.$store.state[this.name].values;
   } else {
     this.fields.forEach(function (field) {
-      value = getValue(field.getValue());
+      value = getValue(field.getValue(), nullifyEmptyStrings);
       data[field.name] = value;
     });
   }
@@ -30,7 +31,11 @@ function isArray(value) {
   return Object.prototype.toString.call(value) === '[object Array]';
 }
 
-function getValue(value) {
+function getValue(value, nullifyEmptyStrings) {
+
+  if (typeof value === 'string' && value.trim() === '' && nullifyEmptyStrings) {
+    return null;
+  }
 
   if (!value || (typeof value === 'undefined' ? 'undefined' : _typeof(value)) != 'object' || isArray(value)) return value;
 

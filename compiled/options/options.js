@@ -32,6 +32,7 @@ module.exports = function () {
       clear: 'Clear'
     },
     messageFormatters: {},
+    nullifyEmptyStrings: false,
     disableValidation: false // set to true for testing purposes
   };
 
