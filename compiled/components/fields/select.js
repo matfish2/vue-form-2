@@ -198,7 +198,13 @@ module.exports = function () {
             self.removeDuplicateValues();
           }
 
-          self.saveValue($(this).val());
+          var val = $(this).val();
+
+          if (self.multiple && $.isArray(val)) {
+            val = $.unique(val);
+          }
+
+          self.saveValue(val);
         }).on("select2:unselecting", function (e) {
           if (self.multiple) {
             var $this = $(this);
