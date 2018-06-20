@@ -14,8 +14,8 @@ exports.default = function (newVal, oldVal) {
 
      var data = { name: this.Name, value: newVal, oldValue: oldVal };
 
-     if (_typeof(this.items) === 'object') {
-          var selected = this.items.find(function (item) {
+     if (_typeof(this.flatItems) === 'object') {
+          var selected = this.flatItems.find(function (item) {
                return item.id === newVal;
           });
           data = (0, _merge2.default)(data, { selected: selected });

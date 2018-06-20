@@ -103,6 +103,19 @@ module.exports = function () {
           return !_this2.filterValue || !item[_this2.filterBy] || item[_this2.filterBy] == _this2.filterValue;
         });
       },
+      flatItems: function flatItems() {
+        if (!this.items[0].children) {
+          return this.items;
+        }
+
+        var res = [];
+
+        this.items.forEach(function (item) {
+          return res = res.concat(item.children);
+        });
+
+        return res;
+      },
 
       arraySymbol: require('../computed/array-symbol'),
       filterValue: function filterValue() {
@@ -221,13 +234,11 @@ module.exports = function () {
           }
         });
 
-        if (this.value) {
-          this.el.val(this.value).trigger("change");
-        }
+        this.el.val(this.value).trigger("change");
 
-        setTimeout(function () {
-          this.el.trigger('change');
-        }.bind(this), 0);
+        // setTimeout(function() {
+        //   this.el.trigger('change');
+        // }.bind(this),0);
 
         if (this.containerClass) {
           this.el.data('select2').$container.addClass("container-" + this.containerClass);
