@@ -15,10 +15,11 @@ exports.default = function (newVal, oldVal) {
      var data = { name: this.Name, value: newVal, oldValue: oldVal };
 
      if (_typeof(this.flatItems) === 'object') {
-          var selected = this.flatItems.find(function (item) {
-               return item.id === newVal;
+          var val = this.multiple ? newVal : [newVal];
+          var selected = this.flatItems.filter(function (item) {
+               return val.indexOf(item.id) > -1;
           });
-          data = (0, _merge2.default)(data, { selected: selected });
+          data = (0, _merge2.default)(data, { selected: this.multiple ? selected : selected[0] });
      }
 
      form.dispatch('change::' + this.Name, data);

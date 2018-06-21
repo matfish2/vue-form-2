@@ -99,12 +99,12 @@ module.exports = function () {
       filteredItems: function filteredItems() {
         var _this2 = this;
 
-        return this.items.filter(function (item) {
+        return this.Items.filter(function (item) {
           return !_this2.filterValue || !item[_this2.filterBy] || item[_this2.filterBy] == _this2.filterValue;
         });
       },
       flatItems: function flatItems() {
-        if (!this.items[0].children) {
+        if (this.Items.length && !this.items[0].children) {
           return this.items;
         }
 
@@ -129,10 +129,18 @@ module.exports = function () {
       return {
         fieldType: 'select',
         tagName: 'select',
+        Items: this.items,
         render: true
       };
     },
     methods: {
+      addItem: function addItem(item) {
+        if (this.Items.find(function (i) {
+          return i.id === item.id;
+        })) return;
+
+        this.Items.push(item);
+      },
       initSelect2: function initSelect2() {
         if (typeof $ == 'undefined') {
           console.error('vue-form-2: missing global dependency: vf-select with select2 depends on JQuery');
@@ -151,7 +159,7 @@ module.exports = function () {
           placeholder: this.placeholder
         });
 
-        if (!this.html && !this.filterBy) options.data = this.items;
+        if (!this.html && !this.filterBy) options.data = this.Items;
 
         if (this.ajaxUrl) {
           options = merge.recursive(options, {
@@ -199,13 +207,13 @@ module.exports = function () {
 
             var data = e.params.data;
 
+            var item = { id: data.id, text: data.text };
+            self.addItem(item);
+
             self.getForm().dispatch('new-ajax-item', {
               name: self.name,
               listId: self.listId,
-              item: {
-                id: data.id,
-                text: data.text
-              }
+              item: item
             });
 
             self.removeDuplicateValues();
