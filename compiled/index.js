@@ -34,8 +34,12 @@ var _fields2 = _interopRequireDefault(_fields);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.install = function (Vue, globalOptions, customFields) {
+exports.install = function (Vue) {
   var _this = this;
+
+  var globalOptions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var customFields = arguments[2];
+
 
   customFields = customFields ? customFields : {};
 
