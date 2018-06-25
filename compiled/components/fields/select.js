@@ -309,6 +309,11 @@ module.exports = function () {
 
         if (this.select2 && this.el) this.el.val(value).trigger("change");
       }
+    },
+    beforeDestroy: function beforeDestroy() {
+      if (this.select2) {
+        this.el.select2("destroy");
+      }
     }
   });
 };
