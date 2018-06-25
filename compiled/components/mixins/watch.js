@@ -16,6 +16,7 @@ exports.default = function (newVal, oldVal) {
 
      if (_typeof(this.flatItems) === 'object') {
           var val = this.multiple ? newVal : [newVal];
+          console.log(this.flatItems);
           var selected = this.flatItems.filter(function (item) {
                return val.indexOf(item.id) > -1;
           });

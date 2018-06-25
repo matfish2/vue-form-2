@@ -96,21 +96,26 @@ module.exports = function () {
       }
     },
     computed: {
+      allItems: function allItems() {
+        return this.items.concat(this.newItems);
+      },
       filteredItems: function filteredItems() {
         var _this2 = this;
 
-        return this.Items.filter(function (item) {
-          return !_this2.filterValue || !item[_this2.filterBy] || item[_this2.filterBy] == _this2.filterValue;
+        if (!this.filterValue) return this.allItems;
+
+        return this.allItems.filter(function (item) {
+          return !item[_this2.filterBy] || item[_this2.filterBy] == _this2.filterValue;
         });
       },
       flatItems: function flatItems() {
-        if (this.Items.length && !this.items[0].children) {
-          return this.items;
+        if (!this.items.length || !this.items[0].children) {
+          return this.allItems;
         }
 
         var res = [];
 
-        this.items.forEach(function (item) {
+        this.allItems.forEach(function (item) {
           return res = res.concat(item.children);
         });
 
@@ -129,17 +134,17 @@ module.exports = function () {
       return {
         fieldType: 'select',
         tagName: 'select',
-        Items: this.items,
+        newItems: [],
         render: true
       };
     },
     methods: {
       addItem: function addItem(item) {
-        if (this.Items.find(function (i) {
+        if (this.allItems.find(function (i) {
           return i.id === item.id;
         })) return;
 
-        this.Items.push(item);
+        this.newItems.push(item);
       },
       initSelect2: function initSelect2() {
         if (typeof $ == 'undefined') {
@@ -159,7 +164,7 @@ module.exports = function () {
           placeholder: this.placeholder
         });
 
-        if (!this.html && !this.filterBy) options.data = this.Items;
+        if (!this.html && !this.filterBy) options.data = this.items;
 
         if (this.ajaxUrl) {
           options = merge.recursive(options, {
