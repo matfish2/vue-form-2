@@ -8,7 +8,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 exports.default = function (newVal, oldVal) {
 
-     if (oldVal === newVal) return;
+     if (this.isIdenticalValue(oldVal, newVal)) return;
 
      var form = this.getForm();
 
