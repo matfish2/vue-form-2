@@ -31,19 +31,29 @@ module.exports = {
 
       if (form.opts.sendOnlyDirtyFields) {
 
-        if (!form.vuex) {
-          this.$watch('dirty', function (isDirty) {
-            if (isDirty) {
-              form.fields.push(_this);
-            } else if (form.opts.removePristineFields) {
-              form.fields = form.fields.filter(function (field) {
-                return field.name != _this.name;
-              });
+        this.$watch('dirty', function (isDirty) {
+
+          if (isDirty) {
+            if (form.vuex) {
+              _this.commit('CHANGE', { name: _this.name, value: _this.value, oldValue: _this.value });
             }
-          });
-        }
+            form.fields.push(_this);
+          } else if (form.opts.removePristineFields) {
+            if (form.vuex) {
+              _this.commit('RESET', { name: _this.name });
+            }
+
+            form.fields = form.fields.filter(function (field) {
+              return field.name != _this.name;
+            });
+          }
+        });
       } else {
-        form.vuex ? this.commit('CHANGE', { name: this.name, value: this.value, oldValue: this.value }) : form.fields.push(this);
+        if (form.vuex) {
+          this.commit('CHANGE', { name: this.name, value: this.value, oldValue: this.value });
+        }
+
+        form.fields.push(this);
       }
 
       var v = form.validation;

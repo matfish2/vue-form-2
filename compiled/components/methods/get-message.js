@@ -48,7 +48,7 @@ function extractMessage(rule, message, field) {
 }
 
 function stripLabel(label) {
-  return label.replace(/<(?:.|\n)*?>/gm, '');
+  return label ? label.replace(/<(?:.|\n)*?>/gm, '') : '';
 }
 
 function isMomentObject(param) {

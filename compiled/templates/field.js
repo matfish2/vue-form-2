@@ -73,9 +73,3 @@ exports.default = function (h) {
     )]
   );
 };
-
-var _merge = require('merge');
-
-var _merge2 = _interopRequireDefault(_merge);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
