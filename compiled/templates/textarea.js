@@ -31,6 +31,7 @@ exports.default = function (h) {
                         attrs: {
                               name: this.Name,
                               id: "textarea_" + this.Name
+                              // maxlength={this.maxlength}
                         },
                         "class": "form-control",
                         on: {

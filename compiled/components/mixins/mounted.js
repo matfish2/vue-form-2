@@ -34,9 +34,6 @@ module.exports = {
         this.$watch('dirty', function (isDirty) {
 
           if (isDirty) {
-            if (form.vuex) {
-              _this.commit('CHANGE', { name: _this.name, value: _this.value, oldValue: _this.value });
-            }
             form.fields.push(_this);
           } else if (form.opts.removePristineFields) {
             if (form.vuex) {

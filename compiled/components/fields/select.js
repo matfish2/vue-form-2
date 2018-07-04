@@ -215,11 +215,11 @@ module.exports = function () {
             var item = { id: data.id, text: data.text };
             self.addItem(item);
 
-            // self.getForm().dispatch('new-ajax-item',{
-            //   name:self.name,
-            //   listId:self.listId,
-            //   item
-            // });
+            self.getForm().dispatch('new-ajax-item', {
+              name: self.name,
+              listId: self.listId,
+              item: item
+            });
 
             self.removeDuplicateValues();
           }

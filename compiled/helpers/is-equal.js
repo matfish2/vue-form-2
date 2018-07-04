@@ -4,10 +4,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 module.exports = function (value1, value2) {
 
-  if (value1 && value1.format) value1 = value1.format('YYYY-MM-DD');
-  if (value2 && value2.format) value2 = value2.format('YYYY-MM-DD');
+  if (['date', 'partialdate'].indexOf(this.fieldType) > -1 && !this.range) {
+    value1 = stringifyDate(value1);
+    value2 = stringifyDate(value2);
+  }
 
-  if ((typeof value1 === 'undefined' ? 'undefined' : _typeof(value1)) != 'object' && (typeof value2 === 'undefined' ? 'undefined' : _typeof(value2)) != 'object') return value1 == value2;
+  if (isPrimitive(value1) && isPrimitive(value2)) {
+    value1 = value1 ? value1 : null;
+    value2 = value2 ? value2 : null;
+    return value1 == value2;
+  }
 
   var what = Object.prototype.toString;
 
@@ -42,4 +48,19 @@ function arraysEqual(arr1, arr2) {
   });
 
   return equal;
+}
+
+function isPrimitive(val) {
+  return ['string', 'number', 'boolean'].indexOf(typeof val === 'undefined' ? 'undefined' : _typeof(val)) > -1 || val === null;
+}
+
+function stringifyDate(value) {
+
+  if (!value) return value;
+
+  if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' && value.format) {
+    return value.format('YYYY-MM-DD');
+  }
+
+  return value.split(' ')[0];
 }

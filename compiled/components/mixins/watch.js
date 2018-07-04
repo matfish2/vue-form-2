@@ -33,7 +33,7 @@ exports.default = function (newVal, oldVal) {
      }
 
      this.handleTriggeredFields();
-     this.dirty = this.wasReset ? false : !(0, _isEqual2.default)(this.curValue, this.initialValue);
+     this.dirty = this.wasReset ? false : !_isEqual2.default.apply(this, [this.curValue, this.initialValue]);
 
      this.pristine = this.wasReset;
 

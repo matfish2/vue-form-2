@@ -1,15 +1,13 @@
 "use strict";
 
 module.exports = function (name) {
-
      if (this.$parent && this.$parent.$refs.hasOwnProperty(name)) return this.$parent.$refs[name];
-
      return getField(this, name);
 };
 
 function getField(parent, name) {
 
-     if (parent.name == name) {
+     if (parent.isField && parent.name == name) {
           return parent;
      } else if (parent.$children && parent.$children.length) {
           var i;
