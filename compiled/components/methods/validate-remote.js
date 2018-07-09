@@ -2,22 +2,23 @@
 
 module.exports = function () {
 
-    if (!this.rules.remote) return;
+    if (!this.Rules.remote) return;
 
     var formError = {
         name: this.name,
         rule: "remote",
-        show: true };
+        show: true
+    };
 
-    this.$http.get(this.rules.remote, { value: this.value }).then(function (data) {
+    this.$http.get(this.Rules.remote, { value: this.value }).then(function (data) {
+        var i = this.errors.indexOf("remote");
+        this.errors.splice(i, 1);
+        if (this.inForm()) this.removeFormError(formError);
+    }).catch(function (e) {
+        this.messages.remote = e.body;
 
-        var valid = data.data;
-
-        if (valid) {
-            this.errors.$remove('remote');
-            if (this.inForm()) this.removeFormError(formError);
-        } else {
-            if (this.errors.indexOf("remote") == -1) this.errors.push("remote");
+        if (this.errors.indexOf("remote") == -1) {
+            this.errors.push("remote");
             if (this.inForm()) this.addFormError(formError, true);
         }
     });
