@@ -31,7 +31,7 @@ exports.default = function (h) {
       [h(
         'span',
         null,
-        [this.label]
+        [this.label, this.$slots.afterlabel]
       ), description]
     );
   }
