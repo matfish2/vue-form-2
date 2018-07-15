@@ -1,4 +1,6 @@
-"use strict";
+'use strict';
+
+var merge = require('merge');
 
 module.exports = function () {
 
@@ -10,7 +12,11 @@ module.exports = function () {
         show: true
     };
 
-    this.$http.get(this.Rules.remote, { value: this.value }).then(function (data) {
+    var rule = this.Rules.remote;
+    var url = typeof rule === 'string' ? rule : rule.url;
+    var params = typeof rule === 'string' ? {} : rule.params;
+
+    this.$http.get(url, { params: merge(params, { value: this.getValue() }) }).then(function (data) {
         var i = this.errors.indexOf("remote");
         this.errors.splice(i, 1);
         if (this.inForm()) this.removeFormError(formError);

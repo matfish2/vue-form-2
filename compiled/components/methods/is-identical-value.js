@@ -7,6 +7,10 @@ module.exports = function (newValue, oldValue) {
     return oldValue === newValue;
   }
 
+  if (oldValue === null && newValue !== null || oldValue === null && newValue !== null) {
+    return false;
+  }
+
   if (Object.prototype.toString.call(newValue) === '[object Array]') {
     return newValue.length === oldValue.length && newValue.every(function (v, i) {
       return v === oldValue[i];
