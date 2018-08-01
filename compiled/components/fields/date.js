@@ -124,6 +124,10 @@ module.exports = function () {
         }.bind(this));
       }
     },
+    beforeDestroy: function beforeDestroy() {
+      this.datepicker.data('daterangepicker').remove();
+    },
+
     methods: {
       setNow: function setNow() {
         this.setValue(moment());
