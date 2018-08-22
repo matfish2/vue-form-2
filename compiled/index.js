@@ -165,6 +165,7 @@ exports.install = function (Vue) {
   Vue.component('vf-buttons-list', require('./components/fields/buttons-list')());
   Vue.component('vf-date', require('./components/fields/date')());
   Vue.component('vf-checkbox', require('./components/fields/checkbox')());
+  Vue.component('vf-toggler', require('./components/fields/toggler')());
   Vue.component('vf-hidden', require('./components/fields/hidden')());
 
   Vue.component('vf-status-bar', _statusBar2.default);

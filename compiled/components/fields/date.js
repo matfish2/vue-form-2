@@ -98,7 +98,10 @@ module.exports = function () {
 
       this.datepicker.on('apply.daterangepicker', function (ev, picker) {
 
-        var value = this.range ? { start: picker.startDate, end: picker.endDate } : picker.startDate;
+        var value = this.range ? {
+          start: picker.startDate,
+          end: picker.endDate
+        } : picker.startDate;
 
         this.setValue(value);
       }.bind(this));
@@ -143,7 +146,10 @@ module.exports = function () {
           var start = val.start.isValid() ? val.start : moment();
           var end = val.end.isValid() ? val.end : moment();
 
-          this.setDatepickerValue({ start: start, end: end });
+          this.setDatepickerValue({
+            start: start,
+            end: end
+          });
         } else {
           formatted = val.format(this.Format);
           var pickerDate = val.isValid() ? val : moment();
@@ -191,8 +197,10 @@ module.exports = function () {
           val.end = pieces[1];
         }
 
-        return this.range ? { start: moment(val.start, this.Format),
-          end: moment(val.end, this.Format) } : moment(val, this.Format);
+        return this.range ? {
+          start: moment(val.start, this.Format),
+          end: moment(val.end, this.Format)
+        } : moment(val, this.Format);
       },
       addTime: function addTime(val) {
 

@@ -7,7 +7,11 @@ module.exports = function (vm) {
 
       setTimeout(function () {
         var data = vm.formData();
-        vm.reinitForm();
+
+        if (vm.opts.resetFormAfterSubmit) {
+          vm.reinitForm();
+        }
+
         vm.dispatch('sent', data);
         vm.getStatusBar().success(vm.opts.texts.sent);
       }, 50);

@@ -212,7 +212,10 @@ module.exports = function () {
 
             var data = e.params.data;
 
-            var item = { id: data.id, text: data.text };
+            var item = {
+              id: data.id,
+              text: data.text
+            };
             self.addItem(item);
 
             self.getForm().dispatch('new-ajax-item', {

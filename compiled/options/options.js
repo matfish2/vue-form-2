@@ -7,6 +7,7 @@ module.exports = function () {
     layout: '',
     showErrorsInStatusBar: false,
     sendOnlyDirtyFields: false,
+    resetFormAfterSubmit: true,
     removePristineFields: true,
     fireChangeOnInit: false,
     successTimeout: 4000,

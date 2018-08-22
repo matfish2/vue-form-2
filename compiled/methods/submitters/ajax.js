@@ -17,7 +17,9 @@ exports.default = function (vm) {
       var method = vm.method.toLowerCase();
       vm.$http[method](vm.action, getData(method, data)).then(function (data) {
 
-        vm.reinitForm();
+        if (vm.opts.resetFormAfterSubmit) {
+          vm.reinitForm();
+        }
 
         vm.dispatch('sent', data);
 
@@ -42,5 +44,7 @@ exports.default = function (vm) {
 };
 
 function getData(method, data) {
-  return ['head', 'get', 'delete'].indexOf(method) > -1 ? { params: data } : data;
+  return ['head', 'get', 'delete'].indexOf(method) > -1 ? {
+    params: data
+  } : data;
 }

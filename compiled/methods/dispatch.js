@@ -10,6 +10,8 @@ module.exports = function (event, payload) {
 	var pieces = event.split("::");
 	var eventName = pieces[0];
 
+	this.$emit(eventName, payload);
+
 	// Trigger Vuex commit
 	if (this.vuex && pieces.length === 1) {
 		var EventName = eventName.toUpperCase().replace(/-/g, '_');
@@ -19,7 +21,6 @@ module.exports = function (event, payload) {
 	// Fire global event
 	event = "vue-form." + pieces.join('::');
 	_bus2.default.$emit(event, payload);
-
 	// Fire Component Specific event 
 
 	if (this.name) {

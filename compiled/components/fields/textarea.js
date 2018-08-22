@@ -58,7 +58,9 @@ module.exports = function () {
         var textarea = $(this.$el).find("textarea");
         var height = this.expanded ? textarea.get(0).scrollHeight : "auto";
         textarea.height(height);
-        this.getForm().dispatch('textarea-was-toggled', { expanded: this.expanded });
+        this.getForm().dispatch('textarea-was-toggled', {
+          expanded: this.expanded
+        });
       }
     },
     computed: {

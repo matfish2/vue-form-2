@@ -28,6 +28,10 @@ var _checkbox = require('./checkbox');
 
 var _checkbox2 = _interopRequireDefault(_checkbox);
 
+var _toggler = require('./toggler');
+
+var _toggler2 = _interopRequireDefault(_toggler);
+
 var _buttonsList = require('./buttons-list');
 
 var _buttonsList2 = _interopRequireDefault(_buttonsList);
@@ -44,5 +48,6 @@ exports.default = {
   textarea: _textarea2.default,
   date: _date2.default,
   checkbox: _checkbox2.default,
+  toggler: _toggler2.default,
   buttons: _buttonsList2.default
 };
