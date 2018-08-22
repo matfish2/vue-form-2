@@ -36,6 +36,10 @@ var _buttonsList = require('./buttons-list');
 
 var _buttonsList2 = _interopRequireDefault(_buttonsList);
 
+var _addressFinder = require('./address-finder');
+
+var _addressFinder2 = _interopRequireDefault(_addressFinder);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
@@ -49,5 +53,6 @@ exports.default = {
   date: _date2.default,
   checkbox: _checkbox2.default,
   toggler: _toggler2.default,
-  buttons: _buttonsList2.default
+  buttons: _buttonsList2.default,
+  addressfinder: _addressFinder2.default
 };

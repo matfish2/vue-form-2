@@ -101,7 +101,10 @@ exports.install = function (Vue) {
       if (!this.ajax && !this.client) {
         var payload = this.options.additionalPayload;
         for (var key in payload) {
-          this.additionalValues.push({ name: key, value: payload[key] });
+          this.additionalValues.push({
+            name: key,
+            value: payload[key]
+          });
         }
       }
 
@@ -163,6 +166,7 @@ exports.install = function (Vue) {
   Vue.component('vf-textarea', require('./components/fields/textarea')());
   Vue.component('vf-select', require('./components/fields/select')());
   Vue.component('vf-buttons-list', require('./components/fields/buttons-list')());
+  Vue.component('vf-address-finder', require('./components/fields/address-finder')());
   Vue.component('vf-date', require('./components/fields/date')());
   Vue.component('vf-checkbox', require('./components/fields/checkbox')());
   Vue.component('vf-toggler', require('./components/fields/toggler')());

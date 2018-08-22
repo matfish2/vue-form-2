@@ -47,4 +47,6 @@ function getValue(value, nullifyEmptyStrings) {
       end: value.end.format()
     };
   }
+
+  return value;
 }
