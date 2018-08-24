@@ -17,6 +17,7 @@ module.exports = function () {
     dateOptions: {},
     select2Options: {},
     tinymceOptions: {},
+    addressFinderOptions: {},
     beforeSubmit: function beforeSubmit() {
       return true;
     },
