@@ -16,7 +16,7 @@ module.exports = function () {
 				$(this.$el).find("input[type=color]").spectrum({
 					color: that.value ? that.value : "#000000",
 					change: function change(color) {
-						that.setValue(color.toHexString());
+						that.$emit('input', color.toHexString());
 					}
 				});
 			}

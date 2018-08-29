@@ -28,11 +28,7 @@ exports.default = function (h) {
         attrs: { 'for': this.Name,
           title: this.title }
       },
-      [h(
-        'span',
-        null,
-        [this.label, this.$slots.afterlabel]
-      ), description]
+      [h('span', [this.label, this.$slots.afterlabel]), description]
     );
   }
 
@@ -45,13 +41,9 @@ exports.default = function (h) {
   }
 
   if (this.hasFeedback) {
-    feedback = h(
-      'span',
-      { 'class': "glyphicon glyphicon-" + this.feedbackIcon + " form-control-feedback",
-        attrs: { 'aria-hidden': 'true' }
-      },
-      []
-    );
+    feedback = h('span', { 'class': "glyphicon glyphicon-" + this.feedbackIcon + " form-control-feedback",
+      attrs: { 'aria-hidden': 'true' }
+    });
   }
 
   return h(

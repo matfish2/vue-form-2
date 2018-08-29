@@ -3,5 +3,5 @@
 var isNumeric = require('../../helpers/is-numeric');
 
 module.exports = function (that) {
-  return isNumeric(that.getValue());
+  return isNumeric(that.value);
 };

@@ -2,7 +2,7 @@
 
 module.exports = function (that) {
 
-  var val = that.getValue();
+  var val = that.value;
 
   var value = ['text', 'textarea'].indexOf(that.fieldType) > -1 ? val.length : val;
 

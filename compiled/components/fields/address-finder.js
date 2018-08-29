@@ -63,7 +63,7 @@ module.exports = function () {
           }
         }
 
-        this.setValue(address);
+        this.$emit('input', address);
       },
 
       // Bias the autocomplete object to the user's geographical location,

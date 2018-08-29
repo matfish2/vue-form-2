@@ -52,7 +52,7 @@ function stripLabel(label) {
 }
 
 function isMomentObject(param) {
-  return typeof param.isValid != 'undefined';
+  return param && typeof param.isValid != 'undefined';
 }
 
 if (!Array.isArray) {

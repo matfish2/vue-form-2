@@ -53,20 +53,13 @@ module.exports = function () {
         required: false
       },
       html: {
-        type: Boolean
+        type: Boolean,
+        default: true
       },
       listId: {}
     },
     mounted: function mounted() {
       var _this = this;
-
-      var value;
-
-      if (!this.disabled && !this.value && this.default) {
-        this.setValue(this.default);
-      } else if (this.noDefault && !this.value) {
-        this.setValue(this.filteredItems[0].id);
-      }
 
       this.$watch('select2', function (val) {
         if (val) {
@@ -127,7 +120,7 @@ module.exports = function () {
 
         if (!this.filterBy) return '';
 
-        return this.getField(this.filterBy).getValue();
+        return this.getField(this.filterBy).value;
       }
     },
     data: function data() {
@@ -137,6 +130,13 @@ module.exports = function () {
         newItems: [],
         render: true
       };
+    },
+    watch: {
+      value: function value(val) {
+        if (this.select2) {
+          $(this.el).val(val).trigger("change");
+        }
+      }
     },
     methods: {
       addItem: function addItem(item) {
@@ -175,11 +175,11 @@ module.exports = function () {
               data: function data(params) {
                 var query = {
                   q: params.term,
-                  selected: self.getValue()
+                  selected: self.value
                 };
 
                 if (this.filterBy) {
-                  var filterValue = self.getForm().getField(this.filterBy).getValue();
+                  var filterValue = self.getForm().getField(this.filterBy).value;
 
                   if (filterValue) query[this.filterBy] = filterValue;
                 }
@@ -232,17 +232,18 @@ module.exports = function () {
           if (self.multiple && $.isArray(val)) {
             val = $.unique(val);
           }
-
-          self.saveValue(val);
+          console.log(val);
+          self.$emit('input', val);
         }).on("select2:unselecting", function (e) {
           if (self.multiple) {
             var $this = $(this);
             setTimeout(function () {
               var value = $this.val();
-              self.saveValue(value ? value : []);
+              console.log(value);
+              self.$emit('input', value ? value : []);
             }, 0);
           } else {
-            self.saveValue('');
+            self.$emit('input', '');
           }
 
           if (self.ajaxUrl) {
@@ -250,7 +251,7 @@ module.exports = function () {
           }
         });
 
-        this.el.val(this.value).trigger("change");
+        // this.el.val(this.value).trigger("change");
 
         // setTimeout(function() {
         //   this.el.trigger('change');
@@ -291,12 +292,8 @@ module.exports = function () {
 
         if (this.multiple && !value) value = [];
 
-        this.saveValue(value);
-        if (setDirty) this.dirty = true;
-
-        if (!this.select2) document.getElementsByName(this.Name)[0].value = value;
-
-        if (this.select2 && this.el) this.el.val(value).trigger("change");
+        // if (this.select2 && this.el)
+        //   this.el.val(value).trigger("change");
       },
       reset: function reset() {
         var value = this.multiple ? [] : '';

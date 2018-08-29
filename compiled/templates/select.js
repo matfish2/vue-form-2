@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -12,9 +12,9 @@ exports.default = function (h) {
 
   if (!this.noDefault && !this.multiple) {
     placeholder = h(
-      "option",
+      'option',
       {
-        attrs: { value: "" }
+        attrs: { value: '' }
       },
       [this.placeholder]
     );
@@ -24,27 +24,35 @@ exports.default = function (h) {
 
     items = this.filteredItems.map(function (item) {
       return h(
-        "option",
+        'option',
         {
-          attrs: { value: item.id, selected: item.id == _this.curValue }
+          domProps: {
+            'value': item.id
+          }
         },
         [item.text]
       );
     });
   }
 
-  return this.render ? h(
-    "select",
+  return h(
+    'select',
     {
-      attrs: { name: this.Name + this.arraySymbol,
+      attrs: {
+        name: this.Name + this.arraySymbol,
         disabled: this.disabled,
         multiple: this.multiple
       },
+      domProps: {
+        'value': this.value
+      },
       on: {
-        "change": this.updateValue.bind(this)
+        'input': function input(e) {
+          return _this.$emit('input', e.target.value);
+        }
       },
 
-      "class": "form-control" },
+      'class': 'form-control' },
     [placeholder, items]
-  ) : '';
+  );
 };

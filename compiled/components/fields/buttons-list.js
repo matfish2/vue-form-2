@@ -80,7 +80,7 @@ module.exports = function () {
 
         this.$watch('filterValue', function (val) {
           if (val) {
-            this.setValue(this.multiple ? [] : '');
+            this.emit('input', this.multiple ? [] : '');
           }
         }.bind(this));
       }
@@ -92,7 +92,7 @@ module.exports = function () {
       selectedCount: function selectedCount() {
         if (!this.multiple) return false;
 
-        return this.curValue.length;
+        return this.value.length;
       },
 
       filteredItems: function filteredItems() {
@@ -103,7 +103,7 @@ module.exports = function () {
         });
       },
       filterValue: function filterValue() {
-        return this.filteringField ? this.filteringField.getValue() : null;
+        return this.filteringField ? this.filteringField.value : null;
       },
       toggleText: function toggleText() {
         return this.allSelected ? this.toggleTexts.unselect : this.toggleTexts.select;
@@ -115,47 +115,12 @@ module.exports = function () {
       arraySymbol: require('../computed/array-symbol')
     },
     methods: {
-      setValue: function setValue(value) {
-
-        var el, val;
-
-        this.saveValue(value);
-
-        var name = this.multiple ? this.Name + "[]" : this.Name;
-        var multiple = this.multiple;
-
-        $('[name="' + name + '"]').each(function () {
-          el = $(this);
-          val = el.val();
-          el.prop('checked', multiple ? value.indexOf(val) > -1 : val == value);
-        });
-      },
       clear: function clear() {
         this.setValue(null);
       },
 
-      updateValue: function updateValue(val, e) {
-        var checked = e.target.checked;
-
-        if (this.multiple) {
-          var value = (0, _clone2.default)(this.getValue());
-
-          if (checked) {
-            value.push(val);
-            this.saveValue(value);
-          } else {
-
-            value = value.filter(function (value) {
-              return value != val;
-            });
-            this.saveValue(value);
-          }
-        } else {
-          this.saveValue(val);
-        }
-      },
       isChecked: function isChecked(value) {
-        var val = this.getValue();
+        var val = this.value;
         return this.multiple ? val.indexOf(value) > -1 : value == val;
       },
       reset: function reset() {

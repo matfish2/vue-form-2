@@ -23,7 +23,7 @@ exports.default = function (h) {
       [this.toggleText]
     );
   } else {
-    toggler = this.curValue ? h(
+    toggler = this.value ? h(
       'span',
       { 'class': 'pull-right btn btn-link',
         on: {
@@ -41,22 +41,22 @@ exports.default = function (h) {
       [h(
         'label',
         { 'class': 'form-check-label' },
-        [h(
-          'input',
-          {
-            'class': 'form-check-input',
-            attrs: { disabled: _this.disabled,
-              name: _this.Name + _this.arraySymbol,
-              type: _this.type,
-              value: item.id,
-
-              checked: _this.isChecked(item.id) },
-            on: {
-              'change': _this.updateValue.bind(_this, item.id)
-            }
+        [h('input', {
+          'class': 'form-check-input',
+          attrs: { disabled: _this.disabled,
+            name: _this.Name + _this.arraySymbol,
+            type: _this.type
           },
-          []
-        ), h(
+          domProps: {
+            'value': item.id,
+            'checked': _this.isChecked(item.id)
+          },
+          on: {
+            'change': function change(e) {
+              _this.$emit('input', e.target.value);
+            }
+          }
+        }), h(
           'span',
           { 'class': 'form-check-label-text' },
           [item.text]

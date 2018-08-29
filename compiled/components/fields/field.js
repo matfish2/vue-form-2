@@ -18,25 +18,8 @@ module.exports = function () {
 		render: _field2.default,
 		mixins: [props, data, methods, computed, mounted],
 		methods: {
-			setValue: function setValue(value) {
-				var setDirty = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-
-				this.saveValue(value);
-				if (setDirty) this.dirty = true;
-			},
 			updateValue: function updateValue(e) {
-				this.saveValue(e.target.value);
-			},
-			saveValue: function saveValue(value) {
-				this.curValue = value;
-			},
-
-			getValue: function getValue() {
-				return this.vuex ? this.state[this.name] : this.curValue;
-			},
-			reset: function reset() {
-				this.wasReset = true;
-				this.curValue = '';
+				this.$emit('input', e.target.value);
 			},
 			focus: function focus() {
 				this.$el.getElementsByTagName(this.tagName)[0].focus();

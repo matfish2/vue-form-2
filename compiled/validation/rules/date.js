@@ -2,7 +2,7 @@
 
 module.exports = function (field) {
 
-		var val = field.getValue();
+		var val = field.value;
 
 		if (!val) return true;
 

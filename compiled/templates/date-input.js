@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (h) {
+	var _this = this;
 
 	var nowButton = '';
 
@@ -20,23 +21,20 @@ exports.default = function (h) {
 		);
 	}
 
-	return h(
-		"div",
-		null,
-		[h(
-			"input",
-			{ "class": "VF-Field--Date__datepicker form-control",
-				attrs: { name: this.Name,
-					placeholder: this.placeholder,
-					value: this.formattedDate,
-					disabled: this.disabled,
+	return h("div", [h("input", { "class": "VF-Field--Date__datepicker form-control",
+		attrs: { name: this.Name,
+			placeholder: this.placeholder,
 
-					type: "text" },
-				on: {
-					"change": this.updateValue.bind(this)
-				}
-			},
-			[]
-		), nowButton]
-	);
+			disabled: this.disabled,
+
+			type: "text" },
+		domProps: {
+			"value": this.formattedDate
+		},
+		on: {
+			"change": function change(e) {
+				return _this.$emit('input', _this.value);
+			}
+		}
+	}), nowButton]);
 };

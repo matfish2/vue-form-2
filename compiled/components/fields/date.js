@@ -188,7 +188,7 @@ module.exports = function () {
 
         if (this.isValidMoment(val)) return val;
 
-        if (!val) val = this.getValue();
+        if (!val) val = this.value;
 
         if (this.range && typeof val == 'string') {
           var pieces = val.split('-');
@@ -237,7 +237,7 @@ module.exports = function () {
           return;
         }
 
-        this.saveValue(val);
+        this.$emit('input', val);
 
         setTimeout(function () {
           this.setDatepickerValue(val);
@@ -292,7 +292,7 @@ module.exports = function () {
       },
       formattedDate: function formattedDate() {
 
-        var value = this.getValue();
+        var value = this.value;
 
         if (!value || !this.range && (!value.format || value.format() == 'Invalid date') || this.range && (!value.start || !value.start.format || !value.end || !value.end.format)) {
 
@@ -305,7 +305,7 @@ module.exports = function () {
       },
       serverFormat: function serverFormat() {
 
-        var value = this.getValue();
+        var value = this.value;
 
         if (!value || isDateString(value)) return '';
 

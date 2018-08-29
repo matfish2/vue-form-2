@@ -80,25 +80,6 @@ module.exports = {
       }, 0);
     }
 
-    if (form && form.opts.fireChangeOnInit) this.$watch('curValue', _watch2.default);
-
-    if (this.value || this.fieldType === 'checkbox') {
-      this.setValue(this.value, false); // don't set as dirty on init
-    }
-
-    if (!form || !form.opts.fireChangeOnInit) this.$watch('curValue', _watch2.default);
-
-    this.$nextTick(function () {
-      _this.$watch('value', function (value, oldValue) {
-
-        if (_this.isIdenticalValue(oldValue, value)) return;
-
-        if (value === '') {
-          _this.reset();
-        } else {
-          _this.setValue(value);
-        }
-      });
-    });
+    this.$watch('value', _watch2.default);
   }
 };
