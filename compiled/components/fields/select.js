@@ -61,6 +61,12 @@ module.exports = function () {
     mounted: function mounted() {
       var _this = this;
 
+      if (this.select2) {
+        this.$watch('value', function (val) {
+          $(_this.el).val(val).trigger("change");
+        });
+      }
+
       this.$watch('select2', function (val) {
         if (val) {
           _this.initSelect2();
@@ -88,6 +94,7 @@ module.exports = function () {
         this.initSelect2();
       }
     },
+
     computed: {
       allItems: function allItems() {
         return this.items.concat(this.newItems);
@@ -130,13 +137,6 @@ module.exports = function () {
         newItems: [],
         render: true
       };
-    },
-    watch: {
-      value: function value(val) {
-        if (this.select2) {
-          $(this.el).val(val).trigger("change");
-        }
-      }
     },
     methods: {
       addItem: function addItem(item) {
@@ -232,7 +232,7 @@ module.exports = function () {
           if (self.multiple && $.isArray(val)) {
             val = $.unique(val);
           }
-          console.log(val);
+
           self.$emit('input', val);
         }).on("select2:unselecting", function (e) {
           if (self.multiple) {

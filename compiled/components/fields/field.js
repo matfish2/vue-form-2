@@ -1,5 +1,9 @@
 'use strict';
 
+var _watch = require('../mixins/watch');
+
+var _watch2 = _interopRequireDefault(_watch);
+
 var _field = require('../../templates/field');
 
 var _field2 = _interopRequireDefault(_field);
@@ -23,6 +27,12 @@ module.exports = function () {
 			},
 			focus: function focus() {
 				this.$el.getElementsByTagName(this.tagName)[0].focus();
+			}
+		},
+		watch: {
+			value: {
+				immediate: true,
+				handler: _watch2.default
 			}
 		},
 		destroyed: function destroyed() {

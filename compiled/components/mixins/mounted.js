@@ -4,10 +4,6 @@ var _merge = require('merge');
 
 var _merge2 = _interopRequireDefault(_merge);
 
-var _watch = require('./watch');
-
-var _watch2 = _interopRequireDefault(_watch);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var convertDateRulesToMoment = require('../../helpers/convert-date-rules-to-moment');
@@ -16,11 +12,11 @@ module.exports = {
   mounted: function mounted() {
     var _this = this;
 
-    if (this.required) {
-      this.Rules.required = true;
-    }
-
     this.Rules = (0, _merge2.default)(this.Rules, this.rules);
+
+    if (this.required) {
+      this.$set(this.Rules, 'required', true);
+    }
 
     var inForm = this.inForm();
     var form = null;
@@ -79,7 +75,5 @@ module.exports = {
         _this.handleTriggeredFields();
       }, 0);
     }
-
-    this.$watch('value', _watch2.default);
   }
 };

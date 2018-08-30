@@ -18,6 +18,9 @@ module.exports = {
     },
     formName: function formName() {
       return this.getForm().name;
+    },
+    dirty: function dirty() {
+      return this.initialValue !== this.value;
     }
   }
 };

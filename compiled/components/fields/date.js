@@ -109,7 +109,6 @@ module.exports = function () {
       this.datepicker.on('cancel.daterangepicker', function (ev, picker) {
 
         this.clear();
-        this.dirty = true;
         this.datepicker.data('daterangepicker').setStartDate(moment());
         this.datepicker.data('daterangepicker').setEndDate(moment());
       }.bind(this));
@@ -245,7 +244,6 @@ module.exports = function () {
             this.injectValueToField(val);
           }
         }.bind(this), 0);
-        if (setDirty) this.dirty = true;
       },
       clear: function clear() {
         this.reset(false);
