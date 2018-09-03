@@ -40,6 +40,10 @@ var _addressFinder = require('./address-finder');
 
 var _addressFinder2 = _interopRequireDefault(_addressFinder);
 
+var _pikaday = require('./pikaday');
+
+var _pikaday2 = _interopRequireDefault(_pikaday);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
@@ -54,5 +58,6 @@ exports.default = {
   checkbox: _checkbox2.default,
   toggler: _toggler2.default,
   buttons: _buttonsList2.default,
-  addressfinder: _addressFinder2.default
+  addressfinder: _addressFinder2.default,
+  pikaday: _pikaday2.default
 };

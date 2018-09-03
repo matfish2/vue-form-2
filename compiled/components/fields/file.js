@@ -36,8 +36,7 @@ module.exports = function (globalOptions) {
         type: Function
       },
       valueKey: {
-        type: String,
-        default: 'value'
+        type: String
       },
       onSubmit: {
         type: Function,
@@ -75,7 +74,11 @@ module.exports = function (globalOptions) {
       options.done = function (e, _ref) {
         var result = _ref.result;
 
-        self.$emit('input', result);
+        var value = self.valueKey ? result[self.valueKey] : result;
+        // update the model
+        self.$emit('input', value);
+        // send event with response data for the consumer's use
+        self.$emit('upload', result);
       };
 
       if (!options.hasOwnProperty('add')) {

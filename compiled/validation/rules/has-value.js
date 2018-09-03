@@ -6,7 +6,7 @@ module.exports = function (that) {
 
   var value = that.value;
 
-  return !!(value && (isString(value) || ['checkbox', 'date', 'partialdate', 'addressfinder'].includes(that.fieldType) || isMultipleList(that, value) || isNumeric(value)));
+  return !!(value && (isString(value) || ['checkbox', 'date', 'partialdate', 'pikaday', 'addressfinder'].includes(that.fieldType) || isMultipleList(that, value) || isNumeric(value)));
 };
 
 function isMultipleList(that, value) {

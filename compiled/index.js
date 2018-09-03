@@ -152,7 +152,6 @@ exports.install = function (Vue) {
         return this.vuex ? this.$store.state[this.name].count === 0 : this.fields.length === 0;
       }
     }
-
   };
 
   Vue.component('vf-form', vfForm);
@@ -168,6 +167,7 @@ exports.install = function (Vue) {
   Vue.component('vf-buttons-list', require('./components/fields/buttons-list')());
   Vue.component('vf-address-finder', require('./components/fields/address-finder')());
   Vue.component('vf-date', require('./components/fields/date')());
+  Vue.component('vf-pikaday', require('./components/fields/pikaday')());
   Vue.component('vf-checkbox', require('./components/fields/checkbox')());
   Vue.component('vf-toggler', require('./components/fields/toggler')());
   Vue.component('vf-hidden', require('./components/fields/hidden')());
