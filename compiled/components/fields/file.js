@@ -72,11 +72,12 @@ module.exports = function (globalOptions) {
         options.formData.dest = this.dest;
       }
 
-      if (!options.hasOwnProperty('done')) {
-        options.done = this.done ? this.done : function (e, data) {
-          self.setValue(data.result[self.valueKey]);
-        };
-      }
+      options.done = function (e, _ref) {
+        var result = _ref.result;
+
+        console.log('ALL DONE', result);
+        self.$emit('input', result);
+      };
 
       if (!options.hasOwnProperty('add')) {
         options.add = this.onSubmit;
