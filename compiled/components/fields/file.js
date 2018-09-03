@@ -75,7 +75,6 @@ module.exports = function (globalOptions) {
       options.done = function (e, _ref) {
         var result = _ref.result;
 
-        console.log('ALL DONE', result);
         self.$emit('input', result);
       };
 
@@ -85,8 +84,8 @@ module.exports = function (globalOptions) {
 
       if (!options.hasOwnProperty('error')) {
         options.error = this.error ? this.error : function (e, data) {
-          var text = JSON.parse(e.responseText);
-          bootbox.alert(text.error.message);
+          console.error("Upload failed. See full error data below");
+          console.error(e);
         };
       }
 
