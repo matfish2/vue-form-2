@@ -5,6 +5,12 @@ var Field = require('./field');
 
 module.exports = function () {
   return merge.recursive(Field(), {
+    props: {
+      format: {
+        type: String,
+        default: 'DD-MM-YYYY'
+      }
+    },
     data: function data() {
       return {
         fieldType: 'pikaday'
@@ -24,7 +30,9 @@ module.exports = function () {
       formattedValue: function formattedValue() {
         if (!this.picker || !this.value) return '';
 
-        return this.picker.toString('DD-MM-YYYY');
+        this.picker.setDate(this.value, true);
+
+        return this.picker.toString(this.format);
       }
     }
   });
