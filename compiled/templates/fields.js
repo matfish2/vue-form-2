@@ -44,6 +44,10 @@ var _pikaday = require('./pikaday');
 
 var _pikaday2 = _interopRequireDefault(_pikaday);
 
+var _loqate = require('./loqate');
+
+var _loqate2 = _interopRequireDefault(_loqate);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
@@ -59,5 +63,6 @@ exports.default = {
   toggler: _toggler2.default,
   buttons: _buttonsList2.default,
   addressfinder: _addressFinder2.default,
-  pikaday: _pikaday2.default
+  pikaday: _pikaday2.default,
+  loqate: _loqate2.default
 };
