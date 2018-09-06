@@ -44,7 +44,7 @@ module.exports = function () {
     },
     methods: {
       id: function id(field) {
-        return this.name + '__' + field;
+        return this.Name + '__' + field;
       },
       getAddressComponent: function getAddressComponent(key) {
         if (this.value && this.value[key]) {
