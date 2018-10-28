@@ -1,7 +1,7 @@
 'use strict';
 
-var Vue = require('vue');
+import Vue from 'vue'
 
 var bus = new Vue();
 
-module.exports = bus;
+export default bus;
