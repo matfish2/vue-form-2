@@ -1,16 +1,9 @@
-'use strict';
-
-var _clone = require('clone');
-
-var _clone2 = _interopRequireDefault(_clone);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+"use strict";
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var merge = require('merge');
-var Field = require('./field');
-
+var merge = require("merge");
+var Field = require("./field");
 
 module.exports = function () {
   return merge.recursive(Field(), {
@@ -18,12 +11,12 @@ module.exports = function () {
       var _ref;
 
       return _ref = {
-        fieldType: 'buttons',
+        fieldType: "buttons",
         allSelected: false,
         filteringField: null
-      }, _defineProperty(_ref, 'allSelected', false), _defineProperty(_ref, 'clearText', 'Clear'), _defineProperty(_ref, 'toggleTexts', {
-        select: 'Select All',
-        unselect: 'Unselect All'
+      }, _defineProperty(_ref, "allSelected", false), _defineProperty(_ref, "clearText", "Clear"), _defineProperty(_ref, "toggleTexts", {
+        select: "Select All",
+        unselect: "Unselect All"
       }), _ref;
     },
     props: {
@@ -44,7 +37,7 @@ module.exports = function () {
       },
       filterBy: {
         type: String,
-        default: ''
+        default: ""
       },
       horizontal: Boolean
     },
@@ -53,7 +46,7 @@ module.exports = function () {
 
       this.allSelected = this.selectedCount === this.filteredItems.length;
 
-      this.$watch('selectedCount', function (val) {
+      this.$watch("selectedCount", function (val) {
         if (_this.selectedCount === 0) {
           _this.allSelected = false;
         } else if (_this.selectedCount === _this.filteredItems.length) {
@@ -62,7 +55,6 @@ module.exports = function () {
       });
 
       if (this.inForm()) {
-
         var texts = this.getForm().opts.texts;
 
         if (texts.selectAll) {
@@ -78,9 +70,9 @@ module.exports = function () {
       if (this.filterBy) {
         this.filteringField = this.getField(this.filterBy);
 
-        this.$watch('filterValue', function (val) {
+        this.$watch("filterValue", function (val) {
           if (val) {
-            this.emit('input', this.multiple ? [] : '');
+            this.emit("input", this.multiple ? [] : "");
           }
         }.bind(this));
       }
@@ -109,10 +101,10 @@ module.exports = function () {
         return this.allSelected ? this.toggleTexts.unselect : this.toggleTexts.select;
       },
       itemClass: function itemClass() {
-        return this.horizontal ? 'form-check horizontal' : 'form-check';
+        return this.horizontal ? "form-check horizontal" : "form-check";
       },
 
-      arraySymbol: require('../computed/array-symbol')
+      arraySymbol: require("../computed/array-symbol")
     },
     methods: {
       clear: function clear() {
@@ -125,15 +117,31 @@ module.exports = function () {
       },
       reset: function reset() {
         this.wasReset = true;
-        this.saveValue(this.multiple ? [] : '');
+        this.saveValue(this.multiple ? [] : "");
       },
       passesFilter: function passesFilter(item) {
         if (!this.filterBy || !this.filterValue) return true;
 
         return item[this.filterBy] == this.filterValue;
       },
-      toggle: function toggle() {
+      updateValue: function updateValue(e) {
+        var val;
+        if (this.multiple) {
+          if (e.target.checked) {
+            val = this.value.concat(e.target.value);
+          } else {
+            val = this.value.filter(function (v) {
+              return v != e.target.value;
+            });
+          }
+        } else {
+          val = e.target.value;
+        }
 
+        this.$emit("input", val);
+      },
+
+      toggle: function toggle() {
         this.allSelected = !this.allSelected;
 
         if (this.allSelected) {

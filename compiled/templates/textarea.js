@@ -33,7 +33,8 @@ exports.default = function (h) {
           maxlength: this.maxlength,
 
           disabled: this.disabled,
-          placeholder: this.placeholder
+          placeholder: this.placeholder,
+          rows: this.rows
         },
         "class": "form-control",
         domProps: {

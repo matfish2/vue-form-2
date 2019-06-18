@@ -13,6 +13,9 @@ var Field = require("./field");
 module.exports = function () {
   return merge.recursive(Field(), {
     props: {
+      rows: {
+        type: Number
+      },
       placeholder: {
         type: String,
         required: false,
