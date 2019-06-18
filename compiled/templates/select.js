@@ -26,9 +26,7 @@ exports.default = function (h) {
       return h(
         'option',
         {
-          domProps: {
-            'value': item.id
-          }
+          attrs: { value: item.id }
         },
         [item.text]
       );

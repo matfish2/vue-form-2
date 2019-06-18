@@ -1,18 +1,18 @@
-'use strict';
+"use strict";
 
-var getSubmitter = require('./get-submitter');
+var getSubmitter = require("./get-submitter");
 
 module.exports = function (e) {
   var _this = this;
 
   if (e) e.preventDefault();
 
-  this.errors = this.errors.filter(function (error) {
+  this.vferrors = this.vferrors.filter(function (error) {
     var field = _this.getField(error.name);
     return field && !field.isHidden();
   });
 
-  if (this.errors.length > 0) {
+  if (this.vferrors.length > 0) {
     return handleErrors(this);
   }
 
@@ -22,10 +22,10 @@ module.exports = function (e) {
 
   var beforeSubmit = this.opts.beforeSubmit(this);
 
-  if (typeof beforeSubmit === 'boolean' && beforeSubmit) return getSubmitter(this).submit(e);
+  if (typeof beforeSubmit === "boolean" && beforeSubmit) return getSubmitter(this).submit(e);
 
-  var resolveMethod = beforeSubmit.done ? 'done' : 'then';
-  var rejectMethod = beforeSubmit.catch ? 'catch' : 'fail';
+  var resolveMethod = beforeSubmit.done ? "done" : "then";
+  var rejectMethod = beforeSubmit.catch ? "catch" : "fail";
 
   beforeSubmit[resolveMethod](function () {
     return getSubmitter(this).submit(e);
@@ -34,6 +34,6 @@ module.exports = function (e) {
 
 function handleErrors(vm) {
   vm.showAllErrors();
-  vm.dispatch('invalid.client', vm.errors);
+  vm.dispatch("invalid.client", vm.vferrors);
   return false;
 }

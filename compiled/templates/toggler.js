@@ -10,18 +10,24 @@ exports.default = function (h) {
   return h(
     "label",
     { "class": "switch" },
-    [h("input", {
-      attrs: { type: "checkbox",
-        name: this.Name
-      },
-      domProps: {
-        "checked": this.value
-      },
-      on: {
-        "change": function change(e) {
-          return _this.$emit('input', e.target.checked);
+    [h(
+      "input",
+      {
+        attrs: { type: "checkbox",
+          name: this.Name,
+          checked: this.value
+        },
+        on: {
+          "change": function change(e) {
+            return _this.$emit('input', e.target.checked);
+          }
         }
-      }
-    }), h("span", { "class": "slider round" })]
+      },
+      []
+    ), h(
+      "span",
+      { "class": "slider round" },
+      []
+    )]
   );
 };

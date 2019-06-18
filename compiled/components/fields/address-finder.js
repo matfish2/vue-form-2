@@ -1,7 +1,8 @@
-'use strict';
+"use strict";
 
-var merge = require('merge');
-var Field = require('./field');
+var merge = require("merge");
+var Field = require("./field");
+var $ = require("jquery");
 
 module.exports = function () {
   return merge.recursive(Field(), {
@@ -15,7 +16,7 @@ module.exports = function () {
     },
     data: function data() {
       return {
-        fieldType: 'addressfinder',
+        fieldType: "addressfinder",
         componentForm: {
           street_number: "short_name",
           route: "long_name",
@@ -63,7 +64,7 @@ module.exports = function () {
           }
         }
 
-        this.$emit('input', address);
+        this.$emit("input", address);
       },
 
       // Bias the autocomplete object to the user's geographical location,

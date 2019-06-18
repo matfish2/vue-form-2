@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-var merge = require('merge');
-var Field = require('./field');
+var merge = require("merge");
+var Field = require("./field");
 
 module.exports = function () {
   return merge.recursive(Field(), {
@@ -15,17 +15,25 @@ module.exports = function () {
     },
     data: function data() {
       return {
-        fieldType: 'loqate',
-        fields: [{ element: "search", field: "", mode: pca.fieldMode.SEARCH }, { element: "company", field: "Company", mode: pca.fieldMode.DEFAULT | pca.fieldMode.PRESERVE }, { element: "line1", field: "Line1" }, { element: "line2", field: "Line2", mode: pca.fieldMode.POPULATE }, { element: "city", field: "City", mode: pca.fieldMode.POPULATE }, { element: "state", field: "Province", mode: pca.fieldMode.POPULATE }, { element: "postcode", field: "PostalCode" }, { element: "country", field: "CountryName", mode: pca.fieldMode.COUNTRY }]
+        fieldType: "loqate",
+        fields: [{ element: "search", field: "", mode: pca.fieldMode.SEARCH }, {
+          element: "company",
+          field: "Company",
+          mode: pca.fieldMode.DEFAULT | pca.fieldMode.PRESERVE
+        }, { element: "line1", field: "Line1" }, { element: "line2", field: "Line2", mode: pca.fieldMode.POPULATE }, { element: "city", field: "City", mode: pca.fieldMode.POPULATE }, { element: "state", field: "Province", mode: pca.fieldMode.POPULATE }, { element: "postcode", field: "PostalCode" }, {
+          element: "country",
+          field: "CountryName",
+          mode: pca.fieldMode.COUNTRY
+        }]
       };
     },
     mounted: function mounted() {
       var _this = this;
 
-      this.control = new pca.Address(this.Fields, this.Options);
+      this.control = new pca.Address(this.vffields, this.Options);
 
       this.control.listen("populate", function (address) {
-        _this.$emit('input', address);
+        _this.$emit("input", address);
       });
     },
 
@@ -36,7 +44,7 @@ module.exports = function () {
       Fields: function Fields() {
         var _this2 = this;
 
-        return this.fields.map(function (field) {
+        return this.vffields.map(function (field) {
           field.element = _this2.id(field.element);
           return field;
         });
@@ -44,14 +52,14 @@ module.exports = function () {
     },
     methods: {
       id: function id(field) {
-        return this.Name + '__' + field;
+        return this.Name + "__" + field;
       },
       getAddressComponent: function getAddressComponent(key) {
         if (this.value && this.value[key]) {
-          return this.value[key].replace(/(?:\r\n|\r|\n)/g, ', ');
-        };
+          return this.value[key].replace(/(?:\r\n|\r|\n)/g, ", ");
+        }
 
-        return '';
+        return "";
       }
     }
   });

@@ -6,12 +6,13 @@ var Field = require('./field');
 module.exports = function () {
   return merge.recursive(Field(), {
     render: function render(h) {
-      return h('input', {
-        attrs: { type: 'hidden', name: this.Name },
-        domProps: {
-          'value': this.value
-        }
-      });
+      return h(
+        'input',
+        {
+          attrs: { type: 'hidden', name: this.Name, value: this.value }
+        },
+        []
+      );
     }
   });
 };

@@ -41,22 +41,24 @@ exports.default = function (h) {
       [h(
         'label',
         { 'class': 'form-check-label' },
-        [h('input', {
-          'class': 'form-check-input',
-          attrs: { disabled: _this.disabled,
-            name: _this.Name + _this.arraySymbol,
-            type: _this.type
-          },
-          domProps: {
-            'value': item.id,
-            'checked': _this.isChecked(item.id)
-          },
-          on: {
-            'change': function change(e) {
-              _this.$emit('input', e.target.value);
+        [h(
+          'input',
+          {
+            'class': 'form-check-input',
+            attrs: { disabled: _this.disabled,
+              name: _this.Name + _this.arraySymbol,
+              type: _this.type,
+              value: item.id,
+
+              checked: _this.isChecked(item.id) },
+            on: {
+              'change': function change(e) {
+                _this.$emit('input', e.target.value);
+              }
             }
-          }
-        }), h(
+          },
+          []
+        ), h(
           'span',
           { 'class': 'form-check-label-text' },
           [item.text]

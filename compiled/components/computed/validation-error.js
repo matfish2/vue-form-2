@@ -1,5 +1,5 @@
-'use strict';
+"use strict";
 
 module.exports = function () {
-    return this.errors.length ? this.getMessage(this.errors[0]) : '';
+  return this.vferrors.length ? this.getMessage(this.vferrors[0]) : "";
 };

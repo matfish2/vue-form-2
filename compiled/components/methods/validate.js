@@ -1,32 +1,31 @@
-'use strict';
+"use strict";
 
 var validator = {
-  between: require('../../validation/rules/between'),
-  digits: require('../../validation/rules/digits'),
-  email: require('../../validation/rules/email'),
-  greaterThan: require('../../validation/rules/greater-than'),
-  smallerThan: require('../../validation/rules/smaller-than'),
-  integer: require('../../validation/rules/integer'),
-  max: require('../../validation/rules/max'),
-  min: require('../../validation/rules/min'),
-  number: require('../../validation/rules/number'),
-  requiredIf: require('../../validation/rules/required-if'),
-  requiredAndShownIf: require('../../validation/rules/required-if-and-shown'),
-  required: require('../../validation/rules/required'),
-  url: require('../../validation/rules/url'),
-  date: require('../../validation/rules/date'),
-  daterange: require('../../validation/rules/daterange'),
-  matches: require('../../validation/rules/matches')
+  between: require("../../validation/rules/between"),
+  digits: require("../../validation/rules/digits"),
+  email: require("../../validation/rules/email"),
+  greaterThan: require("../../validation/rules/greater-than"),
+  smallerThan: require("../../validation/rules/smaller-than"),
+  integer: require("../../validation/rules/integer"),
+  max: require("../../validation/rules/max"),
+  min: require("../../validation/rules/min"),
+  number: require("../../validation/rules/number"),
+  requiredIf: require("../../validation/rules/required-if"),
+  requiredAndShownIf: require("../../validation/rules/required-if-and-shown"),
+  required: require("../../validation/rules/required"),
+  url: require("../../validation/rules/url"),
+  date: require("../../validation/rules/date"),
+  daterange: require("../../validation/rules/daterange"),
+  matches: require("../../validation/rules/matches")
 };
 
-var merge = require('merge');
+var merge = require("merge");
 
 function shouldShow(that, rule) {
-  return that.dirty || ['greaterThan', 'smallerThan'].indexOf(rule) > -1;
+  return that.dirty || ["greaterThan", "smallerThan"].indexOf(rule) > -1;
 }
 
 module.exports = function () {
-
   var formError;
   var isValid;
 
@@ -34,8 +33,7 @@ module.exports = function () {
 
   for (var rule in this.Rules) {
     if (validator[rule]) {
-
-      isValid = !this.value && rule != 'required' && rule != 'requiredIf' && rule != 'requiredAndShownIf' || validator[rule](this);
+      isValid = !this.value && rule != "required" && rule != "requiredIf" && rule != "requiredAndShownIf" || validator[rule](this);
 
       formError = {
         name: this.name,
@@ -44,15 +42,14 @@ module.exports = function () {
       };
 
       if (isValid) {
-        this.errors = this.errors.filter(function (r) {
+        this.vferrors = this.vferrors.filter(function (r) {
           return r != rule;
         });
 
         if (this.inForm()) this.removeFormError(formError);
       } else {
-
         if (shouldShow(this, rule)) {
-          if (this.errors.indexOf(rule) == -1) this.errors.push(rule);
+          if (this.vferrors.indexOf(rule) == -1) this.vferrors.push(rule);
         }
         if (this.inForm()) {
           this.addFormError(formError, !this.pristine, rule);
@@ -61,5 +58,5 @@ module.exports = function () {
     }
   }
 
-  if (this.errors.length) this.hadErrors = true;
+  if (this.vferrors.length) this.hadErrors = true;
 };

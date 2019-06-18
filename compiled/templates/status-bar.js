@@ -25,20 +25,36 @@ exports.default = function (h) {
     });
 
     errors = errors.map(function (error) {
-        return h('li', [h(
-            'a',
-            {
-                on: {
-                    'click': function click() {
-                        _this.getForm().dispatch('error-clicked', error.name);
-                    }
+        return h(
+            'li',
+            null,
+            [h(
+                'a',
+                {
+                    on: {
+                        'click': function click() {
+                            _this.getForm().dispatch('error-clicked', error.name);
+                        }
+                    },
+                    attrs: { href: '#Field--' + error.name }
                 },
-                attrs: { href: '#Field--' + error.name }
-            },
-            [error.text]
-        )]);
+                [error.text]
+            )]
+        );
     });
-    var content = this.hasErrors ? h('div', [h('p', [typeof this.errorsCount === 'function' ? this.errorsCount.call(this, h) : this.errorsCount]), h('ul', [errors])]) : message;
+    var content = this.hasErrors ? h(
+        'div',
+        null,
+        [h(
+            'p',
+            null,
+            [typeof this.errorsCount === 'function' ? this.errorsCount.call(this, h) : this.errorsCount]
+        ), h(
+            'ul',
+            null,
+            [errors]
+        )]
+    ) : message;
     var style = content ? '' : 'display:none;';
 
     return h(
@@ -60,16 +76,24 @@ function getMessage(h) {
 
         return message.map(function (m) {
             if (m.name) {
-                return h('li', [h(
-                    'a',
-                    {
-                        attrs: { href: '#Field--' + m.name }
-                    },
-                    [m.message]
-                )]);
+                return h(
+                    'li',
+                    null,
+                    [h(
+                        'a',
+                        {
+                            attrs: { href: '#Field--' + m.name }
+                        },
+                        [m.message]
+                    )]
+                );
             }
 
-            return h('li', [m]);
+            return h(
+                'li',
+                null,
+                [m]
+            );
         });
     }
 

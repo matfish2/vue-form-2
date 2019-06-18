@@ -1,12 +1,12 @@
-'use strict';
+"use strict";
 
-var _merge = require('merge');
+var _merge = require("merge");
 
 var _merge2 = _interopRequireDefault(_merge);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var convertDateRulesToMoment = require('../../helpers/convert-date-rules-to-moment');
+var convertDateRulesToMoment = require("../../helpers/convert-date-rules-to-moment");
 
 module.exports = {
   mounted: function mounted() {
@@ -15,38 +15,39 @@ module.exports = {
     this.Rules = (0, _merge2.default)(this.Rules, this.rules);
 
     if (this.required) {
-      this.$set(this.Rules, 'required', true);
+      this.$set(this.Rules, "required", true);
     }
 
     var inForm = this.inForm();
     var form = null;
 
     if (inForm && this.name) {
-
       form = this.getForm();
 
       if (form.opts.sendOnlyDirtyFields) {
-
-        this.$watch('dirty', function (isDirty) {
-
+        this.$watch("dirty", function (isDirty) {
           if (isDirty) {
-            form.fields.push(_this);
+            form.vffields.push(_this);
           } else if (form.opts.removePristineFields) {
             if (form.vuex) {
-              _this.commit('RESET', { name: _this.name });
+              _this.commit("RESET", { name: _this.name });
             }
 
-            form.fields = form.fields.filter(function (field) {
+            form.vffields = form.vffields.filter(function (field) {
               return field.name != _this.name;
             });
           }
         });
       } else {
         if (form.vuex) {
-          this.commit('CHANGE', { name: this.name, value: this.value, oldValue: this.value });
+          this.commit("CHANGE", {
+            name: this.name,
+            value: this.value,
+            oldValue: this.value
+          });
         }
 
-        form.fields.push(this);
+        form.vffields.push(this);
       }
 
       var v = form.validation;
@@ -55,7 +56,7 @@ module.exports = {
         this.Rules = convertDateRulesToMoment((0, _merge2.default)(this.Rules, v.rules[this.name]));
       }
 
-      if (typeof v.messages != 'undefined' && v.messages.hasOwnProperty(this.name)) this.messages = v.messages[this.name];
+      if (typeof v.messages != "undefined" && v.messages.hasOwnProperty(this.name)) this.messages = v.messages[this.name];
 
       if (!form.opts.disableValidation) {
         setTimeout(function () {

@@ -25,32 +25,36 @@ exports.default = function (h) {
       return h(
             "div",
             { "class": "Textarea__wrapper" },
-            [h("textarea", (0, _babelHelperVueJsxMergeProps2.default)([{
-                  attrs: {
-                        name: this.Name,
-                        id: "textarea_" + this.Name,
-                        maxlength: this.maxlength
-                  },
-                  "class": "form-control",
-                  domProps: {
-                        "value": _this.value
-                  },
-                  on: {
-                        "input": function input($event) {
-                              if ($event.target.composing) return;
-                              _this.value = $event.target.value;
+            [h(
+                  "textarea",
+                  (0, _babelHelperVueJsxMergeProps2.default)([{
+                        attrs: {
+                              name: this.Name,
+                              id: "textarea_" + this.Name,
+                              maxlength: this.maxlength
+                        },
+                        "class": "form-control",
+                        domProps: {
+                              "value": _this.value
+                        },
+                        on: {
+                              "input": function input($event) {
+                                    if ($event.target.composing) return;
+                                    _this.value = $event.target.value;
+                              }
                         }
-                  }
-            }, {
-                  directives: [{
-                        name: "model",
-                        value: _this.value
-                  }]
-            }, {
-                  attrs: {
-                        disabled: this.disabled,
-                        placeholder: this.placeholder }
-            }])), button]
+                  }, {
+                        directives: [{
+                              name: "model",
+                              value: _this.value
+                        }]
+                  }, {
+                        attrs: {
+                              disabled: this.disabled,
+                              placeholder: this.placeholder }
+                  }]),
+                  []
+            ), button]
       );
 };
 

@@ -10,15 +10,16 @@ exports.default = function (h) {
 
   if (!this.ajax && !this.client) {
     this.additionalValues.map(function (value) {
-      hidden.push(h("input", {
-        attrs: {
-          type: "hidden",
-          name: value.name
+      hidden.push(h(
+        "input",
+        {
+          attrs: {
+            type: "hidden",
+            name: value.name,
+            value: value.value }
         },
-        domProps: {
-          "value": value.value
-        }
-      }));
+        []
+      ));
     });
   };
   return h(

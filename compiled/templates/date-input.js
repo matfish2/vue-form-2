@@ -21,20 +21,25 @@ exports.default = function (h) {
 		);
 	}
 
-	return h("div", [h("input", { "class": "VF-Field--Date__datepicker form-control",
-		attrs: { name: this.Name,
-			placeholder: this.placeholder,
+	return h(
+		"div",
+		null,
+		[h(
+			"input",
+			{ "class": "VF-Field--Date__datepicker form-control",
+				attrs: { name: this.Name,
+					placeholder: this.placeholder,
+					value: this.formattedDate,
+					disabled: this.disabled,
 
-			disabled: this.disabled,
-
-			type: "text" },
-		domProps: {
-			"value": this.formattedDate
-		},
-		on: {
-			"change": function change(e) {
-				return _this.$emit('input', _this.value);
-			}
-		}
-	}), nowButton]);
+					type: "text" },
+				on: {
+					"change": function change(e) {
+						return _this.$emit('input', _this.value);
+					}
+				}
+			},
+			[]
+		), nowButton]
+	);
 };

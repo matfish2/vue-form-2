@@ -1,7 +1,15 @@
-'use strict';
+"use strict";
 
-import Vue from 'vue'
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-var bus = new Vue();
+var _vue = require("vue");
 
-export default bus;
+var _vue2 = _interopRequireDefault(_vue);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var bus = new _vue2.default();
+
+exports.default = bus;

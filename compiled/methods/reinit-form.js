@@ -1,10 +1,9 @@
-'use strict';
+"use strict";
 
-var clone = require('clone');
+var clone = require("clone");
 
 module.exports = function () {
-
-  this.fields.forEach(function (field) {
+  this.vffields.forEach(function (field) {
     field.initialValue = clone(field.value);
   });
 };

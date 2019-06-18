@@ -1,5 +1,5 @@
 "use strict";
 
 module.exports = function () {
-    return this.hadErrors && !this.errors.length;
+  return this.hadErrors && !this.vferrors.length;
 };
