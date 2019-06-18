@@ -1,14 +1,14 @@
-'use strict';
+"use strict";
 
-var _updateValue = require('../methods/update-value');
+var _updateValue = require("../methods/update-value");
 
 var _updateValue2 = _interopRequireDefault(_updateValue);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var merge = require('merge');
-var clone = require('clone');
-var Field = require('./field');
+var merge = require("merge");
+var clone = require("clone");
+var Field = require("./field");
 
 module.exports = function () {
   return merge.recursive(Field(), {
@@ -16,7 +16,7 @@ module.exports = function () {
       placeholder: {
         type: String,
         required: false,
-        default: ''
+        default: ""
       },
       // maxlength:{
       //   type:Number,
@@ -46,8 +46,8 @@ module.exports = function () {
     data: function data() {
       return {
         editor: null,
-        fieldType: 'textarea',
-        tagName: 'textarea',
+        fieldType: "textarea",
+        tagName: "textarea",
         expanded: false
       };
     },
@@ -58,7 +58,7 @@ module.exports = function () {
         var textarea = $(this.$el).find("textarea");
         var height = this.expanded ? textarea.get(0).scrollHeight : "auto";
         textarea.height(height);
-        this.getForm().dispatch('textarea-was-toggled', {
+        this.getForm().dispatch("textarea-was-toggled", {
           expanded: this.expanded
         });
       }
@@ -77,26 +77,24 @@ module.exports = function () {
       }
     },
     mounted: function mounted() {
-
       if (!this.tinymce) return;
 
-      if (typeof tinymce == 'undefined') {
-        console.error('vue-form-2: missing global dependency. TinyMCE is required on a vf-textarea with a tinymce prop');
+      if (typeof tinymce == "undefined") {
+        console.error("vue-form-2: missing global dependency. TinyMCE is required on a vf-textarea with a tinymce prop");
         return;
       }
 
       var that = this;
 
-      var _setup = that.options && that.options.hasOwnProperty('setup') ? that.options.setup : function () {};
+      var _setup = that.options && that.options.hasOwnProperty("setup") ? that.options.setup : function () {};
 
-      var parentSetup = that.getForm().opts.tinymceOptions.hasOwnProperty('setup') ? that.getForm().opts.tinymceOptions.setup : function () {};
+      var parentSetup = that.getForm().opts.tinymceOptions.hasOwnProperty("setup") ? that.getForm().opts.tinymceOptions.setup : function () {};
 
       var options = merge.recursive(clone(this.getForm().opts.tinymceOptions), this.options);
 
       options = merge.recursive(options, {
-        selector: 'textarea[name=' + this.name + ']',
+        selector: "textarea[name=" + this.name + "]",
         setup: function setup(ed) {
-
           ed.on("init", function (ed) {
             tinymce.get("textarea_" + that.name).setContent(that.value);
           });
@@ -105,14 +103,14 @@ module.exports = function () {
           parentSetup(ed);
           _setup(ed);
 
-          ed.on('change', function (e) {
+          ed.on("change", function (e) {
             that.saveValue(ed.getContent());
           }.bind(this));
         }
       });
 
       tinymce.init(options);
-      this.$watch('value', function (val) {
+      this.$watch("value", function (val) {
         if (val != tinymce.get("textarea_" + this.name).getContent()) {
           tinymce.get("textarea_" + this.name).setContent(val);
         }
