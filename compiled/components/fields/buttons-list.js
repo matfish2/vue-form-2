@@ -113,7 +113,14 @@ module.exports = function () {
 
       isChecked: function isChecked(value) {
         var val = this.value;
-        return this.multiple ? val.indexOf(value) > -1 : value == val;
+        var isChecked = this.multiple ? val.indexOf(value) > -1 : value == val;
+
+        var d = document.querySelector("input[value=" + value + "]");
+        if (d) {
+          d.checked = isChecked;
+        }
+
+        return isChecked;
       },
       reset: function reset() {
         this.wasReset = true;

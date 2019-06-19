@@ -5,11 +5,18 @@ var Field = require("./field");
 
 module.exports = function () {
   return merge.recursive(Field(), {
-    methods: {},
+    props: {
+      options: {
+        type: Object
+      }
+    },
     data: function data() {
       return {
-        fieldType: "checkbox"
+        fieldType: "datepicker"
       };
-    }
+    },
+    mounted: function mounted() {},
+
+    methods: {}
   });
 };

@@ -12,25 +12,22 @@ exports.default = function (h) {
 
   if (this.disabled) {
     toggler = "";
-  } else if (this.multiple) {
-    toggler = h(
-      "span",
-      { "class": "pull-right btn btn-link", on: {
-          "click": this.toggle.bind(this)
-        }
-      },
-      [this.toggleText]
-    );
-  } else {
-    toggler = this.value ? h(
-      "span",
-      { "class": "pull-right btn btn-link", on: {
-          "click": this.clear.bind(this)
-        }
-      },
-      [this.clearText]
-    ) : "";
   }
+  // else if (this.multiple) {
+  //   toggler = (
+  //     <span class="pull-right btn btn-link" on-click={this.toggle.bind(this)}>
+  //       {this.toggleText}
+  //     </span>
+  //   );
+  // } else {
+  //   toggler = this.value ? (
+  //     <span class="pull-right btn btn-link" on-click={this.clear.bind(this)}>
+  //       {this.clearText}
+  //     </span>
+  //   ) : (
+  //     ""
+  //   );
+  // }
 
   this.items.map(function (item) {
     if (_this.passesFilter(item)) items.push(h(

@@ -168,6 +168,7 @@ exports.install = function (Vue) {
 
   Vue.component("vf-date", require("./components/fields/date")());
   Vue.component("vf-pikaday", require("./components/fields/pikaday")());
+  Vue.component("vf-datepicker", require("./components/fields/datepicker")());
   Vue.component("vf-checkbox", require("./components/fields/checkbox")());
   Vue.component("vf-toggler", require("./components/fields/toggler")());
   Vue.component("vf-hidden", require("./components/fields/hidden")());

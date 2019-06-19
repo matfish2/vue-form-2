@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _submit = require('../templates/submit');
+var _submit = require("../templates/submit");
 
 var _submit2 = _interopRequireDefault(_submit);
 
@@ -16,13 +16,16 @@ exports.default = {
     text: {
       type: String,
       required: false,
-      default: 'Submit'
+      default: "Submit"
     }
   },
   methods: {
-    getForm: require('./methods/get-form')
+    getForm: require("./methods/get-form")
   },
   computed: {
+    sending: function sending() {
+      return this.getForm().sending;
+    },
     disabled: function disabled() {
       return this.getForm().sending || this.getForm().options.sendOnlyDirtyFields && this.getForm().pristine();
     }
