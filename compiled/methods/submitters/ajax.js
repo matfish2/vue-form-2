@@ -11,7 +11,7 @@ exports.default = function (vm) {
       if (e) e.preventDefault();
       vm.sending = true;
       status.info(vm.opts.texts.sending);
-      vm.dispatch("sending");
+      vm.dispatch("sending", vm);
       var data = vm.formData();
       var method = vm.method.toLowerCase();
       vm.$http[method](vm.action, getData(method, data)).then(function (data) {

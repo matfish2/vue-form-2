@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-var merge = require('merge');
-var clone = require('clone');
-var Field = require('./field');
-var fuzzyOptions = require('./fuzzy-search/options');
+var merge = require("merge");
+var clone = require("clone");
+var Field = require("./field");
+var fuzzyOptions = require("./fuzzy-search/options");
 
 module.exports = function () {
   return merge.recursive(Field(), {
@@ -35,18 +35,18 @@ module.exports = function () {
       placeholder: {
         type: String,
         required: false,
-        default: 'Select Option'
+        default: "Select Option"
       },
       noDefault: {
         type: Boolean
       },
       filterBy: {
         type: String,
-        default: ''
+        default: ""
       },
       ajaxUrl: {
         type: String,
-        default: ''
+        default: ""
       },
       callback: {
         type: Function,
@@ -56,18 +56,21 @@ module.exports = function () {
         type: Boolean,
         default: true
       },
-      listId: {}
+      listId: {},
+      grouped: {
+        type: Boolean
+      }
     },
     mounted: function mounted() {
       var _this = this;
 
       if (this.select2) {
-        this.$watch('value', function (val) {
+        this.$watch("value", function (val) {
           $(_this.el).val(val).trigger("change");
         });
       }
 
-      this.$watch('select2', function (val) {
+      this.$watch("select2", function (val) {
         if (val) {
           _this.initSelect2();
         } else {
@@ -77,10 +80,8 @@ module.exports = function () {
       });
 
       if (this.filterBy) {
-
-        this.$watch('filterValue', function (val) {
+        this.$watch("filterValue", function (val) {
           if (val) {
-
             if (this.select2 && !this.ajaxUrl) {
               this.el.select2(options);
             }
@@ -122,18 +123,17 @@ module.exports = function () {
         return res;
       },
 
-      arraySymbol: require('../computed/array-symbol'),
+      arraySymbol: require("../computed/array-symbol"),
       filterValue: function filterValue() {
-
-        if (!this.filterBy) return '';
+        if (!this.filterBy) return "";
 
         return this.getField(this.filterBy).value;
       }
     },
     data: function data() {
       return {
-        fieldType: 'select',
-        tagName: 'select',
+        fieldType: "select",
+        tagName: "select",
         newItems: [],
         render: true
       };
@@ -147,13 +147,13 @@ module.exports = function () {
         this.newItems.push(item);
       },
       initSelect2: function initSelect2() {
-        if (typeof $ == 'undefined') {
-          console.error('vue-form-2: missing global dependency: vf-select with select2 depends on JQuery');
+        if (typeof $ == "undefined") {
+          console.error("vue-form-2: missing global dependency: vf-select with select2 depends on JQuery");
           return;
         }
 
-        if (typeof $(this.$el).select2 == 'undefined') {
-          console.error('vue-form-2: missing global dependency: vf-select with select2 depends on Select2');
+        if (typeof $(this.$el).select2 == "undefined") {
+          console.error("vue-form-2: missing global dependency: vf-select with select2 depends on Select2");
           return;
         }
 
@@ -170,7 +170,7 @@ module.exports = function () {
           options = merge.recursive(options, {
             ajax: {
               url: this.ajaxUrl,
-              dataType: 'json',
+              dataType: "json",
               delay: 250,
               data: function data(params) {
                 var query = {
@@ -187,7 +187,6 @@ module.exports = function () {
                 return query;
               },
               processResults: function processResults(data) {
-
                 return {
                   results: this.callback ? $.map(data, this.callback) : data
                 };
@@ -207,9 +206,7 @@ module.exports = function () {
         this.el = $(this.$el).find("select");
 
         this.el.select2(options).on("select2:select", function (e) {
-
           if (self.ajaxUrl && self.inForm()) {
-
             var data = e.params.data;
 
             var item = {
@@ -218,7 +215,7 @@ module.exports = function () {
             };
             self.addItem(item);
 
-            self.getForm().dispatch('new-ajax-item', {
+            self.getForm().dispatch("new-ajax-item", {
               name: self.name,
               listId: self.listId,
               item: item
@@ -233,17 +230,17 @@ module.exports = function () {
             val = $.unique(val);
           }
 
-          self.$emit('input', val);
+          self.$emit("input", val);
         }).on("select2:unselecting", function (e) {
           if (self.multiple) {
             var $this = $(this);
             setTimeout(function () {
               var value = $this.val();
               console.log(value);
-              self.$emit('input', value ? value : []);
+              self.$emit("input", value ? value : []);
             }, 0);
           } else {
-            self.$emit('input', '');
+            self.$emit("input", "");
           }
 
           if (self.ajaxUrl) {
@@ -258,22 +255,22 @@ module.exports = function () {
         // }.bind(this),0);
 
         if (this.containerClass) {
-          this.el.data('select2').$container.addClass("container-" + this.containerClass);
-          this.el.data('select2').$dropdown.addClass("dropdown-" + this.containerClass);
+          this.el.data("select2").$container.addClass("container-" + this.containerClass);
+          this.el.data("select2").$dropdown.addClass("dropdown-" + this.containerClass);
         }
       },
       removeDuplicateValues: function removeDuplicateValues() {
         var _this3 = this;
 
-        // fix select2 duplicate values bug when performing an ajax request 
+        // fix select2 duplicate values bug when performing an ajax request
         // https://github.com/select2/select2/issues/4298
 
         var title;
 
         this.$nextTick(function () {
           $(_this3.$el).find(".select2-selection__rendered li").each(function () {
-            title = $(this).prop('title');
-            $(this).siblings('[title=\'' + title + '\']').remove();
+            title = $(this).prop("title");
+            $(this).siblings("[title='" + title + "']").remove();
           });
         });
       },
@@ -286,7 +283,7 @@ module.exports = function () {
         });
       },
 
-      fuzzySearch: require('./fuzzy-search/fuzzy-search'),
+      fuzzySearch: require("./fuzzy-search/fuzzy-search"),
       setValue: function setValue(value) {
         var setDirty = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
@@ -296,7 +293,7 @@ module.exports = function () {
         //   this.el.val(value).trigger("change");
       },
       reset: function reset() {
-        var value = this.multiple ? [] : '';
+        var value = this.multiple ? [] : "";
 
         if (this.noDefault && this.filteredItems.length) {
           value = this.filteredItems[0].id;
