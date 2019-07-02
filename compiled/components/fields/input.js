@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-var merge = require('merge');
-var Field = require('./field');
+var merge = require("merge");
+var Field = require("./field");
 
 module.exports = function () {
   return merge.recursive(Field(), {
@@ -9,7 +9,7 @@ module.exports = function () {
       placeholder: {
         type: String,
         required: false,
-        default: ''
+        default: ""
       },
       debounce: {
         type: Number,
@@ -20,7 +20,9 @@ module.exports = function () {
       },
       minlength: Number,
       maxlength: Number,
-      autocomplete: String
+      autocomplete: String,
+      addon: String,
+      afterAddon: String
     },
     data: function data() {
       return {

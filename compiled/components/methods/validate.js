@@ -9,6 +9,7 @@ var validator = {
   integer: require("../../validation/rules/integer"),
   max: require("../../validation/rules/max"),
   min: require("../../validation/rules/min"),
+  exactly: require("../../validation/rules/exactly"),
   number: require("../../validation/rules/number"),
   requiredIf: require("../../validation/rules/required-if"),
   requiredAndShownIf: require("../../validation/rules/required-if-and-shown"),

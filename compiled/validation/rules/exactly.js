@@ -7,5 +7,5 @@ module.exports = function (that) {
 
   if (that.Rules.number || that.Rules.integer) value = parseFloat(value);
 
-  return value <= that.Rules.max;
+  return value === that.Rules.exactly;
 };

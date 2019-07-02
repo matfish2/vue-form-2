@@ -1,40 +1,55 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
-       value: true
+  value: true
 });
 
 exports.default = function (h) {
-       var _this = this;
+  var _this = this;
 
-       return h(
-              'input',
-              {
-                     attrs: { type: this.fieldType,
-                            name: this.Name,
+  var addon = this.addon ? h(
+    "span",
+    { "class": "input-group-addon" },
+    [h(
+      "i",
+      { "class": "fa fa-" + this.addon + " fa-lg" },
+      []
+    )]
+  ) : "";
 
-                            placeholder: this.placeholder,
-                            disabled: this.disabled,
-                            minlength: this.minlength,
-                            maxlength: this.maxlength,
-                            autocomplete: this.autocomplete
-                     },
-                     domProps: {
-                            'value': this.value
-                     },
-                     on: {
-                            'input': function input(e) {
-                                   return _this.$emit('input', e.target.value);
-                            }
-                     },
+  var afterAddon = this.afterAddon ? h(
+    "span",
+    { "class": "input-group-addon" },
+    [this.afterAddon]
+  ) : "";
 
-                     'class': 'form-control' },
-              []
-       );
+  return h(
+    "div",
+    { "class": "input-group" },
+    [addon, h(
+      "input",
+      {
+        attrs: {
+          type: this.fieldType,
+          name: this.Name,
+
+          placeholder: this.placeholder,
+          disabled: this.disabled,
+          minlength: this.minlength,
+          maxlength: this.maxlength,
+          autocomplete: this.autocomplete
+        },
+        domProps: {
+          "value": this.value
+        },
+        on: {
+          "input": function input(e) {
+            return _this.$emit("input", e.target.value);
+          }
+        },
+
+        "class": "form-control" },
+      []
+    ), afterAddon]
+  );
 };
-
-var _debounce = require('debounce');
-
-var _debounce2 = _interopRequireDefault(_debounce);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

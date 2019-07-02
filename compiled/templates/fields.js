@@ -52,6 +52,10 @@ var _datepicker = require("./datepicker");
 
 var _datepicker2 = _interopRequireDefault(_datepicker);
 
+var _monthYear = require("./month-year");
+
+var _monthYear2 = _interopRequireDefault(_monthYear);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
@@ -69,5 +73,6 @@ exports.default = {
   addressfinder: _addressFinder2.default,
   pikaday: _pikaday2.default,
   loqate: _loqate2.default,
-  datepicker: _datepicker2.default
+  datepicker: _datepicker2.default,
+  monthyear: _monthYear2.default
 };

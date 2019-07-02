@@ -16,7 +16,21 @@ module.exports = function () {
     },
     data: function data() {
       return {
-        fieldType: "pikaday"
+        fieldType: "pikaday",
+        months: {
+          Jan: "01",
+          Feb: "02",
+          Mar: "03",
+          Apr: "04",
+          May: "05",
+          Jun: "06",
+          Jul: "07",
+          Aug: "08",
+          Sep: "09",
+          Oct: "10",
+          Nov: "11",
+          Dec: "12"
+        }
       };
     },
     mounted: function mounted() {
@@ -25,7 +39,18 @@ module.exports = function () {
       var options = merge({
         field: this.$el,
         onSelect: function onSelect(e) {
-          self.$emit("input", moment(e));
+          // console.log(e);
+          // console.log(moment(e));
+          var date = e.toDateString();
+          var pieces = date.split(" ");
+          var day = pieces[2];
+          var month = self.months[pieces[1]];
+          var year = pieces[3];
+
+          self.$emit("input", moment(year + "-" + month + "-" + day, "YYYY-MM-DD"));
+          self.$nextTick(function () {
+            self.picker.setDate(self.value, true);
+          });
         }
       }, this.options);
 
@@ -36,17 +61,7 @@ module.exports = function () {
       formattedValue: function formattedValue() {
         if (!this.value) return "";
 
-        if (this.picker) {
-          this.picker.setDate(moment(this.value), true);
-        }
-
-        // already a moment object
-        if (typeof this.value.isValid !== "undefined") {
-          return this.value.format(this.format);
-        }
-
-        // a DateTime object
-        return moment(this.value.format("yyyy-mm-dd"), "YYYY-MM-DD").format(this.format);
+        return this.value.format(this.format);
       }
     }
   });
