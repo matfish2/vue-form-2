@@ -152,7 +152,7 @@ module.exports = function () {
           return;
         }
 
-        if (typeof $(this.$el).select2 == "undefined") {
+        if (typeof window.$().select2 === "undefined") {
           console.error("vue-form-2: missing global dependency: vf-select with select2 depends on Select2");
           return;
         }
@@ -203,7 +203,7 @@ module.exports = function () {
 
         options = merge.recursive(options, this.options);
 
-        this.el = $(this.$el).find("select");
+        this.el = window.$(this.$el).find("select");
 
         this.el.select2(options).on("select2:select", function (e) {
           if (self.ajaxUrl && self.inForm()) {
