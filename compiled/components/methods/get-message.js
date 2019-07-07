@@ -30,7 +30,7 @@ module.exports = function (rule) {
     }
   }
 
-  message = message.replace(":field", this.label ? stripLabel(this.label) : this.Name);
+  message = message.replace(":field", this.label ? stripLabel(this.label) : "");
 
   if (this.fieldType == "date") message = message.replace(":format", this.format);
 
@@ -40,7 +40,7 @@ module.exports = function (rule) {
 function extractMessage(rule, message, field) {
   if (field.Rules.number || field.Rules.integer) return message.number;
 
-  if (["date", "partialdate", "datepicker", "pikaday"].indexOf(field.fieldType) > -1) return message.date;
+  if (["date", "partialdate", "datepicker", "pikaday", "monthyear"].indexOf(field.fieldType) > -1) return message.date;
 
   return message.string;
 }

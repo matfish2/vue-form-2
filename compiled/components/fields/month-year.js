@@ -7,6 +7,7 @@ module.exports = function () {
   return merge.recursive(Field(), {
     data: function data() {
       return {
+        format: "MM-YYYY",
         fieldType: "monthyear",
         selected: {
           month: "",
@@ -20,14 +21,15 @@ module.exports = function () {
       updateValue: function updateValue(val, type) {
         this.selected[type] = val;
 
-        var val = this.selected.year && this.selected.month ? this.selected.month + "/" + this.selected.year : "";
+        var val = this.selected.year && this.selected.month ? moment(this.selected.year + "-" + this.selected.month + "-01", "YYYY-MM-DD") : null;
+
         this.$emit("input", val);
       }
     },
     computed: {},
     mounted: function mounted() {
       if (this.value) {
-        var p = this.value.split("/");
+        var p = this.value.format("MM/YYYY").split("/");
         this.selected.month = p[0];
         this.selected.year = p[1];
       }

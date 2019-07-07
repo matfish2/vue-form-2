@@ -37,7 +37,7 @@ module.exports = function () {
       isValid = !this.value && rule != "required" && rule != "requiredIf" && rule != "requiredAndShownIf" || validator[rule](this);
 
       formError = {
-        name: this.name,
+        name: this.Name,
         rule: rule,
         show: shouldShow(this, rule)
       };

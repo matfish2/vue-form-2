@@ -32,7 +32,7 @@ exports.default = function (h) {
             return h(
               "option",
               {
-                attrs: { value: i.id }
+                attrs: { value: i.id, disabled: i.disabled }
               },
               [i.text]
             );
@@ -44,7 +44,7 @@ exports.default = function (h) {
         return h(
           "option",
           {
-            attrs: { value: item.id }
+            attrs: { value: item.id, disabled: item.disabled }
           },
           [item.text]
         );

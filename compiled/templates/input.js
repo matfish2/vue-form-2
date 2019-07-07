@@ -25,7 +25,7 @@ exports.default = function (h) {
 
   return h(
     "div",
-    { "class": "input-group" },
+    { "class": this.addon ? "input-group" : "" },
     [addon, h(
       "input",
       {

@@ -21,7 +21,7 @@ module.exports = {
     var inForm = this.inForm();
     var form = null;
 
-    if (inForm && this.name) {
+    if (inForm) {
       form = this.getForm();
 
       if (form.opts.sendOnlyDirtyFields) {
