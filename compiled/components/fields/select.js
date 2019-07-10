@@ -147,6 +147,8 @@ module.exports = function () {
         this.newItems.push(item);
       },
       initSelect2: function initSelect2() {
+        var _this3 = this;
+
         if (typeof $ == "undefined") {
           console.error("vue-form-2: missing global dependency: vf-select with select2 depends on JQuery");
           return;
@@ -248,6 +250,19 @@ module.exports = function () {
           }
         });
 
+        // update selected value view
+        this.$watch("value", function (val) {
+          _this3.el.trigger("change");
+        });
+
+        // update items view
+        this.$watch("items", function (val) {
+          _this3.el.empty();
+          _this3.el.select2({
+            data: _this3.items
+          });
+        });
+
         // this.el.val(this.value).trigger("change");
 
         // setTimeout(function() {
@@ -260,7 +275,7 @@ module.exports = function () {
         }
       },
       removeDuplicateValues: function removeDuplicateValues() {
-        var _this3 = this;
+        var _this4 = this;
 
         // fix select2 duplicate values bug when performing an ajax request
         // https://github.com/select2/select2/issues/4298
@@ -268,18 +283,18 @@ module.exports = function () {
         var title;
 
         this.$nextTick(function () {
-          $(_this3.$el).find(".select2-selection__rendered li").each(function () {
+          $(_this4.$el).find(".select2-selection__rendered li").each(function () {
             title = $(this).prop("title");
             $(this).siblings("[title='" + title + "']").remove();
           });
         });
       },
       rerender: function rerender() {
-        var _this4 = this;
+        var _this5 = this;
 
         this.render = false;
         setTimeout(function () {
-          _this4.render = true;
+          _this5.render = true;
         });
       },
 
