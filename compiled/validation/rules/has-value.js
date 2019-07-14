@@ -5,7 +5,7 @@ var isNumeric = require("../../helpers/is-numeric");
 module.exports = function (that) {
   var value = that.value;
 
-  return !!(value && (isString(value) || ["checkbox", "date", "partialdate", "monthyear", "pikaday", "addressfinder", "loqate"].includes(that.fieldType) || isMultipleList(that, value) || isNumeric(value)));
+  return !!((value || value === 0 || value === "0") && (isString(value) || ["checkbox", "date", "partialdate", "monthyear", "pikaday", "addressfinder", "loqate"].includes(that.fieldType) || isMultipleList(that, value) || isNumeric(value)));
 };
 
 function isMultipleList(that, value) {
