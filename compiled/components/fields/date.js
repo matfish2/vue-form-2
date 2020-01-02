@@ -88,7 +88,7 @@ module.exports = function () {
         singleDatePicker: !this.range,
         timePicker24Hour: true,
         format: this.Format,
-        startDate: moment(),
+        startDate: this.value ? this.value : moment(),
         locale: {
           cancelLabel: this.clearLabel
         }
