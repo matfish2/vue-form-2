@@ -25,6 +25,9 @@ module.exports = function () {
       updateValue: function updateValue(e) {
         this.$emit("input", e.target.value);
       },
+      saveValue: function saveValue(val) {
+        this.$emit("input", val);
+      },
       focus: function focus() {
         this.$el.getElementsByTagName(this.tagName)[0].focus();
       }
