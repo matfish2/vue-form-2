@@ -263,7 +263,7 @@ module.exports = function () {
           });
         });
 
-        // this.el.val(this.value).trigger("change");
+        this.el.val(this.value).trigger("change");
 
         // setTimeout(function() {
         //   this.el.trigger('change');
