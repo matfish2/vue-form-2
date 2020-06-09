@@ -1,5 +1,7 @@
 'use strict';
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 module.exports = {
   computed: {
     fieldClasses: require('../computed/field-classes'),
@@ -20,7 +22,7 @@ module.exports = {
       return this.getForm().name;
     },
     dirty: function dirty() {
-      return this.initialValue !== this.value;
+      return this.initialValue !== this.value && _typeof(this.value) !== 'object';
     }
   }
 };
