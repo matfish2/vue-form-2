@@ -12,7 +12,6 @@ module.exports = function () {
     data: function data() {
       return {
         fieldType: 'date',
-        datepicker: null,
         opts: this.options
       };
     },
@@ -58,13 +57,14 @@ module.exports = function () {
       }
     },
     mounted: function mounted() {
+      var _this = this;
 
       if (typeof $ == 'undefined') {
         console.error('vue-form-2: missing global dependency: vf-date depends on JQuery');
         return;
       }
 
-      this.datepicker = $(this.$el).find(".VF-Field--Date__datepicker");
+      this.datepicker = $(this.$el).find(".VF-Field--Date__datepicker").eq(0);
 
       if (typeof this.datepicker.daterangepicker == 'undefined') {
         console.error('vue-form-2: missing global dependency: vf-date depends on daterangepicker');
@@ -90,21 +90,19 @@ module.exports = function () {
         format: this.Format,
         startDate: this.value ? this.value : moment(),
         locale: {
-          cancelLabel: this.clearLabel
+          cancelLabel: this.clearLabel,
+          format: this.Format
         }
       }, this.opts);
 
-      this.datepicker.daterangepicker(options);
+      this.datepicker.daterangepicker(options, function (start, end) {
+        var value = _this.range ? {
+          start: start,
+          end: end
+        } : end;
 
-      this.datepicker.on('apply.daterangepicker', function (ev, picker) {
-
-        var value = this.range ? {
-          start: picker.startDate,
-          end: picker.endDate
-        } : picker.startDate;
-
-        this.setValue(value);
-      }.bind(this));
+        _this.setValue(value);
+      });
 
       this.datepicker.on('cancel.daterangepicker', function (ev, picker) {
 
