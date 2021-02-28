@@ -57,7 +57,6 @@ module.exports = function () {
       }
     },
     mounted: function mounted() {
-      var _this = this;
 
       if (typeof $ == 'undefined') {
         console.error('vue-form-2: missing global dependency: vf-date depends on JQuery');
@@ -95,13 +94,15 @@ module.exports = function () {
         }
       }, this.opts);
 
-      this.datepicker.daterangepicker(options, function (start, end) {
-        var value = _this.range ? {
-          start: start,
-          end: end
-        } : end;
+      this.datepicker.daterangepicker(options, function (start, end) {});
 
-        _this.setValue(value);
+      this.datepicker.on('apply.daterangepicker', function (ev, picker) {
+        var value = _this.range ? {
+          start: picker.startDate,
+          end: picker.endDate
+        } : picker.endDate;
+
+        this.setValue(value);
       });
 
       this.datepicker.on('cancel.daterangepicker', function (ev, picker) {
