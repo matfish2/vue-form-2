@@ -51,6 +51,7 @@ module.exports = function () {
         type: Boolean
       },
       nowButton: Boolean,
+      clearButton: Boolean,
       nowText: {
         type: String,
         default: 'Now'
@@ -97,13 +98,13 @@ module.exports = function () {
       this.datepicker.daterangepicker(options, function (start, end) {});
 
       this.datepicker.on('apply.daterangepicker', function (ev, picker) {
-        var value = _this.range ? {
+        var value = this.range ? {
           start: picker.startDate,
           end: picker.endDate
         } : picker.endDate;
 
         this.setValue(value);
-      });
+      }.bind(this));
 
       this.datepicker.on('cancel.daterangepicker', function (ev, picker) {
 

@@ -1,6 +1,6 @@
 {
   "name": "vue-form-2",
-  "version": "1.2.1",
+  "version": "1.2.5",
   "description": "Vue.js 2 form component",
   "main": "main.js",
   "scripts": {
