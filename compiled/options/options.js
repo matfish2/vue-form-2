@@ -15,6 +15,7 @@ module.exports = function () {
     customRules: {},
     fileOptions: {},
     dateOptions: {},
+    momentServerFormat: null,
     select2Options: {},
     tinymceOptions: {},
     loqateOptions: {},
